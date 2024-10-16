@@ -1,4 +1,4 @@
-<img src="https://capsule-render.vercel.app/api?type=wave&color=auto&height=300&section=header&text=capsule%20render&fontSize=90" />
+<img src="https://capsule-render.vercel.app/api?type=venom&color=b678c4&height=300&section=header&text=I%20am%20HyeonSeok&fontSize=90&animation=fadeIn&stroke=b678c4" />
 
 <!--
 **nyeonseok/nyeonseok** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
