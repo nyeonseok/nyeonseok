@@ -3,3 +3,4 @@ demo/** linguist-vendored=false
 app/** linguist-documentation=false
 app/** linguist-vendored=false
 *.ts linguist-detectable=true
+*.html linguist-detectable=false
