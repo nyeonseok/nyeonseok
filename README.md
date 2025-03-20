@@ -49,7 +49,8 @@
 
 <!--<h3>📊Most Used Language</h3>-->
 <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nyeonseok&layout=donut&show_icons=true&theme=tokyonight&hide_border=true&icon_color=58A6FF&text_color=fff&title_color=58A6FF&count_private=true&exclude_repo=Face-Transfer-Application" width=38% />
+    <!--<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nyeonseok&layout=donut&show_icons=true&theme=tokyonight&hide_border=true&icon_color=58A6FF&text_color=fff&title_color=58A6FF&count_private=true&exclude_repo=Face-Transfer-Application" width=38% />-->
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nyeonseok&theme=dark&hide_border=false&hide=shell,hlsl,shaderlab,glsl,qml,lua&langs_count=20" />
 </a>    
 <a href="https://github.com/anuraghazra/github-readme-stats">
   <img src="https://github-readme-stats.vercel.app/api?username=nyeonseok&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" width=56% />
