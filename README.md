@@ -6,6 +6,9 @@
   <h3 align=center>✨ Tech Stack ✨</h3>
 <br>
 <div align=center>
+  <img src="https://img.shields.io/badge/Remix-black?logo=remix&logoColor=#000000">
+  <img src="https://img.shields.io/badge/React-black?logo=react&logoColor=#61DAFB">
+  <br>
   <img src="https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white"> <!--HTML-->
   <img src="https://img.shields.io/badge/CSS3-1572B6?logo=CSS3&logoColor=white">  <!--CSS-->
   <img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?logo=javascript&logoColor=black">  <!--JavaScript-->
