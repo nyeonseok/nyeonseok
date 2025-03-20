@@ -2,4 +2,4 @@ demo/** linguist-documentation=false
 demo/** linguist-vendored=false
 app/** linguist-documentation=false
 app/** linguist-vendored=false
-*.php linguist-vendored
+*.html linguist-vendored
