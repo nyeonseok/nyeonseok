@@ -30,13 +30,21 @@
 <br>
 
 ## 💻 Projects
-[DMS - 소프트웨어공학 팀프로젝트](https://github.com/IENFI/software)
+
+
+| 서비스명 | 설명 | Repository 주소|
+|---|---|---|
+|DMS|소프트웨어공학 팀프로젝트|https://github.com/IENFI/software|
+|Dying Message|졸업작품|https://github.com/IENFI/3DMafia|
+|Vero|정보보안 SW 웹/앱 개발 공모전|https://github.com/sw-security-web-app/sw-security-web-app_FE|
+
+<br>
+<!--[DMS - 소프트웨어공학 팀프로젝트](https://github.com/IENFI/software)
 <br>
 [Dying Message - 졸업작품](https://github.com/IENFI/3DMafia)
 <br>
-[Vero - 정보보안 SW 웹/앱 개발 공모전](https://github.com/sw-security-web-app/sw-security-web-app_FE)
+[Vero - 정보보안 SW 웹/앱 개발 공모전](https://github.com/sw-security-web-app/sw-security-web-app_FE) -->
 
-<br>
 
 ## 👇 More About Me
 [Portfolio](https://www.notion.so/ABOUT-ME-1dac7917f2c2803db666f1e38d72cbde?source=copy_link)
