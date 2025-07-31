@@ -13,7 +13,7 @@
 
 | Language |
 |---|
-|[![Languages](https://go-skill-icons.vercel.app/api/icons?i=html,js,css,ts,python,c,mysql,dart)](https://skillicons.dev)||
+|[![Languages](https://go-skill-icons.vercel.app/api/icons?i=html,css,js,ts,python,c,mysql,dart)](https://skillicons.dev)||
 
 | DevOps | Utillities |
 |---|---|
