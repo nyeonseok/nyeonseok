@@ -31,6 +31,16 @@
 
 ## 💻 Projects
 
+### [DMS - 소프트웨어공학 팀프로젝트](https://github.com/IENFI/software)
+> 팀 기반 웹 시스템 설계 및 구현 프로젝트
+
+### [Dying Message - 졸업작품](https://github.com/IENFI/3DMafia)
+> 3D 기반 마피아 게임
+
+### [Vero - 정보보안 SW 웹/앱 개발 공모전](https://github.com/sw-security-web-app/sw-security-web-app_FE)
+> AI를 활용한 정보 보안 솔루션 웹/앱
+
+
 
 <!-- | 서비스명 | 설명 | Repository 주소|
 |---|---|---|
@@ -38,11 +48,11 @@
 |Dying Message|졸업작품|https://github.com/IENFI/3DMafia|
 |Vero|정보보안 SW 웹/앱 개발 공모전|https://github.com/sw-security-web-app/sw-security-web-app_FE| -->
 
-[DMS - 소프트웨어공학 팀프로젝트](https://github.com/IENFI/software)
+<!-- [DMS - 소프트웨어공학 팀프로젝트](https://github.com/IENFI/software)
 <br>
 [Dying Message - 졸업작품](https://github.com/IENFI/3DMafia)
 <br>
-[Vero - 정보보안 SW 웹/앱 개발 공모전](https://github.com/sw-security-web-app/sw-security-web-app_FE)
+[Vero - 정보보안 SW 웹/앱 개발 공모전](https://github.com/sw-security-web-app/sw-security-web-app_FE) -->
 
 <br>
 
