@@ -13,20 +13,19 @@
 
 | Language |
 |---|
-|[![Languages](https://go-skill-icons.vercel.app/api/icons?i=html,css,js,ts,python,c,mysql,dart)](https://skillicons.dev)||
+|[![Languages](https://go-skill-icons.vercel.app/api/icons?i=html,css,js,ts,python,java,c,cpp,dart)](https://skillicons.dev)||
 
-| DevOps | Utillities |
+| DevOps | Dev Tools |
 |---|---|
-|[![DevOps](https://go-skill-icons.vercel.app/api/icons?i=aws,cloudfront,lambda,apigateway)](https://skillicons.dev) | [![Utillities](https://go-skill-icons.vercel.app/api/icons?i=zustand,axios)](https://skillicons.dev)
+|[![DevOps](https://go-skill-icons.vercel.app/api/icons?i=aws,cloudfront,lambda,apigateway)](https://skillicons.dev) |[![Dev Tools](https://go-skill-icons.vercel.app/api/icons?i=vite,vscode,androidstudio,mysql)](https://skillicons.dev) | 
 
-
-| Framework & Library |
-|---|
-|[![Frameworks](https://go-skill-icons.vercel.app/api/icons?i=react,remix,vite,unity,flutter)](https://skillicons.dev)|
+| Framework | Library | Game Engine |
+|---|---|---|
+|[![Frameworks](https://go-skill-icons.vercel.app/api/icons?i=react,remix,flutter)](https://skillicons.dev)|[![Library](https://go-skill-icons.vercel.app/api/icons?i=zustand,axios)](https://skillicons.dev)|<div align="center">[![Game Engine](https://go-skill-icons.vercel.app/api/icons?i=unity)](https://skillicons.dev)</div>|
 
 | Communication |
 |---|
-|[![Communication](https://go-skill-icons.vercel.app/api/icons?i=github,jira,figma,notion)](https://skillicons.dev)|
+|[![Communication](https://go-skill-icons.vercel.app/api/icons?i=github,jira,figma,notion,discord)](https://skillicons.dev)|
 
 <br>
 
