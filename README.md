@@ -12,8 +12,17 @@
 
 | Language |
 |---|
-|![Languages](https://skillicons.dev/icons?i=html,js,css,ts,python,c,mysql,dart)|
+|[![Languages](https://go-skill-icons.vercel.app/api/icons?i=html,js,css,ts,python,c,mysql,dart)](https://skillicons.dev)||
+
+| DevOps | Utillities |
+|---|---|
+|[![DevOps](https://go-skill-icons.vercel.app/api/icons?i=aws,cloudfront,lambda,apigateway)](https://skillicons.dev) | [![Utillities](https://go-skill-icons.vercel.app/api/icons?i=zustand,axios)](https://skillicons.dev)
+
 
 | Framework & Library |
 |---|
-|[![Frameworks](https://skillicons.dev/icons?i=react,remix,vite,unity,flutter)](https://skillicons.dev)|
+|[![Frameworks](https://go-skill-icons.vercel.app/api/icons?i=react,remix,vite,unity,flutter)](https://skillicons.dev)|
+
+| Communication |
+|---|
+|[![Communication](https://go-skill-icons.vercel.app/api/icons?i=github,jira,figma,notion)](https://skillicons.dev)|
