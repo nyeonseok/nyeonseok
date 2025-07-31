@@ -32,7 +32,7 @@
 ## 💻 Projects
 
 ### [DMS - 소프트웨어공학 팀프로젝트](https://github.com/IENFI/software)
-> 팀 기반 웹 시스템 설계 및 구현 프로젝트
+> 개인 일정 관리 및 자기개발 웹
 
 ### [Dying Message - 졸업작품](https://github.com/IENFI/3DMafia)
 > 3D 기반 마피아 게임
@@ -57,4 +57,4 @@
 <br>
 
 ## 👇 More About Me
-[Portfolio](https://www.notion.so/ABOUT-ME-1dac7917f2c2803db666f1e38d72cbde?source=copy_link)
+🔗 [Portfolio](https://www.notion.so/ABOUT-ME-1dac7917f2c2803db666f1e38d72cbde?source=copy_link)
