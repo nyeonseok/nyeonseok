@@ -8,7 +8,7 @@
 > 멋쟁이사자처럼 영남대 13기 프론트엔드 파트
 <br>
 
-## 🛠️ Tech Stack
+## 🛠️ Skills
 
 | Language |
 |---|
