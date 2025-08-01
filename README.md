@@ -1,6 +1,8 @@
 # Hi there, this is Hyeonseok
 > Ocube Frontend Developer
 
+> iM Upay에서 프로젝트 유지보수 근무중
+
 > 영남대학교 수학과, 컴공, 교직 5학년
 
 > DGB 대구경북 혁신대학 1기 전자정보융합전공 AI/SW 트랙
