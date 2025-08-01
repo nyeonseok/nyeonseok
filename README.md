@@ -60,4 +60,9 @@
 ## 👇 More About Me
 🔗 [Portfolio](https://www.notion.so/ABOUT-ME-1dac7917f2c2803db666f1e38d72cbde?source=copy_link)
 
-<!-- [![Hits](https://hits.sh/github.com/nyeonseok.svg?style=flat&label=hits&color=white)](https://hits.sh/github.com/nyeonseok/) -->
+
+<p align="center">
+  <a href="https://hits.sh/github.com/nyeonseok/">
+    <img src="https://hits.sh/github.com/nyeonseok.svg?style=flat&label=hits&color=blue" alt="Hits">
+  </a>
+</p>
