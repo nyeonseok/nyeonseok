@@ -41,6 +41,8 @@
 ### [Vero - 정보보안 SW 웹/앱 개발 공모전](https://github.com/sw-security-web-app/sw-security-web-app_FE)
 > AI를 활용한 정보 보안 솔루션 웹/앱
 
+### [ILKAN - 멋쟁이사자처럼 중앙 해커톤](https://github.com/Likelion-YeungNam-Univ/ILKAN-web)
+> AI를 활용한 공실 감소 및 지역 활성화 통합 솔루션
 
 
 <!-- | 서비스명 | 설명 | Repository 주소|
