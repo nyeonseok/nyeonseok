@@ -14,11 +14,11 @@
 
 | Language |
 |---|
-|[![Languages](https://go-skill-icons.vercel.app/api/icons?i=html,css,js,ts,python,java,c,cpp,dart)](https://skillicons.dev)||
+|[![Languages](https://go-skill-icons.vercel.app/api/icons?i=html,css,tailwind,js,ts,python,java,c,cpp,dart)](https://skillicons.dev)||
 
 | DevOps | Dev Tools |
 |---|---|
-|[![DevOps](https://go-skill-icons.vercel.app/api/icons?i=aws,cloudfront,lambda,apigateway)](https://skillicons.dev) |[![Dev Tools](https://go-skill-icons.vercel.app/api/icons?i=vite,vscode,androidstudio,mysql)](https://skillicons.dev) | 
+|[![DevOps](https://go-skill-icons.vercel.app/api/icons?i=aws,cloudfront,lambda,apigateway,s3,ec2)](https://skillicons.dev) |[![Dev Tools](https://go-skill-icons.vercel.app/api/icons?i=vite,vscode,androidstudio,mysql)](https://skillicons.dev) | 
 
 | Framework | Library | Game Engine |
 |---|---|---|
