@@ -47,7 +47,7 @@
 <br>
 
 ## 📚 Library
-[nyeonseok-modal](https://github.com/nyeonseok/nyeonseok-modal) : React기반 modal 라이브러리
+**[nyeonseok-modal](https://github.com/nyeonseok/nyeonseok-modal)** - React기반 modal 라이브러리
 
 <!-- | 서비스명 | 설명 | Repository 주소|
 |---|---|---|
