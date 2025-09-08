@@ -44,6 +44,10 @@
 ### [ILKAN - 멋쟁이사자처럼 중앙 해커톤](https://github.com/Likelion-YeungNam-Univ/ILKAN-web)
 > AI를 활용한 공실 감소 및 지역 활성화 통합 웹 솔루션
 
+<br>
+
+## 📚 Library
+[nyeonseok-modal](https://github.com/nyeonseok/nyeonseok-modal) : React기반 modal 라이브러리
 
 <!-- | 서비스명 | 설명 | Repository 주소|
 |---|---|---|
