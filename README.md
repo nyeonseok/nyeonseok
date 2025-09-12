@@ -78,9 +78,18 @@
 🔗 [Portfolio](https://www.notion.so/ABOUT-ME-1dac7917f2c2803db666f1e38d72cbde?source=copy_link)
 
 <p align="center">
-  <a href="https://hits.sh/github.com/nyeonseok/">
+ <!-- <a href="https://hits.sh/github.com/nyeonseok/">
     <img src="https://hits.sh/github.com/nyeonseok.svg?style=flat&label=hits&color=blue" alt="Hits">
+  </a> -->
+
+   <a href="https://myhits.vercel.app" target="_blank" rel="noopener noreferrer" title="View hit stats">
+    <img
+      src="https://myhits.vercel.app/api/hit/https%3A%2F%2Fgithub.com%2Fnyeonseok?color=blue&label=hits&size=small"
+      alt="Hits"
+      style="display:inline-block; vertical-align:middle; border:0;"
+    />
   </a>
+
 </p>
 
 
