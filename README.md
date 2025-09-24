@@ -44,6 +44,9 @@
 ### [ILKAN - 멋쟁이사자처럼 중앙 해커톤](https://github.com/Likelion-YeungNam-Univ/ILKAN-web)
 > AI를 활용한 공실 감소 및 지역 활성화 통합 웹 솔루션
 
+### [MenuPicker - 토이 프로젝트](https://github.com/MenuPicker/MenuPicker_FE)
+> AI를 활용한 밥집, 술집 추천 웹/앱 (PWA)
+
 <br>
 
 ## 📚 Library
