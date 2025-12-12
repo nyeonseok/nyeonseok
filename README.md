@@ -32,12 +32,6 @@
 
 ## 💻 Projects
 
-### [DMS - 소프트웨어공학 팀프로젝트](https://github.com/IENFI/software)
-> 개인 일정 관리 및 자기계발 웹
-
-### [Dying Message - 졸업작품](https://github.com/IENFI/3DMafia)
-> 3D 기반 마피아 게임
-
 ### [Vero - 정보보안 SW 웹/앱 개발 공모전](https://github.com/sw-security-web-app/sw-security-web-app_FE)
 > AI를 활용한 정보 보안 웹/앱 솔루션
 
@@ -46,6 +40,16 @@
 
 ### [MenuPicker - 토이 프로젝트](https://github.com/MenuPicker/MenuPicker_FE)
 > AI를 활용한 밥집, 술집 추천 웹/앱 (PWA)
+
+### [STAGE ON - 사이드 프로젝트](https://github.com/stage-on/stage_on_WEB)
+> 아티스트 공연 일정 조회 및 관리 웹/앱 (PWA)
+
+### [DMS - 소프트웨어공학 팀프로젝트](https://github.com/IENFI/software)
+> 개인 일정 관리 및 자기계발 웹
+
+### [Dying Message - 졸업작품](https://github.com/IENFI/3DMafia)
+> 3D 기반 마피아 게임
+
 
 <br>
 
