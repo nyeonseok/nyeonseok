@@ -1,7 +1,9 @@
 # Hi there, this is Hyeonseok
+> SSAFY 15기
+
 > Ocube Frontend Developer
 
-> iM Upay에서 프로젝트 유지보수 근무중
+> iM Upay에서 프로젝트 유지보수 근무 
 
 > 영남대학교 수학과, 컴공, 교직 5학년
 
