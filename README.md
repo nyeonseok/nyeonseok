@@ -1,13 +1,13 @@
 # Hi there, this is Hyeonseok
 > SSAFY 15기
 
-> Ocube Frontend Developer
+> Ocube Frontend Developer(2025.06 ~ 2025.12)
 
-> iM Upay에서 프로젝트 유지보수 근무 
+> iM Upay에서 프로젝트 유지보수 근무 (2025.06 ~ 2025.12)
 
 > 영남대학교 수학과, 컴공, 교직 5학년
 
-> DGB 대구경북 혁신대학 1기 전자정보융합전공 AI/SW 트랙
+> DGM 대구경북 혁신대학 1기 전자정보융합전공 AI/SW 트랙
 
 > 멋쟁이사자처럼 영남대 13기 프론트엔드 파트
 <br>
