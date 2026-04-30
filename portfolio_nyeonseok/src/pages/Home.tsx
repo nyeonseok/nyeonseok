@@ -255,13 +255,24 @@ export default function Home() {
                                 className={`card reveal reveal-delay-${i}`}
                             >
                                 <div className="card-thumbnail">
-                                    <div
-                                        className="card-thumbnail-inner"
-                                        style={{ background: project.gradient }}
-                                    />
-                                    <span className="card-thumbnail-label">
-                                        {project.title}
-                                    </span>
+                                    {project.thumbnail ? (
+                                        <img
+                                            src={project.thumbnail}
+                                            alt={project.title}
+                                            className="card-thumbnail-inner"
+                                            style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                                        />
+                                    ) : (
+                                        <>
+                                            <div
+                                                className="card-thumbnail-inner"
+                                                style={{ background: project.gradient }}
+                                            />
+                                            <span className="card-thumbnail-label">
+                                                {project.title}
+                                            </span>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="card-body">
                                     <div className="card-tags">

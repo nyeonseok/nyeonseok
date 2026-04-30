@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+import profileImg from "../assets/profile.jpg";
 
 const strengths = [
     {
@@ -78,7 +79,11 @@ export default function About() {
             <div className="container">
                 {/* Profile */}
                 <div className="about-profile">
-                    <div className="about-avatar">안현석</div>
+                    <img
+                        src={profileImg}
+                        alt="안현석 프로필 사진"
+                        className="about-avatar"
+                    />
                     <div className="about-info">
                         <h1>안현석</h1>
                         <div className="role-badge">⚛️ 프론트엔드 개발자</div>
