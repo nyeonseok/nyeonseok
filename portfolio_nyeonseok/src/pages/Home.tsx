@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import type { IconType } from "react-icons";
+import { ResumeDocument } from "../components/ResumeDocument";
 import {
     SiReact,
     SiRemix,
@@ -37,6 +40,35 @@ const skillChips: SkillChip[] = [
 ];
 
 export default function Home() {
+    const resumeRef = useRef<HTMLDivElement>(null);
+    const [downloading, setDownloading] = useState(false);
+
+    const handleDownloadResume = async () => {
+        if (!resumeRef.current || downloading) return;
+        setDownloading(true);
+        try {
+            const canvas = await html2canvas(resumeRef.current, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff',
+            });
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+            const pageW = pdf.internal.pageSize.getWidth();
+            const pageH = pdf.internal.pageSize.getHeight();
+            const imgH = (canvas.height * pageW) / canvas.width;
+            let y = 0;
+            while (y < imgH) {
+                pdf.addImage(imgData, 'PNG', 0, -y, pageW, imgH);
+                if (y + pageH < imgH) pdf.addPage();
+                y += pageH;
+            }
+            pdf.save('안현석_이력서.pdf');
+        } finally {
+            setDownloading(false);
+        }
+    };
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -308,7 +340,7 @@ export default function Home() {
                         </p>
                         <div className="contact-actions">
                             <a
-                                href="mailto:ynustudy1357@gmail.com"
+                                href="mailto:aragorn2358@naver.com"
                                 className="btn btn-primary btn-lg"
                             >
                                 이메일 보내기 ✉️
@@ -321,10 +353,22 @@ export default function Home() {
                             >
                                 GitHub ↗
                             </a>
+                            <button
+                                onClick={handleDownloadResume}
+                                className="btn btn-secondary btn-lg"
+                                disabled={downloading}
+                            >
+                                {downloading ? '생성 중...' : '이력서 다운로드 📄'}
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
+
+            {/* Hidden resume for print/PDF */}
+            <div style={{ position: 'absolute', left: '-9999px', top: 0 }}>
+                <ResumeDocument ref={resumeRef} />
+            </div>
         </div>
     );
 }
