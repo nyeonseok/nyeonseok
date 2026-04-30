@@ -43,7 +43,7 @@ const certs = [
     { icon: "🏗️", name: "데이터아키텍처 준전문가 (DAsP)", date: "2024.10.25" },
     {
         icon: "🗣️",
-        name: "TOEIC Speaking Intermediate High",
+        name: "TOEIC Speaking Intermediate High (150)",
         date: "2025.11.20",
     },
     { icon: "⌨️", name: "컴퓨터활용능력 1급", date: "2023.04.21" },

@@ -10,7 +10,7 @@ const filters: { key: FilterType; label: string }[] = [
     { key: "all", label: "전체" },
     { key: "team", label: "팀 프로젝트" },
     { key: "toy", label: "토이 프로젝트" },
-    { key: "side", label: "사이드 프로젝트" },
+    // { key: "side", label: "사이드 프로젝트" },
 ];
 
 function ProjectCard({ project }: { project: Project }) {
@@ -22,7 +22,11 @@ function ProjectCard({ project }: { project: Project }) {
                         src={project.thumbnail}
                         alt={project.title}
                         className="card-thumbnail-inner"
-                        style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                        style={{
+                            objectFit: "cover",
+                            width: "100%",
+                            height: "100%",
+                        }}
                     />
                 ) : (
                     <>
@@ -30,7 +34,9 @@ function ProjectCard({ project }: { project: Project }) {
                             className="card-thumbnail-inner"
                             style={{ background: project.gradient }}
                         />
-                        <span className="card-thumbnail-label">{project.title}</span>
+                        <span className="card-thumbnail-label">
+                            {project.title}
+                        </span>
                     </>
                 )}
             </div>

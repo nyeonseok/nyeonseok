@@ -25,7 +25,7 @@ export interface Project {
     description: string;
     background?: string;
     techReason?: string;
-    type: "team" | "toy" | "side";
+    type: "team" | "toy" | "pwa";
     typeLabel: string;
     gradient: string;
     role: string;
@@ -381,15 +381,15 @@ const lambda = new aws.lambda.Function("lambdaFunction", {
             "공연 팬들이 여러 사이트를 오가며 일정을 직접 취합해야 하는 불편함에서 출발했습니다. 특히 모바일 환경에서 공연 일정을 앱처럼 빠르게 확인하고 싶다는 수요가 있었습니다. 앱 스토어 출시 없이도 모바일 홈 화면에 추가할 수 있는 PWA로 제작하고, 타임테이블 뷰를 통해 날짜·아티스트별 일정을 직관적으로 파악할 수 있도록 했습니다.",
         techReason:
             "React + Vite는 빠른 개발 환경과 경량 번들링이 모바일 PWA 성능에 유리합니다. CSS Modules는 6인 팀에서 스타일 네이밍 충돌 없이 각자 독립적으로 컴포넌트를 개발할 수 있어 채택했습니다. Vercel은 GitHub 연동으로 자동 배포가 되어 팀 협업 시 빠른 프리뷰 확인이 가능합니다. 커스텀 훅(useSearch, useMyBands) 패턴을 적용해 UI 컴포넌트와 API 로직을 분리, 유지보수성과 재사용성을 높였습니다.",
-        type: "side",
-        typeLabel: "사이드 프로젝트",
+        type: "team",
+        typeLabel: "팀 프로젝트",
         gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
         role: "프론트엔드 개발",
         techStack: [
             "React",
             "Vite",
             "TypeScript",
-            "PWA",
+            "team",
             "CSS Modules",
             "Vercel",
             "Jira",
