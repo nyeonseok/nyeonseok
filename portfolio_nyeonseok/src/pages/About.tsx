@@ -87,6 +87,16 @@ export default function About() {
                     <div className="about-info">
                         <h1>안현석</h1>
                         <div className="role-badge">⚛️ 프론트엔드 개발자</div>
+                        <p
+                            style={{
+                                fontSize: "0.95rem",
+                                fontWeight: 600,
+                                color: "var(--accent)",
+                                margin: "6px 0 16px",
+                            }}
+                        >
+                            "나날이 새롭게 — 할 수 있는 모든 것에 도전한다"
+                        </p>
                         <p className="about-bio">
                             사용자 경험을 최우선으로 생각하는 프론트엔드
                             개발자입니다. React, PWA 기반 웹 앱 개발 경험을
@@ -95,11 +105,12 @@ export default function About() {
                             경험했습니다.
                             <br />
                             <br />
-                            SSAFY 교육 과정을 통해 팀 프로젝트에서 프론트엔드
-                            개발을 주도하며 협업 역량을 키웠고, 실무에서는
-                            대구경북 교통카드 시스템 유지보수와 LG SHOPTIME
-                            서비스 페이지 개발을 통해 운영 환경에서의 실전
-                            경험을 쌓았습니다.
+                            SSAFY 교육 과정에서는 최종 관통 프로젝트 Trip
+                            Baton의 프론트엔드 아키텍처와 UI/UX를 리드했고,
+                            여러 팀 프로젝트에서 개발을 주도하며 협업 역량을
+                            키웠습니다. 실무에서는 대구경북 교통카드 시스템
+                            유지보수와 LG SHOPTIME 서비스 페이지 개발을 통해
+                            운영 환경에서의 실전 경험을 쌓았습니다.
                             <br />
                             <br />
                             정보처리기사, SQLD를 포함한 다수의 자격증을 보유하며

@@ -1,13 +1,14 @@
 import { useEffect, useRef } from 'react';
 import type { IconType } from 'react-icons';
 import {
-  SiReact, SiRemix, SiTypescript, SiVite, SiCssmodules, SiHtml5,
+  SiReact, SiRemix, SiTypescript, SiVite, SiCssmodules, SiHtml5, SiJavascript,
   SiReactrouter, SiPwa, SiAxios, SiSpring, SiVercel,
-  SiGit, SiGithub, SiJira, SiFigma,
+  SiGit, SiGithub, SiJira, SiFigma, SiGitlab, SiNotion,
   SiOpenai, SiKakao, SiMysql, SiPulumi, SiGooglegemini,
+  SiPython, SiOpenjdk, SiNginx, SiLinux,
 } from 'react-icons/si';
 import { BiLogoAws, BiLogoVisualStudio } from 'react-icons/bi';
-import { FaBolt, FaDatabase } from 'react-icons/fa';
+import { FaBolt, FaDatabase, FaServer, FaShieldAlt } from 'react-icons/fa';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface SkillDef {
@@ -37,6 +38,7 @@ const categories: CategoryDef[] = [
       { Icon: FaBolt,         color: '#FF9F43', name: 'Zustand',         level: 70, levelLabel: '능숙' },
       { Icon: SiCssmodules,   color: '#000BFF', name: 'CSS Modules',     level: 80, levelLabel: '숙련' },
       { Icon: SiHtml5,        color: '#E34F26', name: 'HTML / CSS',      level: 85, levelLabel: '숙련' },
+      { Icon: SiJavascript,   color: '#F7DF1E', name: 'JavaScript',      level: 80, levelLabel: '숙련' },
       { Icon: SiPwa,          color: '#5A0FC8', name: 'PWA',             level: 65, levelLabel: '중급' },
       { Icon: SiReactrouter,  color: '#CA4245', name: 'React Router',    level: 75, levelLabel: '능숙' },
       { Icon: SiVite,         color: '#646CFF', name: 'Vite',            level: 70, levelLabel: '능숙' },
@@ -54,6 +56,10 @@ const categories: CategoryDef[] = [
       { Icon: SiPulumi,            color: '#8A3391', name: 'Pulumi',         level: 50, levelLabel: '기초' },
       { Icon: SiSpring,            color: '#6DB33F', name: 'Spring Boot',    level: 40, levelLabel: '입문' },
       { Icon: SiVercel,            color: '#C8C8C8', name: 'Vercel',         level: 65, levelLabel: '중급' },
+      { Icon: SiOpenjdk,           color: '#437291', name: 'Java',           level: 45, levelLabel: '입문' },
+      { Icon: SiPython,            color: '#3776AB', name: 'Python',         level: 45, levelLabel: '입문' },
+      { Icon: SiNginx,             color: '#009639', name: 'Nginx',          level: 45, levelLabel: '입문' },
+      { Icon: SiLinux,             color: '#FCC624', name: 'Linux',          level: 50, levelLabel: '기초' },
     ],
   },
   {
@@ -63,7 +69,9 @@ const categories: CategoryDef[] = [
     skills: [
       { Icon: SiGit,               color: '#F05032', name: 'Git',            level: 80, levelLabel: '숙련' },
       { Icon: SiGithub,            color: '#C8C8C8', name: 'GitHub',         level: 80, levelLabel: '숙련' },
+      { Icon: SiGitlab,            color: '#FC6D26', name: 'GitLab',         level: 60, levelLabel: '중급' },
       { Icon: SiJira,              color: '#0052CC', name: 'Jira',           level: 70, levelLabel: '능숙' },
+      { Icon: SiNotion,            color: '#C8C8C8', name: 'Notion',         level: 70, levelLabel: '능숙' },
       { Icon: BiLogoVisualStudio,  color: '#007ACC', name: 'VS Code',        level: 85, levelLabel: '숙련' },
       { Icon: SiFigma,             color: '#F24E1E', name: 'Figma',          level: 50, levelLabel: '기초' },
     ],
@@ -83,8 +91,21 @@ const categories: CategoryDef[] = [
     categoryColor: '#4479A1',
     title: 'Database',
     skills: [
-      { Icon: SiMysql,        color: '#4479A1', name: 'SQL',             level: 70, levelLabel: '능숙' },
+      { Icon: SiMysql,        color: '#4479A1', name: 'MySQL',           level: 70, levelLabel: '능숙' },
       { Icon: FaDatabase,     color: '#336791', name: 'Tibero',          level: 50, levelLabel: '기초' },
+      { Icon: FaDatabase,     color: '#000000', name: 'DataGrip',        level: 55, levelLabel: '기초' },
+    ],
+  },
+  {
+    Icon: FaServer,
+    categoryColor: '#43e97b',
+    title: '공공 시스템 인프라',
+    skills: [
+      { Icon: FaServer,       color: '#43e97b', name: 'WebtoB',          level: 45, levelLabel: '입문' },
+      { Icon: FaServer,       color: '#38f9d7', name: 'JEUS',            level: 45, levelLabel: '입문' },
+      { Icon: FaShieldAlt,    color: '#F05032', name: 'SG Client',       level: 45, levelLabel: '입문' },
+      { Icon: FaShieldAlt,    color: '#4facfe', name: 'CHAKRA',          level: 45, levelLabel: '입문' },
+      { Icon: FaShieldAlt,    color: '#00f2fe', name: 'HIWARE',          level: 40, levelLabel: '입문' },
     ],
   },
 ];

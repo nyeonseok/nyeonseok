@@ -43,6 +43,138 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        id: "trip-baton",
+        title: "Trip Baton",
+        subtitle: "생성형 AI와 배치를 접목한 여행 웹앱(PWA) 서비스",
+        description:
+            "'여행'을 주제로 한 웹앱(PWA) 서비스입니다. 생성형 AI와 배치 작업을 접목했고, 모바일 접근성을 위해 PWA로 제작해 실제 앱처럼 설치·사용할 수 있도록 구현했습니다. 프론트엔드 전체 아키텍처와 UI/UX를 리드하며 일부 백엔드 로직과 배치를 구현했고, Jira·Notion으로 팀 일정을 관리했습니다.",
+        background:
+            "SSAFY 1학기 최종 관통 프로젝트로 진행되었습니다. 여행 계획부터 기록까지 하나의 서비스에서 해결하고자 기획했으며, 생성형 AI로 맞춤 일정을 제안하고 배치 작업으로 데이터를 주기적으로 갱신하도록 설계했습니다. 웹과 모바일 환경을 하나의 코드베이스에서 모두 만족시키기 위해 FSD(Feature-Sliced Design) 아키텍처를 도입하고, PWA로 제작해 앱 스토어 배포 없이도 모바일에서 네이티브에 가까운 경험을 제공하는 것을 목표로 했습니다.",
+        techReason:
+            "React + TypeScript는 컴포넌트 재사용성과 타입 안정성을 확보하기 위해 선택했습니다. FSD는 웹/모바일 환경 분기와 도메인별 응집도를 확보해 유지보수성을 강화합니다. PWA는 별도 앱 배포 없이 모바일 설치와 네이티브 경험을 제공합니다. Zustand(persist)는 경량 전역 상태 관리와 새로고침 후 상태 유지를 동시에 만족합니다. OAuth + JWT로 카카오·구글 소셜 로그인 진입 장벽을 최소화했고, Presigned URL(S3)로 이미지 업로드를 서버 경유 없이 클라이언트가 직접 처리하도록 했습니다.",
+        type: "team",
+        typeLabel: "팀 프로젝트",
+        gradient: "linear-gradient(135deg, #fa8bff 0%, #2bd2ff 52%, #2bff88 90%)",
+        role: "프론트엔드 개발 (아키텍처 · UI/UX 리드) · 일부 백엔드 · 프로젝트 일정 관리",
+        techStack: [
+            "React",
+            "TypeScript",
+            "FSD",
+            "PWA",
+            "Zustand",
+            "OAuth",
+            "JWT",
+            "AWS S3",
+            "OpenAI API",
+            "Jira",
+            "Notion",
+        ],
+        featured: true,
+        features: [
+            {
+                title: "소셜 로그인",
+                description:
+                    "OAuth(카카오·구글) 기반 로그인, JWT 인증/인가",
+            },
+            {
+                title: "생성형 AI 연동",
+                description:
+                    "OpenAI API 통신, 프롬프트 엔지니어링(원샷 프롬프팅)으로 응답 일관성 확보",
+            },
+            {
+                title: "이미지 업로드",
+                description:
+                    "Presigned URL로 클라이언트가 S3에 직접 업로드",
+            },
+            {
+                title: "배치",
+                description: "일정 주기마다 데이터 갱신 작업 수행",
+            },
+            {
+                title: "검색",
+                description:
+                    "debounce 적용, 컴포넌트화하여 모든 검색창에서 재사용",
+            },
+            {
+                title: "PWA",
+                description: "모바일 앱처럼 설치 가능, 네이티브 UX 재현",
+            },
+        ],
+        contributions: [
+            {
+                title: "FSD 아키텍처 설계",
+                items: [
+                    "웹 환경과 모바일 환경을 분리해 구현, 도메인별 폴더로 환경에 따라 분기",
+                    "도메인별 `ui / api / hook` 분리로 책임 분리 및 재사용성 확보",
+                ],
+            },
+            {
+                title: "모바일 네이티브 UX 구현",
+                items: [
+                    "실제 앱처럼 보이도록 토스트, 하단 네비게이션 바, 드래그 바텀 시트 구현",
+                    "Promise 기반 confirm 모달, 라우트 가드 적용",
+                ],
+            },
+            {
+                title: "인증 / 인가",
+                items: [
+                    "OAuth(카카오·구글) + JWT 기반 인증/인가 구현",
+                    "axios 인터셉터로 Access Token을 Local Storage에서 주입, 만료 시 로그아웃 처리",
+                ],
+            },
+            {
+                title: "이미지 업로드 최적화",
+                items: [
+                    "Presigned URL을 발급받아 프론트가 S3에 직접 업로드 → 서버 경유 제거",
+                ],
+            },
+            {
+                title: "상태 관리",
+                items: [
+                    "Zustand + `persist`로 새로고침 후에도 상태를 유지하는 안정적 전역 상태 관리",
+                ],
+            },
+            {
+                title: "검색 성능",
+                items: [
+                    "onChange마다 발생하던 API 호출에 debounce 적용, 검색 컴포넌트로 추출해 재사용",
+                ],
+            },
+            {
+                title: "백엔드 · 배치",
+                items: [
+                    "백엔드 로직 일부 구현, 일정 주기로 동작하는 배치 기능 구현",
+                ],
+            },
+            {
+                title: "일정 관리",
+                items: ["Jira·Notion으로 스프린트 일정 및 이슈 추적 관리"],
+            },
+        ],
+        troubleshooting: [
+            {
+                title: "웹 / 모바일 UI 이원화",
+                problem:
+                    "하나의 코드베이스에서 웹과 모바일 UX를 동시에 만족시켜야 함",
+                solution:
+                    "FSD 구조에서 도메인별로 환경을 분기, 모바일에서는 하단 네비·바텀 시트 등 네이티브 컴포넌트로 렌더링 → 실제 앱에 가까운 UX 확보, 도메인 단위로 로직 확인이 쉬워 유지보수성 향상",
+            },
+            {
+                title: "서버 업로드 부하",
+                problem:
+                    "이미지를 서버가 중계하면 트래픽·메모리 부담 발생",
+                solution:
+                    "Presigned URL 발급 후 클라이언트가 S3에 직접 업로드 → 업로드 트래픽이 서버를 거치지 않아 부하 감소",
+            },
+            {
+                title: "AI 응답 일관성",
+                problem: "동일 요청에도 AI 응답 형식이 불규칙",
+                solution:
+                    "원샷 프롬프팅으로 출력 형식을 예시와 함께 고정 → 백엔드에서 항상 파싱 가능한 형태의 값을 프론트로 전달",
+            },
+        ],
+    },
+    {
         id: "vero",
         title: "VERO",
         subtitle: "생성형 AI와의 안전한 소통을 지원하는 보안 웹 애플리케이션",
@@ -104,20 +236,32 @@ export const projects: Project[] = [
         ],
         contributions: [
             {
-                title: "로그인 & 인증 시스템",
-                items: [
-                    "JWT 기반 로그인 서비스 개발",
-                    "Refresh Token Rotation + HttpOnly 쿠키로 XSS 방어",
-                    "Zustand로 Access Token을 LocalStorage에 관리",
-                    "axios Interceptor로 매 요청 시 Access Token 자동 주입",
-                    "토큰 만료 시 Refresh Token으로 자동 재발급",
-                ],
-            },
-            {
                 title: "회원가입 구현",
                 items: [
                     "사용자 유형(일반 / 관리자 / 직원)별 회원가입 플로우 구현",
                     "이메일 및 핸드폰 인증 API 연동",
+                ],
+            },
+            {
+                title: "로그인 & 인증",
+                items: [
+                    "JWT 기반 로그인 서비스 개발",
+                    "Access Token은 Local Storage, Refresh Token은 HttpOnly 쿠키에 분리 저장하여 토큰 탈취(XSS) 위험을 이중 방어",
+                    "Zustand로 로그인 상태 관리",
+                ],
+            },
+            {
+                title: "통신 라이브러리 (axios Interceptor)",
+                items: [
+                    "axios Interceptor로 모든 API 요청에 보안 헤더를 강제하고 Access Token을 header에 주입",
+                    "토큰 만료 시 Refresh Token으로 재발급 프로세스를 자동화",
+                ],
+            },
+            {
+                title: "AI 학습 데이터 업로드",
+                items: [
+                    "Multi-part Form으로 텍스트/파일 전송하여 보안 로직 추가로 인한 응답 지연 최소화",
+                    "useState로 제출 후 로딩 화면 렌더링",
                 ],
             },
             {
@@ -127,7 +271,6 @@ export const projects: Project[] = [
                     "사이드바에 이전 대화 목록 렌더링",
                     "useParams로 선택 AI 저장, 새 대화방 생성",
                     "전송 중 버튼 비활성화, useRef로 자동 스크롤",
-                    "페이징을 통해 메모리 효율 향상",
                     "스크롤 업 시 페이징으로 이전 대화 로드",
                 ],
             },
@@ -149,11 +292,11 @@ export const projects: Project[] = [
                     "Custom Hook 도입 — isLogin() 함수 대신 LocalStorage를 직접 참조하여 상태를 즉시 반영",
             },
             {
-                title: "채팅 페이징으로 성능 개선",
+                title: "대화 기록 누적으로 인한 메모리 병목",
                 problem:
-                    "채팅이 길어질수록 전체 데이터를 불러와 속도 저하 발생",
+                    "LLM 대화 기록을 일괄 호출하는 구조라 데이터가 누적될수록 클라이언트 메모리 점유율이 상승",
                 solution:
-                    "페이지 이동마다 해당 페이지 데이터만 API 호출 — 메모리 효율 개선",
+                    "대화 기록을 구간별로 나누어 요청하는 페이징 방식 도입 → 채팅이 길어져도 메모리 효율 유지",
             },
             {
                 title: "AWS Lambda 용량 초과",
@@ -179,15 +322,15 @@ const lambda = new aws.lambda.Function("lambdaFunction", {
         title: "Il-Kan",
         subtitle: "AI를 통해 공실율을 낮추는 지역 경제 활성화 웹 솔루션",
         description:
-            "Il-Kan은 대구 동성로의 심각한 공실 문제를 해결하기 위한 웹 솔루션입니다. 실제 건물주/부동산 인터뷰를 바탕으로 기획되었으며, 빈 점포를 공유 오피스·프리랜서 시장으로 연결하고, AI 리모델링 시각화 기능으로 건물주의 의사결정을 지원합니다.",
+            "Il-Kan은 대구 동성로의 심각한 공실 문제를 해결하기 위한 웹 솔루션입니다. 실제 건물주/부동산 인터뷰를 바탕으로 기획되었으며, 빈 점포를 공유 오피스·프리랜서 시장으로 연결하고, AI 리모델링 시각화 기능으로 건물주의 의사결정을 지원합니다. 1,500명 · 약 250개 팀이 참가한 멋쟁이사자처럼 중앙 해커톤에서 상위 6%를 기록했습니다.",
         background:
             "대구 동성로 일대 공실률이 40%를 넘어서며 지역 경제 침체가 가속화되고 있습니다. 팀원들이 직접 건물주와 부동산 중개인을 인터뷰한 결과, 핵심 장벽은 '리모델링 비용 부담'과 '수익화 경로 불투명'이었습니다. Il-Kan은 AI 리모델링 시각화로 초기 비용 부담 없이 공간 가능성을 확인하고, 공유 오피스·프리랜서 매칭으로 즉시 수익을 창출할 수 있도록 설계되었습니다.",
         techReason:
-            "React + Vite 조합은 빠른 HMR과 경량 번들로 개발 생산성을 높였습니다. OpenAI gpt-image-1 모델은 초기 사용한 Gemini Imagine 대비 원본 이미지 반영 품질이 훨씬 뛰어나 전환했습니다. react-router-dom은 역할별(건물주/전문가/의뢰자) 페이지 분기를 직관적으로 구성할 수 있어 선택했습니다. AWS EC2 + ALB는 HTTPS 강제 리다이렉트와 커스텀 도메인 적용을 간단하게 처리할 수 있어 적합했습니다.",
+            "React + Vite 조합은 빠른 HMR과 경량 번들로 개발 생산성을 높였습니다. OpenAI gpt-image-1 모델은 초기 사용한 Gemini 이미지 모델 대비 원본 이미지 반영 품질이 훨씬 뛰어나 전환했습니다. react-router-dom은 역할별(건물주/전문가/의뢰자) 페이지 분기를 직관적으로 구성할 수 있어 선택했습니다. AWS EC2 + ALB는 HTTPS 강제 리다이렉트와 커스텀 도메인 적용을 간단하게 처리할 수 있어 적합했습니다.",
         type: "team",
         typeLabel: "팀 프로젝트",
         gradient: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
-        role: "프론트엔드 개발",
+        role: "프론트엔드 개발 · 인프라 · PM",
         techStack: [
             "React",
             "Vite",
@@ -224,6 +367,20 @@ const lambda = new aws.lambda.Function("lambdaFunction", {
         ],
         contributions: [
             {
+                title: "프로젝트 관리 (PM)",
+                items: [
+                    "모놀리식 아키텍처 및 브랜치 전략(Jira 기반 Github Flow) 설정",
+                    "프론트·백엔드 개발 진행도를 파악해 동일 기능을 개발하는 개발자 간 소통 관리",
+                ],
+            },
+            {
+                title: "사용자 상태 관리",
+                items: [
+                    "axios Interceptor로 로그인 시 role을 header에 담아 전송",
+                    "Custom Hook으로 페이지 이동 시 로그인 여부 확인",
+                ],
+            },
+            {
                 title: "생성형 AI 이미지 변환",
                 items: [
                     "OpenAI API key 발급 및 연동",
@@ -233,9 +390,9 @@ const lambda = new aws.lambda.Function("lambdaFunction", {
                 ],
             },
             {
-                title: "서버 배포",
+                title: "서버 배포 (인프라)",
                 items: [
-                    "AWS EC2 백엔드 서버 배포 기여",
+                    "AWS EC2 백엔드 서버 배포",
                     "커스텀 도메인 적용",
                     "AWS ALB로 HTTP(80) → HTTPS(443) 리다이렉트",
                 ],
@@ -253,7 +410,6 @@ const lambda = new aws.lambda.Function("lambdaFunction", {
                 items: [
                     "지원 전문가, 날짜 선정, 선택 여부 등 복잡한 상태 개별 관리",
                     "시작/마감 날짜 기반 progress bar 구현",
-                    "Jira-GitHub 연동으로 애자일 방식 협업",
                 ],
             },
         ],
@@ -261,9 +417,9 @@ const lambda = new aws.lambda.Function("lambdaFunction", {
             {
                 title: "생성형 AI 이미지 품질 개선",
                 problem:
-                    "Gemini Imagine 모델 사용 시 원본 사진을 반영하지 못하는 성능 이슈 발생",
+                    "Gemini 이미지 모델 사용 시 원본 사진을 반영하지 못하는 성능 이슈 발생",
                 solution:
-                    "OpenAI gpt-image-1 모델로 전환 + 프롬프트 세분화/정규화 → 성능 눈에 띄게 향상",
+                    "OpenAI gpt-image-1 모델로 전환 + 프롬프트 세분화/정규화 → 결과물 반영도 개선",
             },
             {
                 title: "마이 페이지 복잡한 상태 관리",
@@ -366,6 +522,13 @@ const lambda = new aws.lambda.Function("lambdaFunction", {
   },
   (error) => { /* 에러 처리 */ }
 );`,
+            },
+            {
+                title: "검색 입력 시 불필요한 API 과다 호출",
+                problem:
+                    "검색창 onChange마다 API를 호출해 동일 검색어에서도 요청이 반복되어 UX 저하",
+                solution:
+                    "debounce를 적용해 입력이 멈춘 뒤 일정 시간이 지나야 API를 호출하도록 변경 → 동일 검색어 기준 호출 24회 → 3회 (87.5% 감소), INP 65ms → 24ms 개선",
             },
         ],
         github: "https://github.com/MenuPicker/MenuPicker_FE",

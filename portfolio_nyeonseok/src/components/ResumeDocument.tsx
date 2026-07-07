@@ -95,10 +95,11 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
         <SectionTitle>기술 스택</SectionTitle>
         <div style={{ display: 'flex', flexDirection: 'column' as const, gap: 5 }}>
           {[
-            { label: 'Frontend',   skills: 'React · Remix · TypeScript · Zustand · CSS Modules · HTML/CSS · PWA · React Router · Vite · Axios' },
-            { label: 'Infra',      skills: 'AWS (EC2 · Lambda · S3) · Pulumi · Spring Boot · Vercel' },
-            { label: 'Tools',      skills: 'Git · GitHub · Jira · VS Code · Figma' },
-            { label: 'APIs / DB',  skills: 'OpenAI API · Gemini API · Kakao Map API · SQL · Tibero' },
+            { label: 'Frontend',   skills: 'React · Remix · TypeScript · JavaScript · Zustand · CSS Modules · HTML/CSS · PWA · React Router · Vite · Axios' },
+            { label: 'Backend',    skills: 'Spring Boot · Java · Python' },
+            { label: 'Infra',      skills: 'AWS (EC2 · Lambda · S3) · Pulumi · Vercel · Nginx · Linux · WebtoB · JEUS · SG Client · CHAKRA · HIWARE' },
+            { label: 'Tools',      skills: 'Git · GitHub · GitLab · Jira · Notion · VS Code · Figma' },
+            { label: 'APIs / DB',  skills: 'OpenAI API · Gemini API · Kakao Map API · MySQL · Tibero · DataGrip' },
           ].map(row => (
             <div key={row.label} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               <span style={{
@@ -144,15 +145,15 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 2 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' as const }}>
               <span style={{ fontWeight: 700, fontSize: '10pt', color: TEXT }}>대구경북 어르신 무임 교통카드</span>
-              <Tag>Spring Boot · Tibero · SQL</Tag>
+              <Tag>WebtoB · JEUS · Tibero · DataGrip</Tag>
             </div>
             <span style={{ fontSize: '8pt', color: MUTED, whiteSpace: 'nowrap' as const, marginLeft: 8 }}>2025.06 – 2025.12</span>
           </div>
           <div style={{ fontSize: '8.5pt', color: MUTED, marginBottom: 4, fontWeight: 500 }}>
-            프로젝트 유지보수 및 인프라 관리
+            공공 시스템 WEB & WAS 유지보수 · 운영 · 인프라 관리
           </div>
-          <Bullet>서버 라이선스 교체로 고객 정보 조회 오류 해결, 평문 저장 데이터 → 암호화 전환</Bullet>
-          <Bullet>DB 모니터링, 클라이언트-서버 통신 점검, 민원 대응으로 서비스 민원 약 70% 감소</Bullet>
+          <Bullet>선임 부재 상황에서 로그 정밀 분석으로 암호화 모듈 라이선스 만료 식별, 이중화 서버 순차 교체 및 평문 데이터 약 50건 재암호화로 무중단 대응</Bullet>
+          <Bullet>서버·로그 모니터링, 이상 접근자 문서화·차단, 민원 대응으로 서비스 민원 약 70% 감소</Bullet>
           <Bullet>서비스 안정화 → 2025년 9월 이용 금액 전월 대비 약 11.4% 증가 (↑79.7백만원)</Bullet>
         </div>
       </div>
@@ -160,6 +161,23 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
       {/* ═══════════════════════ PROJECTS ════════════════════ */}
       <div style={{ marginBottom: 18 }}>
         <SectionTitle>프로젝트</SectionTitle>
+
+        {/* Trip Baton */}
+        <div style={{ marginBottom: 11, paddingBottom: 10, borderBottom: `1px solid ${BORDER}` }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 2, flexWrap: 'wrap' as const, gap: 4 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' as const }}>
+              <span style={{ fontWeight: 700, fontSize: '10pt', color: TEXT }}>Trip Baton</span>
+              <span style={{ fontSize: '8pt', color: MUTED }}>SSAFY 1학기 최종 관통 프로젝트</span>
+              <Tag>React · TypeScript · FSD · PWA · Zustand</Tag>
+            </div>
+            <span style={{ fontSize: '8pt', color: MUTED }}>프론트엔드 아키텍처·UI/UX 리드</span>
+          </div>
+          <div style={{ fontSize: '8.5pt', color: MUTED, marginBottom: 4 }}>
+            생성형 AI와 배치를 접목한 여행 웹앱(PWA) 서비스
+          </div>
+          <Bullet>FSD 아키텍처로 웹/모바일 도메인 분기 설계, Presigned URL(S3)로 서버 경유 없는 이미지 업로드 구현</Bullet>
+          <Bullet>OAuth+JWT 인증, Zustand(persist) 전역 상태 관리, 검색 debounce 적용 및 백엔드·배치 로직 일부 개발</Bullet>
+        </div>
 
         {/* VERO */}
         <div style={{ marginBottom: 11, paddingBottom: 10, borderBottom: `1px solid ${BORDER}` }}>
@@ -187,16 +205,16 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 2, flexWrap: 'wrap' as const, gap: 4 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' as const }}>
               <span style={{ fontWeight: 700, fontSize: '10pt', color: TEXT }}>Il-Kan</span>
-              <span style={{ fontSize: '8pt', color: MUTED }}>팀 프로젝트 (6인)</span>
+              <span style={{ fontSize: '8pt', color: MUTED }}>팀 프로젝트 (6인) · 멋쟁이사자처럼 중앙 해커톤 상위 6%</span>
               <Tag>React · TypeScript · Vite · AWS EC2 · OpenAI API</Tag>
             </div>
-            <span style={{ fontSize: '8pt', color: MUTED }}>프론트엔드 개발</span>
+            <span style={{ fontSize: '8pt', color: MUTED }}>프론트엔드 개발 · 인프라 · PM</span>
           </div>
           <div style={{ fontSize: '8.5pt', color: MUTED, marginBottom: 4 }}>
             AI 기반 공실 활용 지역 경제 활성화 웹 솔루션
           </div>
-          <Bullet>OpenAI gpt-image-1로 공실 리모델링 AI 시각화 구현 (Gemini 대비 성능 대폭 향상)</Bullet>
-          <Bullet>AWS EC2 배포 + ALB로 HTTP→HTTPS 리다이렉트 설정, Jira-GitHub 연동 애자일 협업</Bullet>
+          <Bullet>OpenAI gpt-image-1로 공실 리모델링 AI 시각화 구현 (Gemini 대비 결과물 반영도 개선)</Bullet>
+          <Bullet>브랜치 전략(Jira 기반 Github Flow) 수립 및 개발 진행도 관리(PM), AWS EC2 배포 + ALB HTTPS 리다이렉트 설정</Bullet>
         </div>
 
         {/* Menu Picker */}
@@ -214,6 +232,7 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
           </div>
           <Bullet>Vercel Serverless 함수로 CORS 없이 Gemini API 안전하게 호출하는 서버리스 아키텍처 구축</Bullet>
           <Bullet>Kakao Map API + navigator.geolocation으로 GPS 기반 주변 맛집 탐색 및 추천 구현</Bullet>
+          <Bullet>검색 debounce 적용으로 API 호출 24회 → 3회 (87.5%↓), INP 65ms → 24ms 개선</Bullet>
           <div style={{ fontSize: '8pt', color: MUTED, marginTop: 3 }}>
             Demo: menu-picker-fe.vercel.app
           </div>

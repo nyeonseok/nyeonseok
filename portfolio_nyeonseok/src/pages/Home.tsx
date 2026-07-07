@@ -180,7 +180,7 @@ export default function Home() {
                         </div>
                         <div className="about-stats">
                             {[
-                                { number: "4+", label: "완성 프로젝트" },
+                                { number: "5+", label: "완성 프로젝트" },
                                 { number: "6+", label: "보유 자격증" },
                                 { number: "2년+", label: "개발 경험" },
                             ].map((stat, i) => (
