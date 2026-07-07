@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { projects } from "../data/projects";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
@@ -7,11 +7,23 @@ export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const project = projects.find((p) => p.id === id);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(
+    null
+  );
   useScrollReveal();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [lightbox]);
 
   if (!project) {
     return (
@@ -258,7 +270,31 @@ export default function ProjectDetail() {
               <div className="screenshots-grid">
                 {project.screenshots.map((shot) => (
                   <div key={shot.title} className="screenshot-card">
-                    <img src={shot.image} alt={shot.title} />
+                    <div className="screenshot-media">
+                      <img src={shot.image} alt={shot.title} />
+                      <button
+                        type="button"
+                        className="screenshot-expand-btn"
+                        aria-label="이미지 전체화면으로 보기"
+                        onClick={() =>
+                          setLightbox({ src: shot.image, alt: shot.title })
+                        }
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+                          <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+                          <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+                          <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+                        </svg>
+                      </button>
+                    </div>
                     <h4>{shot.title}</h4>
                     <p>{shot.description}</p>
                   </div>
@@ -329,6 +365,37 @@ export default function ProjectDetail() {
           </div>
         </div>
       </div>
+
+      {lightbox && (
+        <div
+          className="screenshot-lightbox"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            type="button"
+            className="screenshot-lightbox-close"
+            aria-label="닫기"
+            onClick={() => setLightbox(null)}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }
