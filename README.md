@@ -34,6 +34,9 @@
 
 ## 💻 Projects
 
+### [Trip Baton - SSAFY(삼성청년SW·AI아카데미) 1학기 최종 관통 프로젝트](https://github.com/SSAFY-TRIP-AL)
+> 여행 릴레이 웹/앱 서비스(PWA)
+
 ### [Vero - 정보보안 SW 웹/앱 개발 공모전](https://github.com/sw-security-web-app/sw-security-web-app_FE)
 > AI를 활용한 정보 보안 웹/앱 솔루션
 
