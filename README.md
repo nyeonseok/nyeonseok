@@ -20,7 +20,7 @@
 
 | DevOps | Dev Tools |
 |---|---|
-|[![DevOps](https://go-skill-icons.vercel.app/api/icons?i=aws,cloudfront,lambda,apigateway,s3,ec2)](https://skillicons.dev) |[![Dev Tools](https://go-skill-icons.vercel.app/api/icons?i=vite,vscode,androidstudio,mysql)](https://skillicons.dev) | 
+|[![DevOps](https://go-skill-icons.vercel.app/api/icons?i=aws,cloudfront,lambda,apigateway,s3,ec2)](https://skillicons.dev) |[![Dev Tools](https://go-skill-icons.vercel.app/api/icons?i=vite,vscode,androidstudio,mysql,spring)](https://skillicons.dev) | 
 
 | Framework | Library | Game Engine |
 |---|---|---|
