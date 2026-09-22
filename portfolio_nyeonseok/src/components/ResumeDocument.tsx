@@ -80,7 +80,7 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
             안현석
           </div>
           <div style={{ fontSize: '11pt', fontWeight: 600, color: ACCENT, marginTop: 4, letterSpacing: '0.02em' }}>
-            Frontend Developer · 프론트엔드 개발자
+            Fullstack Developer · 데이터로 원인을 좁히는 개발자
           </div>
         </div>
         <div style={{ textAlign: 'right', color: MUTED, fontSize: '8.5pt', lineHeight: 1.7 }}>
@@ -97,7 +97,8 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
           {[
             { label: 'Frontend',   skills: 'React · Remix · TypeScript · JavaScript · Zustand · CSS Modules · HTML/CSS · PWA · React Router · Vite · Axios' },
             { label: 'Backend',    skills: 'Spring Boot · Java · Python' },
-            { label: 'Infra',      skills: 'AWS (EC2 · Lambda · S3) · Pulumi · Vercel · Nginx · Linux · WebtoB · JEUS · SG Client · CHAKRA · HIWARE' },
+            { label: 'AI/ML',      skills: 'Hugging Face · Transformers · Qwen2.5-VL · PyTorch · PEFT · LoRA · BitsAndBytes' },
+            { label: 'Infra',      skills: 'AWS (EC2 · Lambda · S3 · SQS) · Pulumi · Vercel · Nginx · Linux · WebtoB · JEUS · SG Client · CHAKRA · HIWARE' },
             { label: 'Tools',      skills: 'Git · GitHub · GitLab · Jira · Notion · VS Code · Figma' },
             { label: 'APIs / DB',  skills: 'OpenAI API · Gemini API · Kakao Map API · MySQL · Tibero · DataGrip' },
           ].map(row => (
@@ -179,6 +180,23 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
           <Bullet>OAuth+JWT 인증, Zustand(persist) 전역 상태 관리, 검색 debounce 적용 및 백엔드·배치 로직 일부 개발</Bullet>
         </div>
 
+        {/* Projectree */}
+        <div style={{ marginBottom: 11, paddingBottom: 10, borderBottom: `1px solid ${BORDER}` }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 2, flexWrap: 'wrap' as const, gap: 4 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' as const }}>
+              <span style={{ fontWeight: 700, fontSize: '10pt', color: TEXT }}>Projectree</span>
+              <span style={{ fontSize: '8pt', color: MUTED }}>SSAFY 공통 프로젝트</span>
+              <Tag>React · OpenVidu · WebRTC · SSE · AWS SQS</Tag>
+            </div>
+            <span style={{ fontSize: '8pt', color: MUTED }}>PM · 프론트엔드 · 성능 최적화</span>
+          </div>
+          <div style={{ fontSize: '8.5pt', color: MUTED, marginBottom: 4 }}>
+            화상회의를 STT·생성형 AI로 회의록·3D 트리 구조로 변환하는 협업 도구
+          </div>
+          <Bullet>3D 트리 렌더링 병목을 실측 데이터로 분석해 라벨 DOM 4,000→592개, 평균 FPS 9.3→45.4로 개선</Bullet>
+          <Bullet>OpenVidu 기반 WebRTC 회의, SQS 비동기 처리, SSE 자동 재연결·Heartbeat 구현 및 서버 트리 재조립 로직 제거</Bullet>
+        </div>
+
         {/* VERO */}
         <div style={{ marginBottom: 11, paddingBottom: 10, borderBottom: `1px solid ${BORDER}` }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 2, flexWrap: 'wrap' as const, gap: 4 }}>
@@ -254,6 +272,23 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
           <Bullet>dvh 단위 적용으로 모바일 주소창 등장/사라짐에 따른 UI 떨림 문제 해결</Bullet>
           <Bullet>useSearch · useMyBands 커스텀 훅으로 UI 로직과 API 통신 완전 분리, 재사용성 확보</Bullet>
         </div>
+
+        {/* AI VQA Fine-tuning */}
+        <div style={{ marginTop: 11, paddingTop: 10, borderTop: `1px solid ${BORDER}` }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 2, flexWrap: 'wrap' as const, gap: 4 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' as const }}>
+              <span style={{ fontWeight: 700, fontSize: '10pt', color: TEXT }}>AI 이미지 VQA 모델 Fine-tuning</span>
+              <span style={{ fontSize: '8pt', color: MUTED }}>개인 프로젝트</span>
+              <Tag>Qwen2.5-VL · PyTorch · PEFT · LoRA</Tag>
+            </div>
+            <span style={{ fontSize: '8pt', color: MUTED }}>멀티모달 AI Fine-tuning</span>
+          </div>
+          <div style={{ fontSize: '8.5pt', color: MUTED, marginBottom: 4 }}>
+            재활용 이미지 기반 4지선다 VQA 모델을 제한된 GPU 환경에서 Fine-tuning
+          </div>
+          <Bullet>4-bit NF4 양자화 + LoRA(r=16, alpha=32)로 제한된 GPU 환경에서 7B 모델 효율적으로 학습</Bullet>
+          <Bullet>Train/Validation 9:1 분리 후 동일 기준으로 검증, 정확도 약 68% → 91% (약 23%p 향상)</Bullet>
+        </div>
       </div>
 
       {/* ═══════════════════════ CERTIFICATIONS ══════════════ */}
@@ -286,7 +321,7 @@ export const ResumeDocument = React.forwardRef<HTMLDivElement>((_, ref) => {
         fontSize: '7.5pt',
         color: MUTED,
       }}>
-        안현석 · Frontend Developer · aragorn2358@naver.com · github.com/nyeonseok
+        안현석 · Fullstack Developer · aragorn2358@naver.com · github.com/nyeonseok
       </div>
     </div>
   );

@@ -67,9 +67,9 @@ export default function ProjectDetail() {
               </span>
               {project.teamSize ? (
                 <span className="tag tag-accent">팀 {project.teamSize}인</span>
-              ) : (
+              ) : project.type !== "team" ? (
                 <span className="tag tag-toy">개인 개발</span>
-              )}
+              ) : null}
             </div>
             <h1 className="detail-title">{project.title}</h1>
             <p className="detail-subtitle">{project.subtitle}</p>
@@ -264,9 +264,9 @@ export default function ProjectDetail() {
           </div>
 
           {/* Screenshots */}
-          <div className="detail-section reveal">
-            <h2 className="detail-section-title">스크린샷</h2>
-            {project.screenshots && (
+          {project.screenshots && project.screenshots.length > 0 && (
+            <div className="detail-section reveal">
+              <h2 className="detail-section-title">스크린샷</h2>
               <div className="screenshots-grid">
                 {project.screenshots.map((shot) => (
                   <div key={shot.title} className="screenshot-card">
@@ -300,8 +300,8 @@ export default function ProjectDetail() {
                   </div>
                 ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Demo Video */}
           {project.demoVideo && (

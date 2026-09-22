@@ -15,6 +15,8 @@ import {
   SiKakao,
   SiPulumi,
   SiSpringboot,
+  SiHuggingface,
+  SiPytorch,
 } from "react-icons/si";
 import { BiLogoAws } from "react-icons/bi";
 import { FaBolt } from "react-icons/fa";
@@ -39,6 +41,8 @@ const skillChips: SkillChip[] = [
   { Icon: SiKakao, color: "#FEE500", name: "Kakao API" },
   { Icon: SiPulumi, color: "#8A3391", name: "Pulumi" },
   { Icon: SiLinux, color: "#FCC624", name: "Linux" },
+  { Icon: SiHuggingface, color: "#FFD21E", name: "Hugging Face" },
+  { Icon: SiPytorch, color: "#EE4C2C", name: "PyTorch" },
 ];
 
 export default function Home() {
@@ -105,7 +109,7 @@ export default function Home() {
         <div className="hero-content">
           <div className="hero-eyebrow">
             <span className="hero-dot" />
-            풀스택 개발자
+            데이터로 원인을 좁히는 개발자
           </div>
           <h1 className="hero-name">
             안녕하세요,
@@ -114,13 +118,17 @@ export default function Home() {
             입니다.
           </h1>
           <p className="hero-title">
-            <strong>Fullstack Developer</strong> — 어제의 한계를 오늘 넘어서고,
-            할 수 있는 모든 것에 도전합니다.
+            <strong>Fullstack Developer</strong> — 감이 아니라 로그와 수치로
+            원인을 좁히고, 구조를 개선해 정상 동작까지 검증합니다.
           </p>
           <p className="hero-desc">
-            React, PWA 기반 웹 앱 개발 경험을 보유하고 있으며, 실무 DB & 서버
-            관리, 보안 인증 시스템, AI API 연동, AWS 서버리스 배포까지 폭넓게
-            경험했습니다. 채용 담당자분의 연락을 언제나 환영합니다.
+            React·PWA 기반 서비스 개발부터 실무 DB·서버 운영까지 경험했지만,
+            강점은 프레임워크가 아니라 문제를 푸는 방식입니다. 3D 트리 렌더링
+            병목을 프로파일링으로 분석해 평균 FPS 9.3 → 45.4로, DOM 노드
+            4,000개 → 592개로 줄였고, 암호화 모듈 장애도 서버 로그 정밀
+            분석으로 원인을 좁혀 무중단으로 해결했습니다. Qwen2.5-VL을
+            Fine-tuning해 정확도를 68% → 91%로 검증해본 경험을 바탕으로,
+            생성형 AI도 직접 다룰 줄 압니다.
           </p>
           <div className="hero-cta">
             <Link to="/projects" className="btn btn-primary btn-lg">
@@ -150,22 +158,24 @@ export default function Home() {
               <div className="section-header">
                 <span className="section-label reveal">About Me</span>
                 <h2 className="section-title reveal">
-                  사용자를 위한 코드를
+                  원인을 좁히고
                   <br />
-                  작성합니다
+                  구조로 해결합니다
                 </h2>
               </div>
               <p className="reveal">
                 정보처리기사, SQLD, ADsP 등 다수의 자격증을 보유하고 있으며,
-                실무에서는 대구경북 교통카드 시스템 유지보수와 LG SHOPTIME
-                서비스 페이지 개발 경험이 있습니다.
+                실무에서는 대구경북 교통카드 시스템에서 암호화 모듈 라이선스
+                만료 장애를 서버 로그 정밀 분석으로 원인을 좁혀 무중단으로
+                해결하고, LG SHOPTIME 서비스 페이지 개발·운영을 담당했습니다.
               </p>
               <p className="reveal reveal-delay-1" style={{ marginTop: 12 }}>
-                삼성청년SW·AI아카데미(SSAFY) 과정을 통해 프론트엔드 아키텍처
-                설계부터 백엔드 협업, AWS 배포까지 풀스택 개발 전 과정을
-                주도적으로 수행했습니다. 생성형 AI를 활용한 팀 프로젝트를
-                완수하며, 기술적 난관을 실무적인 문제 해결 역량으로 극복하는
-                가치 있는 개발자로 성장했습니다.
+                삼성청년SW·AI아카데미(SSAFY)에서는 PM으로 참여한 Projectree
+                프로젝트의 3D 트리 렌더링 병목을 실측 데이터로 분석해 평균
+                FPS를 9.3 → 45.4로 개선했고, Qwen2.5-VL Fine-tuning으로
+                생성형 AI 모델을 직접 학습·검증(정확도 68% → 91%)한 경험도
+                있습니다. 감으로 넘기지 않고 수치로 확인한 뒤 구조를 바꾸는
+                방식으로 문제를 풉니다.
               </p>
               <div className="reveal reveal-delay-2" style={{ marginTop: 24 }}>
                 <Link to="/about" className="btn btn-secondary">

@@ -5,10 +5,10 @@ import {
   SiReactrouter, SiPwa, SiAxios, SiSpring, SiVercel,
   SiGit, SiGithub, SiJira, SiFigma, SiGitlab, SiNotion,
   SiOpenai, SiKakao, SiMysql, SiPulumi, SiGooglegemini,
-  SiPython, SiOpenjdk, SiNginx, SiLinux,
+  SiPython, SiOpenjdk, SiNginx, SiLinux, SiHuggingface, SiPytorch,
 } from 'react-icons/si';
 import { BiLogoAws, BiLogoVisualStudio } from 'react-icons/bi';
-import { FaBolt, FaDatabase, FaServer, FaShieldAlt } from 'react-icons/fa';
+import { FaBolt, FaDatabase, FaServer, FaShieldAlt, FaLayerGroup, FaMicrochip } from 'react-icons/fa';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface SkillDef {
@@ -84,6 +84,18 @@ const categories: CategoryDef[] = [
       { Icon: SiOpenai,       color: '#74AA9C', name: 'OpenAI API',      level: 65, levelLabel: '중급' },
       { Icon: SiGooglegemini, color: '#4285F4', name: 'Gemini API',      level: 60, levelLabel: '중급' },
       { Icon: SiKakao,        color: '#FEE500', name: 'Kakao API',       level: 65, levelLabel: '중급' },
+    ],
+  },
+  {
+    Icon: SiHuggingface,
+    categoryColor: '#FFD21E',
+    title: 'AI / ML',
+    skills: [
+      { Icon: SiHuggingface,  color: '#FFD21E', name: 'Hugging Face',    level: 55, levelLabel: '기초' },
+      { Icon: FaLayerGroup,   color: '#8B5CF6', name: 'Transformers',    level: 55, levelLabel: '기초' },
+      { Icon: SiPytorch,      color: '#EE4C2C', name: 'PyTorch',         level: 50, levelLabel: '기초' },
+      { Icon: FaMicrochip,    color: '#F59E0B', name: 'PEFT · LoRA',     level: 50, levelLabel: '기초' },
+      { Icon: FaMicrochip,    color: '#10B981', name: 'BitsAndBytes (4-bit)', level: 50, levelLabel: '기초' },
     ],
   },
   {

@@ -45,14 +45,13 @@ function ProjectCard({ project }: { project: Project }) {
                     <span className={`tag tag-${project.type}`}>
                         {project.typeLabel}
                     </span>
-                    {project.teamSize && (
+                    {project.teamSize ? (
                         <span className="tag tag-accent">
                             팀 {project.teamSize}인
                         </span>
-                    )}
-                    {!project.teamSize && (
+                    ) : project.type !== "team" ? (
                         <span className="tag tag-toy">개인</span>
-                    )}
+                    ) : null}
                 </div>
                 <h3 className="card-title">{project.title}</h3>
                 <p className="card-desc">{project.subtitle}</p>

@@ -3,6 +3,7 @@ import veroImg from "../assets/Vero/vero.webp";
 import ilkanImg from "../assets/ILKAN/ilkan.webp";
 import menuPickerImg from "../assets/Menu_Picker/menupicker.webp";
 import stageOnImg from "../assets/Stage_On/stageon.webp";
+import projectreeImg from "../assets/Projectree/projectree.png";
 
 import tripVideo from "../assets/Trip_Baton/서비스 시연 영상.mp4";
 
@@ -73,6 +74,130 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    id: "projectree",
+    title: "Projectree",
+    subtitle:
+      "화상회의를 STT·생성형 AI로 회의록·3D 트리 구조로 변환하는 협업 도구",
+    description:
+      "프로젝트 협업 과정에서 쓸 수 있는 도구를 만드는 SSAFY 공통 프로젝트입니다. WebRTC 기반 화상회의 음성을 STT로 변환한 뒤 생성형 AI로 회의록과 3D 트리 구조의 노드 데이터로 가공하고, 개인 피드백까지 제공합니다. PM으로 매일 스크럼을 진행하며 이슈를 조율했고, 프론트엔드에서는 WebRTC 회의, SSE 알림, 상태 관리, S3 업로드, 3D 트리 렌더링 및 성능 개선을 담당했습니다.",
+    background:
+      "회의 내용이 휘발되고 참여자별 기여가 드러나지 않는 문제에서 출발했습니다. OpenVidu로 화상회의를 열고, 녹음 파일을 SQS 큐를 거쳐 Naver Clova STT로 변환한 뒤 프롬프트 엔지니어링으로 회의록과 3D 트리 노드 데이터를 생성하도록 설계했습니다. 조회가 생성·수정보다 훨씬 잦은 데이터 특성을 고려해 트리는 변경 시점에만 조립하고, 조회 시에는 저장된 JSON을 그대로 반환하도록 구조를 잡았습니다.",
+    techReason:
+      "OpenVidu는 WebRTC 시그널링·미디어 서버를 직접 구축하지 않고도 화상회의를 붙일 수 있어 선택했고, 장애 격리와 확장을 위해 별도 EC2로 분리 배치했습니다. 녹음 파일을 Python 서버에 바로 전달하지 않고 SQS를 거치도록 한 것은 STT·AI 처리 지연이 회의 종료 흐름을 막지 않도록 하기 위함입니다. 3D 트리는 React Three Fiber로 렌더링하되, 라벨이 바뀔 때마다 React 상태로 리렌더링하면 병목이 발생해 ref 기반 직접 갱신으로 전환했습니다.",
+    type: "team",
+    typeLabel: "팀 프로젝트",
+    teamSize: 6,
+    gradient: "linear-gradient(135deg, #0ba360 0%, #3cba92 55%, #30cfd0 100%)",
+    role: "PM · 프론트엔드 개발 · 실시간 통신/AI 기능 연동 · 성능 최적화",
+    techStack: [
+      "React",
+      "TypeScript",
+      "React Three Fiber",
+      "Zustand",
+      "OpenVidu",
+      "WebRTC",
+      "SSE",
+      "AWS SQS",
+      "AWS S3",
+      "AWS EC2",
+      "Naver Clova STT",
+      "Jira",
+    ],
+    thumbnail: projectreeImg,
+    featured: true,
+    features: [
+      {
+        title: "WebRTC 화상회의",
+        description:
+          "OpenVidu 기반 회의방 생성·종료, 장애 격리를 위해 별도 EC2에 분리 배치",
+      },
+      {
+        title: "STT + 생성형 AI",
+        description:
+          "Naver Clova STT로 음성을 텍스트화한 뒤 프롬프트 엔지니어링으로 회의록과 3D 트리 노드 데이터로 가공",
+      },
+      {
+        title: "비동기 처리",
+        description:
+          "녹음 파일을 Python 서버로 바로 전달하지 않고 SQS를 거쳐 처리",
+      },
+      {
+        title: "SSE 알림",
+        description:
+          "로그인 후 자동 연결·재연결, Heartbeat, lastEventId 기반 이벤트 동기화",
+      },
+      {
+        title: "3D 트리 시각화",
+        description: "회의 내용을 노드 구조로 변환해 3D 트리로 렌더링",
+      },
+      {
+        title: "이미지 업로드",
+        description: "Presigned URL 기반 S3 직접 업로드",
+      },
+    ],
+    contributions: [
+      {
+        title: "PM 및 협업 조율",
+        items: [
+          "매일 오전 스크럼을 진행하며 개발 이슈와 변경사항 공유",
+          "프론트에서 필요한 데이터 형식과 서버 처리 방식을 백엔드 담당자와 조율",
+          "코드리뷰를 통해 변경사항과 구현 방향 공유",
+        ],
+      },
+      {
+        title: "WebRTC 화상회의",
+        items: [
+          "OpenVidu와 통신해 회의방 생성·종료 기능 구현",
+          "OpenVidu를 별도 EC2에 배치해 장애 격리와 확장에 대비한 구조로 분리",
+        ],
+      },
+      {
+        title: "STT + 생성형 AI 기능 연결",
+        items: [
+          "화상회의 음성을 Naver Clova로 STT 변환",
+          "변환된 텍스트를 프롬프트 엔지니어링해 3D 트리 노드 구조와 회의록으로 가공",
+          "녹음 파일 처리 요청을 SQS를 거쳐 전달하도록 구성해 비동기 처리 흐름 구축",
+        ],
+      },
+      {
+        title: "SSE 기반 알림",
+        items: [
+          "로그인 후 공통 Layout에서 SSE가 자동 연결되도록 구성",
+          "연결이 끊기면 자동 재연결",
+          "Heartbeat로 끊어진 연결의 불필요한 자원 점유를 방지",
+          "lastEventId를 이용해 클라이언트와 서버 이벤트를 동기화하고 유실 가능성을 줄임",
+        ],
+      },
+      {
+        title: "S3 이미지 업로드",
+        items: [
+          "Presigned URL을 이용해 프론트가 S3에 직접 이미지를 업로드하도록 구현",
+        ],
+      },
+    ],
+    troubleshooting: [
+      {
+        title: "3D 트리 렌더링 병목 개선",
+        problem:
+          "모든 노드에 라벨을 표시하면서 약 4,000개의 DOM이 생성되고 평균 FPS가 9.3까지 하락",
+        solution:
+          "실제 빌드 환경에서 동일한 3D 트리 데이터로 개선 전후 성능을 측정. 화면에 표시할 라벨 노드 수를 제한하고, 디자인 변경 시 React 상태로 전체를 리렌더링하는 대신 ref로 DOM을 참조해 useFrame에서 직접 갱신하도록 변경",
+        code: `라벨 DOM      4,000 → 592   (약 85% 감소)
+평균 FPS      9.3 → 45.4    (약 4.9배 향상)
+30FPS 미만    76.9% → 4.2%
+라벨 리렌더   5,373회 → 0회
+JS Heap       594.9MB → 205MB (약 66% 감소)`,
+      },
+      {
+        title: "반복되는 서버 트리 재조립 제거",
+        problem:
+          "3D 트리를 조회할 때마다 서버에서 동일한 트리 구조를 다시 조립",
+        solution:
+          "생성·수정보다 조회가 훨씬 자주 발생하는 데이터 특성상 매 조회마다 DFS 연산을 반복하는 것은 비효율적이라고 판단. 생성·수정·삭제 시에만 DFS로 트리를 조립해 Three.js에서 바로 쓸 수 있는 JSON으로 저장하고, 조회 시에는 저장된 JSON을 그대로 반환하도록 구조 변경",
+      },
+    ],
+  },
   {
     id: "trip-baton",
     title: "Trip Baton",
@@ -756,5 +881,189 @@ const lambda = new aws.lambda.Function("lambdaFunction", {
       },
     ],
     github: "https://github.com/stage-on/stage_on_WEB",
+  },
+  {
+    id: "vqa-finetuning",
+    title: "AI 이미지 VQA 모델 Fine-tuning",
+    subtitle:
+      "재활용 이미지 기반 4지선다 VQA 모델을 제한된 GPU 환경에서 Fine-tuning",
+    description:
+      "재활용 관련 이미지를 보고 질문과 4개의 보기를 바탕으로 정답을 맞히는 VQA(Vision Question Answering) 모델을 개발했습니다. 이미지와 텍스트를 함께 처리할 수 있는 Qwen2.5-VL-7B-Instruct 계열 모델을 선정하고, 제한된 GPU 환경에서 4-bit 양자화와 LoRA를 적용해 효율적으로 Fine-tuning했습니다.",
+    background:
+      "전체 7B 파라미터를 모두 학습하기엔 GPU 자원이 부족한 상황에서, 모델 정확도뿐 아니라 애플리케이션이 바로 처리할 수 있는 출력 형식까지 요구사항으로 함께 정의하고 설계했습니다.",
+    type: "toy",
+    typeLabel: "AI 프로젝트",
+    gradient: "linear-gradient(135deg, #7b2ff7 0%, #f107a3 100%)",
+    role: "멀티모달 AI 모델 선정 · Fine-tuning · 데이터 전처리 · 추론/검증",
+    techStack: [
+      "Hugging Face",
+      "Transformers",
+      "Qwen2.5-VL",
+      "PyTorch",
+      "PEFT",
+      "LoRA",
+      "BitsAndBytes",
+    ],
+    featured: true,
+    features: [
+      {
+        title: "모델 선정 및 입력 구조 설계",
+        description:
+          "Qwen2.5-VL-7B-Instruct와 Processor로 질문·보기를 구조화해 입력, 출력은 a/b/c/d 한 글자로 제한",
+      },
+      {
+        title: "제한된 GPU 환경 Fine-tuning",
+        description:
+          "4-bit NF4 양자화 + LoRA(r=16, alpha=32)로 Attention·MLP 주요 projection만 학습",
+      },
+      {
+        title: "이미지 전처리 및 증강",
+        description:
+          "EXIF 방향 보정, Flip·Color Jitter·Random Crop·Gaussian Blur, 256~1280px 동적 해상도 처리",
+      },
+      {
+        title: "학습 안정화 및 검증",
+        description:
+          "AdamW·Cosine LR·Warmup·Gradient Clipping·Early Stopping, Validation Loss 기준 Best Model 저장",
+      },
+    ],
+    contributions: [
+      {
+        title: "모델 선정 및 입력 구조 설계",
+        items: [
+          "Vision-Language Model인 Qwen2.5-VL-7B-Instruct 계열 모델과 Processor 활용",
+          "질문과 보기를 [질문], [보기] 형식으로 구조화",
+          "System Prompt에서 이미지의 색상, 재질, 형태, 내용물 등에 집중하도록 역할 정의",
+          "출력은 a / b / c / d 한 글자만 반환하도록 제어",
+        ],
+      },
+      {
+        title: "제한된 GPU 환경에 맞춘 Fine-tuning",
+        items: [
+          "4-bit NF4 양자화 적용",
+          "LoRA r=16, alpha=32 적용",
+          "Attention의 q/k/v/o projection과 MLP의 gate/up/down projection에 LoRA 적용",
+          "Batch Size 2 환경에서 Gradient Accumulation으로 Effective Batch Size 8 구성",
+          "Gradient Checkpointing과 bfloat16 Mixed Precision 적용",
+        ],
+      },
+      {
+        title: "이미지 데이터 전처리 및 증강",
+        items: [
+          "EXIF 방향 보정",
+          "Horizontal Flip, Color Jitter, Random Crop, Gaussian Blur 적용",
+          "입력 해상도를 256×256 ~ 1280×1280 범위에서 동적으로 처리",
+        ],
+      },
+      {
+        title: "학습 안정화 및 검증",
+        items: [
+          "AdamW, Cosine LR Scheduler, Warmup, Gradient Clipping, Early Stopping 적용",
+          "Train / Validation 데이터를 9:1로 분리, Validation Loss 기준 Best Model 저장",
+          "추론 시 do_sample=False 적용, 정규식 후처리로 a/b/c/d 외 출력 제거",
+        ],
+      },
+    ],
+    troubleshooting: [
+      {
+        title: "제한된 GPU 자원에서 7B 모델 학습",
+        problem:
+          "GPU 메모리 제약으로 7B 파라미터 모델 전체를 Fine-tuning하기 어려움",
+        solution:
+          "4-bit NF4 양자화 + LoRA로 Attention·MLP 주요 projection만 학습하고, Gradient Accumulation·Gradient Checkpointing·bfloat16 Mixed Precision으로 메모리를 절약하며 Effective Batch Size 8을 확보",
+      },
+      {
+        title: "자유 형식 출력을 애플리케이션 요구 형식으로 제어",
+        problem:
+          "VLM 특성상 응답이 자연어 문장으로 생성되어 애플리케이션이 바로 파싱하기 어려움",
+        solution:
+          "System Prompt로 출력 형식을 a/b/c/d 한 글자로 제한하고, 추론 시 do_sample=False와 정규식 후처리로 그 외 출력을 제거",
+      },
+      {
+        title: "학습 결과의 객관적 검증",
+        problem:
+          "학습 후 실제 성능이 개선됐는지 감이 아니라 수치로 확인할 필요",
+        solution:
+          "Train/Validation을 9:1로 분리하고 Validation Loss 기준 Best Model을 저장, 동일한 508개 Validation 데이터로 정확도를 측정해 학습 전후를 비교",
+        code: `학습 데이터        5,073개
+Best Val Loss       6.5424 (5 Epoch)
+Validation 정확도   약 68% → 약 91% (약 23%p 향상)
+검증 데이터         508개`,
+      },
+    ],
+  },
+  {
+    id: "job-posting-automation",
+    title: "생성형 AI 기반 채용공고 자동화",
+    subtitle: "지원 가능한 공고를 판별해 누락 없이 관리하는 생성형 AI Workflow",
+    description:
+      "여러 채용 플랫폼과 기업 채용페이지를 매일 반복 확인해야 하는 문제를 줄이기 위해, 단순 검색이 아니라 지원 가능한 공고를 판별하고 한 곳에서 지속 관리하는 자동화 Workflow를 만들었습니다.",
+    background:
+      "공고 탐색 → 지원조건 판별 → JD 적합도 평가 → DB 비교 → 신규 저장·기존 갱신 → 누락 검증 흐름으로 설계했습니다. 신입·경력 혼합 공고나 애매한 자격조건은 임의로 제외하지 않고 별도 확인하도록 규칙을 구조화했습니다.",
+    type: "toy",
+    typeLabel: "AI 프로젝트",
+    gradient: "linear-gradient(135deg, #f77062 0%, #fe5196 100%)",
+    role: "개인 자동화 프로젝트 · 조건/판별 규칙 설계 · 생성형 AI Workflow 구축",
+    techStack: [
+      "ChatGPT",
+      "Notion",
+      "Prompt Engineering",
+      "Workflow Automation",
+    ],
+    features: [
+      {
+        title: "지원 조건 판별",
+        description:
+          "IT 직무, 신입, 정규직, 기업 규모, 제외 조건 등을 규칙으로 정의해 자동 판별",
+      },
+      {
+        title: "JD 적합도 평가",
+        description:
+          "전공, SSAFY, 개발 기술, WEB/WAS 운영, 서버·DB·장애 대응 경험 등을 기준으로 적합도 판단",
+      },
+      {
+        title: "DB 비교 및 저장·갱신",
+        description: "기존 데이터와 비교해 신규 공고는 저장, 기존 공고는 갱신",
+      },
+      {
+        title: "누락 검증",
+        description:
+          "검색 결과만으로 종료하지 않고 공식 채용목록을 추가 확인, 기업군·직무군별 탐색 여부 체크",
+      },
+    ],
+    contributions: [
+      {
+        title: "지원 조건과 판단 규칙 구조화",
+        items: [
+          "IT 직무, 신입, 정규직, 기업 규모, 제외 조건 등을 규칙으로 정의",
+          "신입·경력 혼합 공고나 애매한 자격조건은 임의로 제외하지 않고 별도 확인하도록 설계",
+          "전공, SSAFY, 개발 기술, WEB/WAS 운영, 서버·DB·장애 대응 경험 등을 JD 적합도 판단 기준으로 구조화",
+        ],
+      },
+      {
+        title: "ChatGPT + Notion 자동화",
+        items: [
+          "ChatGPT 예약 실행과 Notion 연동",
+          "매일 오전 8시에 공고 탐색부터 저장·갱신까지 반복되도록 Workflow 구성",
+        ],
+      },
+      {
+        title: "검색 누락 검증 로직 추가",
+        items: [
+          "초기에는 한 번의 웹 검색 결과만 기준으로 수집했으나 신규 공고 누락을 발견",
+          "검색 결과만으로 종료하지 않고 공식 채용목록을 추가 확인",
+          "기업군·직무군별 탐색 여부를 체크하고 미확인 항목이 있으면 재검색하도록 개선",
+        ],
+      },
+    ],
+    troubleshooting: [
+      {
+        title: "단일 검색만으로는 놓치는 신규 공고",
+        problem:
+          "초기에는 한 번의 웹 검색 결과만 기준으로 수집했으나, 신규 공고가 검색 결과에서 누락되는 사례를 발견",
+        solution:
+          "검색 결과만으로 종료하지 않고 기업 공식 채용목록을 추가로 확인, 기업군·직무군별 탐색 여부를 체크해 미확인 항목이 있으면 재검색하도록 Workflow 개선",
+      },
+    ],
   },
 ];

@@ -31,6 +31,11 @@ const strengths = [
 
     desc: "Jira/Notion 기반 일정 관리 및 기획·타 부서와의 유기적인 소통을 통해 서비스 성과(비즈니스 수치 개선) 도출",
   },
+  {
+    icon: "🤖",
+    title: "생성형 AI 활용 및 검증",
+    desc: "Qwen2.5-VL을 4-bit 양자화·LoRA로 Fine-tuning해 정확도를 68%→91%로 수치 검증했고, 생성형 AI 채용공고 자동화에서는 검색 결과를 그대로 신뢰하지 않고 누락 여부를 재검증하도록 설계했습니다.",
+  },
 ];
 
 const certs = [
@@ -53,7 +58,7 @@ const workStyles = [
   },
   {
     emoji: "🔍",
-    text: "<strong>원인 분석 우선</strong> — 데이터 로그 분석을 통해 장애 원인을 파악하고 근본 해결책을 수립합니다.",
+    text: "<strong>원인 분석 우선</strong> — 감이 아니라 로그와 수치로 원인을 좁히고, 구조를 개선한 뒤 실제 정상 동작까지 검증합니다.",
   },
   {
     emoji: "💬",
@@ -83,7 +88,7 @@ export default function About() {
           />
           <div className="about-info">
             <h1>안현석</h1>
-            <div className="role-badge">⚛️ 풀스택 개발자</div>
+            <div className="role-badge">🔍 데이터로 원인을 좁히는 개발자</div>
             <p
               style={{
                 fontSize: "0.95rem",
@@ -92,7 +97,7 @@ export default function About() {
                 margin: "6px 0 16px",
               }}
             >
-              "나날이 새롭게 — 할 수 있는 모든 것에 도전한다"
+              "감이 아니라 로그와 수치로 원인을 좁히고, 구조로 해결한다"
             </p>
             <p className="about-bio">
               <strong>
@@ -103,18 +108,22 @@ export default function About() {
               <br />
               프론트엔드부터 실무 DB/서버 운영, 보안 인증 시스템 설계까지 폭넓은
               기술 스택을 바탕으로 사용자에게 최적화된 경험을 제공합니다. 특히
-              대구경북 교통카드 시스템과 LG SHOPTIME 유지보수 실무를 통해, 실제
-              운영 환경에서의 트래픽 관리, 장애 대응, 데이터 정합성 유지의
-              중요성을 체득했습니다.
+              대구경북 교통카드 시스템에서는 선임 부재 상황에 서버 로그를
+              정밀 분석해 암호화 모듈 라이선스 만료를 식별하고, 이중화 서버를
+              순차 교체해 무중단으로 대응했습니다.
               <br />
               <br />
-              SSAFY 최종 관통 프로젝트에서 FSD 아키텍처를 도입하여 도메인별 책임
-              분리를 실현하고, 프로젝트 전반의 UI/UX 및 아키텍처를 리딩하며
-              1500명 규모의 해커톤 상위 6% 성적을 거둔 경험이 있습니다.
+              SSAFY 과정에서는 FSD 아키텍처 설계와 PM 경험을 쌓았습니다. 특히
+              Projectree 프로젝트에서 3D 트리 렌더링 병목을 실제 빌드 환경의
+              수치로 분석해 평균 FPS를 9.3 → 45.4로, DOM 노드를 4,000개 →
+              592개로 개선했고, 1,500명 규모 해커톤에서 상위 6% 성적을 거둔
+              경험도 있습니다.
               <br />
               <br />
-              단순한 개발에 머물지 않고, 기술적 근거를 바탕으로 문제를 분석하고
-              해결책을 제시하며 팀의 성과를 이끌어내는 개발자로 성장하겠습니다.
+              Qwen2.5-VL Fine-tuning으로 생성형 AI 모델을 직접 학습·검증(정확도
+              68% → 91%)해본 경험을 바탕으로, 생성형 AI를 막연히 활용하는 데
+              그치지 않고 결과를 수치로 검증하고 구조를 개선하는 개발자로
+              성장하겠습니다.
             </p>
             <div className="about-contact-list">
               <div className="about-contact-item">
