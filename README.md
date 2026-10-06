@@ -1,7 +1,7 @@
 # Hi there, this is Hyeonseok
 > 삼성청년SW·AI아카데미(SSAFY) 15기
 
-> Ocube Developer(2025.06 ~ 2025.12)
+> Ocube Developer (2025.06 ~ 2025.12)
 
 > 대구·경북 어르신 무임교통카드 프로젝트 | iM Upay (2025.06 ~ 2025.12)
 
