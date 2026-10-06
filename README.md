@@ -1,9 +1,9 @@
 # Hi there, this is Hyeonseok
 > 삼성청년SW·AI아카데미(SSAFY) 15기
 
-> Ocube Frontend Developer(2025.06 ~ 2025.12)
+> Ocube Developer(2025.06 ~ 2025.12)
 
-> iM Upay에서 프로젝트 유지보수 근무 (2025.06 ~ 2025.12)
+> 대구·경북 어르신 무임교통카드 프로젝트 | iM Upay (2025.06 ~ 2025.12)
 
 > 영남대학교 수학과, 컴퓨터공학과 전공
 
