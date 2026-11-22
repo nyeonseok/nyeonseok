@@ -1,81 +1,68 @@
-import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
-const links = [
-  { to: '/', label: 'Home' },
+const navItems = [
+  { to: '/', label: 'Home', end: true },
   { to: '/projects', label: 'Projects' },
-  { to: '/work', label: 'Work' },
+  { to: '/experience', label: 'Experience' },
   { to: '/about', label: 'About' },
-  { to: '/skills', label: 'Skills' },
+  { to: '/extras', label: '프로젝트 외 자잘한 것들' },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
+  const [open, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open]);
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname]);
+  const close = () => setOpen(false);
 
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [mobileOpen]);
+  const links = navItems.map((item) => (
+    <li key={item.to}>
+      <NavLink to={item.to} end={item.end} className="nav__link" onClick={close}>
+        {item.label}
+      </NavLink>
+    </li>
+  ));
 
   return (
-    <>
-      <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
-        <div className="navbar-inner">
-          <NavLink to="/" className="navbar-logo">
-            <div className="navbar-logo-mark">안</div>
-            Portfolio
-          </NavLink>
+    <header className="site-header">
+      <div className="container site-header__inner">
+        <Link to="/" className="wordmark" onClick={close}>
+          <span className="wordmark__mark" aria-hidden="true" />
+          안현석
+        </Link>
 
-          <ul className="navbar-links">
-            {links.map(link => (
-              <li key={link.to}>
-                <NavLink
-                  to={link.to}
-                  end={link.to === '/'}
-                  className={({ isActive }) => `navbar-link${isActive ? ' active' : ''}`}
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+        <nav className="nav nav--desktop" aria-label="주요 메뉴">
+          <ul>{links}</ul>
+        </nav>
 
-          <button
-            className={`navbar-hamburger${mobileOpen ? ' open' : ''}`}
-            onClick={() => setMobileOpen(v => !v)}
-            aria-label="메뉴 열기/닫기"
-          >
-            <span className="hamburger-line" />
-            <span className="hamburger-line" />
-            <span className="hamburger-line" />
-          </button>
-        </div>
-      </nav>
-
-      <div className={`navbar-mobile${mobileOpen ? ' open' : ''}`}>
-        {links.map(link => (
-          <NavLink
-            key={link.to}
-            to={link.to}
-            end={link.to === '/'}
-            className={({ isActive }) => `navbar-link${isActive ? ' active' : ''}`}
-          >
-            {link.label}
-          </NavLink>
-        ))}
+        <button
+          ref={buttonRef}
+          type="button"
+          className="nav-toggle"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className="nav-toggle__icon" aria-hidden="true" data-open={open} />
+          {open ? '닫기' : '메뉴'}
+        </button>
       </div>
-    </>
+
+      <nav id="mobile-nav" className="nav nav--mobile" aria-label="주요 메뉴" hidden={!open}>
+        <ul className="container">{links}</ul>
+      </nav>
+    </header>
   );
 }

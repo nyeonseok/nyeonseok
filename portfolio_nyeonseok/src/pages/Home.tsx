@@ -1,370 +1,51 @@
-import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import type { IconType } from "react-icons";
-import { ResumeDocument } from "../components/ResumeDocument";
-import {
-  SiReact,
-  SiLinux,
-  SiTypescript,
-  SiVite,
-  SiCssmodules,
-  SiPwa,
-  SiOpenai,
-  SiKakao,
-  SiPulumi,
-  SiSpringboot,
-  SiHuggingface,
-  SiPytorch,
-} from "react-icons/si";
-import { BiLogoAws } from "react-icons/bi";
-import { FaBolt } from "react-icons/fa";
-import { projects } from "../data/projects";
-
-interface SkillChip {
-  Icon: IconType;
-  color: string;
-  name: string;
-}
-
-const skillChips: SkillChip[] = [
-  { Icon: SiReact, color: "#61DAFB", name: "React" },
-  { Icon: SiSpringboot, color: "#6DB33F", name: "Spring Boot" },
-  { Icon: SiTypescript, color: "#3178C6", name: "TypeScript" },
-  { Icon: FaBolt, color: "#FF9F43", name: "Zustand" },
-  { Icon: SiCssmodules, color: "#000BFF", name: "CSS Modules" },
-  { Icon: BiLogoAws, color: "#FF9900", name: "AWS" },
-  { Icon: SiPwa, color: "#5A0FC8", name: "PWA" },
-  { Icon: SiVite, color: "#646CFF", name: "Vite" },
-  { Icon: SiOpenai, color: "#74AA9C", name: "OpenAI API" },
-  { Icon: SiKakao, color: "#FEE500", name: "Kakao API" },
-  { Icon: SiPulumi, color: "#8A3391", name: "Pulumi" },
-  { Icon: SiLinux, color: "#FCC624", name: "Linux" },
-  { Icon: SiHuggingface, color: "#FFD21E", name: "Hugging Face" },
-  { Icon: SiPytorch, color: "#EE4C2C", name: "PyTorch" },
-];
+import { Link } from 'react-router-dom';
+import { profile } from '../data/profile';
+import { projects, smallProjects } from '../data/projects';
+import { experiences } from '../data/experience';
+import { extras } from '../data/extras';
+import { ProjectGrid } from '../components/ProjectGrid';
+import { Icon } from '../components/Icon';
 
 export default function Home() {
-  const resumeRef = useRef<HTMLDivElement>(null);
-  const [downloading, setDownloading] = useState(false);
-
-  const handleDownloadResume = async () => {
-    if (!resumeRef.current || downloading) return;
-    setDownloading(true);
-    try {
-      const canvas = await html2canvas(resumeRef.current, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#ffffff",
-      });
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4",
-      });
-      const pageW = pdf.internal.pageSize.getWidth();
-      const pageH = pdf.internal.pageSize.getHeight();
-      const imgH = (canvas.height * pageW) / canvas.width;
-      let y = 0;
-      while (y < imgH) {
-        pdf.addImage(imgData, "PNG", 0, -y, pageW, imgH);
-        if (y + pageH < imgH) pdf.addPage();
-        y += pageH;
-      }
-      pdf.save("안현석_이력서.pdf");
-    } finally {
-      setDownloading(false);
-    }
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" },
-    );
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const featured = projects.filter((p) => p.featured).slice(0, 3);
-
+  const experience = experiences[0];
   return (
-    <div style={{ paddingTop: 0 }}>
-      {/* ── Hero ── */}
-      <section className="hero">
-        <div className="hero-bg">
-          <div className="hero-glow" />
-          <div className="hero-glow-2" />
-          <div className="hero-grid" />
-        </div>
-        <div className="hero-content">
-          <div className="hero-eyebrow">
-            <span className="hero-dot" />
-            데이터로 원인을 좁히는 개발자
-          </div>
-          <h1 className="hero-name">
-            안녕하세요,
-            <br />
-            <span className="hero-name-highlight">안현석</span>
-            입니다.
-          </h1>
-          <p className="hero-title">
-            <strong>Fullstack Developer</strong> — 감이 아니라 로그와 수치로
-            원인을 좁히고, 구조를 개선해 정상 동작까지 검증합니다.
-          </p>
-          <p className="hero-desc">
-            React·PWA 기반 서비스 개발부터 실무 DB·서버 운영까지 경험했지만,
-            강점은 프레임워크가 아니라 문제를 푸는 방식입니다. 3D 트리 렌더링
-            병목을 프로파일링으로 분석해 평균 FPS 9.3 → 45.4로, DOM 노드
-            4,000개 → 592개로 줄였고, 암호화 모듈 장애도 서버 로그 정밀
-            분석으로 원인을 좁혀 무중단으로 해결했습니다. Qwen2.5-VL을
-            Fine-tuning해 정확도를 68% → 91%로 검증해본 경험을 바탕으로,
-            생성형 AI도 직접 다룰 줄 압니다.
-          </p>
-          <div className="hero-cta">
-            <Link to="/projects" className="btn btn-primary btn-lg">
-              프로젝트 보기 →
-            </Link>
-            <a
-              href="https://github.com/nyeonseok"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary btn-lg"
-            >
-              GitHub ↗
-            </a>
-          </div>
-        </div>
-        <div className="hero-scroll">
-          <div className="hero-scroll-line" />
-          <span>Scroll</span>
-        </div>
-      </section>
-
-      {/* ── About ── */}
-      <section className="section">
-        <div className="container">
-          <div className="home-about-grid">
-            <div className="home-about-text">
-              <div className="section-header">
-                <span className="section-label reveal">About Me</span>
-                <h2 className="section-title reveal">
-                  원인을 좁히고
-                  <br />
-                  구조로 해결합니다
-                </h2>
-              </div>
-              <p className="reveal">
-                정보처리기사, SQLD, ADsP 등 다수의 자격증을 보유하고 있으며,
-                실무에서는 대구경북 교통카드 시스템에서 암호화 모듈 라이선스
-                만료 장애를 서버 로그 정밀 분석으로 원인을 좁혀 무중단으로
-                해결하고, LG SHOPTIME 서비스 페이지 개발·운영을 담당했습니다.
-              </p>
-              <p className="reveal reveal-delay-1" style={{ marginTop: 12 }}>
-                삼성청년SW·AI아카데미(SSAFY)에서는 PM으로 참여한 Projectree
-                프로젝트의 3D 트리 렌더링 병목을 실측 데이터로 분석해 평균
-                FPS를 9.3 → 45.4로 개선했고, Qwen2.5-VL Fine-tuning으로
-                생성형 AI 모델을 직접 학습·검증(정확도 68% → 91%)한 경험도
-                있습니다. 감으로 넘기지 않고 수치로 확인한 뒤 구조를 바꾸는
-                방식으로 문제를 풉니다.
-              </p>
-              <div className="reveal reveal-delay-2" style={{ marginTop: 24 }}>
-                <Link to="/about" className="btn btn-secondary">
-                  자세히 보기 →
-                </Link>
-              </div>
-            </div>
-            <div className="about-stats">
-              {[
-                { number: "5+", label: "완성 프로젝트" },
-                { number: "6+", label: "보유 자격증" },
-                { number: "2년+", label: "개발 경험" },
-              ].map((stat, i) => (
-                <div key={i} className={`stat-card reveal reveal-delay-${i}`}>
-                  <div className="stat-number">{stat.number}</div>
-                  <div className="stat-label">{stat.label}</div>
-                </div>
-              ))}
+    <>
+      <title>안현석 — 개발자 포트폴리오</title>
+      <section className="intro container" aria-labelledby="hero-title">
+        <div className="intro__layout">
+          <div>
+            <p className="intro__name">안현석 · 개발자</p>
+            <h1 id="hero-title">익숙함에 안주하지 않고<br /><em>도전하는 개발자</em></h1>
+            <p className="intro__summary">서비스를 개발하고 운영하면서 동시성, 성능, AI 연동 문제를 해결해 왔습니다.</p>
+            <div className="hero__actions">
+              <Link to="/projects" className="button button--primary button--lg">프로젝트 보기 <Icon name="arrow-right" size={18} /></Link>
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="button button--lg">GitHub <Icon name="arrow-up-right" size={16} /><span className="sr-only"> (새 창)</span></a>
+              <Link to="/about" className="button button--ghost button--lg">About</Link>
             </div>
           </div>
         </div>
       </section>
-
-      <hr className="divider" />
-
-      {/* ── Skills Quick ── */}
-      <section className="section">
-        <div className="container">
-          <div className="section-header reveal">
-            <span className="section-label">Tech Stack</span>
-            <h2 className="section-title">기술 스택</h2>
-            <p className="section-desc">
-              다양한 프로젝트를 통해 경험한 기술들입니다.
-            </p>
-          </div>
-          <div className="skills-quick-grid">
-            {skillChips.map((s, i) => (
-              <div
-                key={s.name}
-                className={`skill-chip reveal reveal-delay-${Math.min(i % 5, 4)}`}
-              >
-                <s.Icon size={18} color={s.color} />
-                {s.name}
-              </div>
-            ))}
-          </div>
-          <div className="reveal" style={{ marginTop: 28, textAlign: "right" }}>
-            <Link to="/skills" className="btn btn-ghost">
-              전체 스킬 보기 →
-            </Link>
-          </div>
+      <section className="section container" aria-labelledby="home-projects">
+        <header className="section__head">
+          <div><h2 className="section__title" id="home-projects">대표 프로젝트</h2></div>
+          <Link to="/projects" className="link-arrow">전체 프로젝트 <Icon name="arrow-right" size={16} /></Link>
+        </header>
+        <ProjectGrid projects={projects} />
+      </section>
+      <section className="operation container section" aria-labelledby="home-experience">
+        <div className="operation__inner">
+          <div><h2 id="home-experience">실무 경험</h2><Link to="/experience" className="button button--primary">실무 경험 보기 <Icon name="arrow-right" size={16} /></Link></div>
+          <div className="operation__story"><p className="operation__meta">{experience.org} · {experience.employment}<br />{experience.period}</p><h3>{experience.title}</h3><p>{experience.summary}</p><p className="operation__incident">{experience.incident.title}</p><p>로그 확인 → 원인 특정 → 서버 순차 변경 → 재암호화 → 데이터 정합성 검증</p></div>
         </div>
       </section>
-
-      <hr className="divider" />
-
-      {/* ── Featured Projects ── */}
-      <section className="section">
-        <div className="container">
-          <div className="section-header reveal">
-            <span className="section-label">Featured Projects</span>
-            <h2 className="section-title">대표 프로젝트</h2>
-            <p className="section-desc">
-              직접 기획하고 개발에 참여한 주요 프로젝트들입니다.
-            </p>
-          </div>
-          <div className="grid-3">
-            {featured.map((project, i) => (
-              <Link
-                key={project.id}
-                to={`/projects/${project.id}`}
-                className={`card reveal reveal-delay-${i}`}
-              >
-                <div className="card-thumbnail">
-                  {project.thumbnail ? (
-                    <img
-                      src={project.thumbnail}
-                      alt={project.title}
-                      className="card-thumbnail-inner"
-                      style={{
-                        objectFit: "cover",
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
-                  ) : (
-                    <>
-                      <div
-                        className="card-thumbnail-inner"
-                        style={{ background: project.gradient }}
-                      />
-                      <span className="card-thumbnail-label">
-                        {project.title}
-                      </span>
-                    </>
-                  )}
-                </div>
-                <div className="card-body">
-                  <div className="card-tags">
-                    <span className={`tag tag-${project.type}`}>
-                      {project.typeLabel}
-                    </span>
-                    {project.teamSize && (
-                      <span className="tag tag-accent">
-                        팀 {project.teamSize}인
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="card-title">{project.title}</h3>
-                  <p className="card-desc">{project.subtitle}</p>
-                  <div className="card-techs">
-                    {project.techStack.slice(0, 3).map((t) => (
-                      <span key={t} className="tech-tag">
-                        {t}
-                      </span>
-                    ))}
-                    {project.techStack.length > 3 && (
-                      <span className="tech-tag">
-                        +{project.techStack.length - 3}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="card-footer">
-                  <span
-                    style={{
-                      fontSize: "0.82rem",
-                      color: "var(--text-tertiary)",
-                    }}
-                  >
-                    {project.role}
-                  </span>
-                  <span className="card-arrow">→</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div
-            className="reveal"
-            style={{ marginTop: 32, textAlign: "center" }}
-          >
-            <Link to="/projects" className="btn btn-secondary">
-              모든 프로젝트 보기 →
-            </Link>
-          </div>
+      <section className="section container" aria-labelledby="home-more">
+        <header className="section__head"><div><h2 className="section__title" id="home-more">그 밖에 만든 것들</h2></div></header>
+        <div className="side-notes">
+          <Link to="/projects#small-projects" className="side-note"><span className="kicker">개인 프로젝트</span><h3>{smallProjects[0].name} <Icon name="arrow-up-right" size={22} /></h3><p>{smallProjects[0].tagline}</p></Link>
+          <Link to="/extras" className="side-note"><span className="kicker">프로젝트 외 자잘한 것들</span><h3>{extras[0].title} <Icon name="arrow-up-right" size={22} /></h3><p>ChatGPT와 Notion으로 채용공고 탐색·분류·저장을 자동화했습니다.</p></Link>
         </div>
       </section>
-
-      <hr className="divider" />
-
-      {/* ── Contact ── */}
-      <section className="section">
-        <div className="container">
-          <div className="contact-section reveal">
-            <h2 className="contact-title">함께 일하고 싶으신가요?</h2>
-            <p className="contact-desc">
-              새로운 기회와 협업에 열려있습니다. 언제든지 연락해주세요.
-            </p>
-            <div className="contact-actions">
-              <a
-                href="mailto:aragorn2358@naver.com"
-                className="btn btn-primary btn-lg"
-              >
-                이메일 보내기 ✉️
-              </a>
-              <a
-                href="https://github.com/nyeonseok"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary btn-lg"
-              >
-                GitHub ↗
-              </a>
-              <button
-                onClick={handleDownloadResume}
-                className="btn btn-secondary btn-lg"
-                disabled={downloading}
-              >
-                {downloading ? "생성 중..." : "이력서 다운로드 📄"}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Hidden resume for print/PDF */}
-      <div style={{ position: "absolute", left: "-9999px", top: 0 }}>
-        <ResumeDocument ref={resumeRef} />
-      </div>
-    </div>
+    </>
   );
 }
+

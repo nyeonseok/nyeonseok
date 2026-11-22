@@ -1,32 +1,37 @@
+import { profile } from '../data/profile';
+import { Icon } from './Icon';
+
 export default function Footer() {
-    return (
-        <footer className="footer">
-            <div className="footer-inner">
-                <div className="footer-left">
-                    <div className="footer-name">안현석 · An Hyeon-seok</div>
-                    <div className="footer-sub">
-                        © 2025 안현석. All rights reserved.
-                    </div>
-                </div>
-                <div className="footer-links">
-                    <a
-                        href="mailto:aragorn2358@naver.com"
-                        className="footer-link"
-                    >
-                        <span>✉️</span>
-                        aragorn2358@naver.com
-                    </a>
-                    <a
-                        href="https://github.com/nyeonseok"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="footer-link"
-                    >
-                        <span>🐙</span>
-                        GitHub
-                    </a>
-                </div>
-            </div>
-        </footer>
-    );
+  return (
+    <footer className="site-footer">
+      <div className="container site-footer__inner">
+        <div>
+          <p className="site-footer__name">
+            <span className="wordmark__mark" aria-hidden="true" />
+            {profile.name}
+            <span className="site-footer__en" lang="en">
+              {profile.nameEn}
+            </span>
+          </p>
+          
+        </div>
+        <ul className="site-footer__actions">
+          <li>
+            <a href={`mailto:${profile.email}`} className="button button--sm">
+              {profile.email}
+            </a>
+          </li>
+          <li>
+            <a href={profile.github} target="_blank" rel="noopener noreferrer" className="button button--sm">
+              GitHub
+              <Icon name="arrow-up-right" size={15} />
+              <span className="sr-only"> (새 창)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <p className="container site-footer__copy">© 2026 {profile.name}</p>
+    </footer>
+  );
 }
+

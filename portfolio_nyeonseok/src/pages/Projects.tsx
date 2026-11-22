@@ -1,159 +1,54 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { projects } from "../data/projects";
-import type { Project } from "../data/projects";
-import { useScrollReveal } from "../hooks/useScrollReveal";
-
-type FilterType = "all" | "team" | "toy" | "side";
-
-const filters: { key: FilterType; label: string }[] = [
-    { key: "all", label: "전체" },
-    { key: "team", label: "팀 프로젝트" },
-    { key: "toy", label: "토이 프로젝트" },
-    // { key: "side", label: "사이드 프로젝트" },
-];
-
-function ProjectCard({ project }: { project: Project }) {
-    return (
-        <Link to={`/projects/${project.id}`} className="card">
-            <div className="card-thumbnail">
-                {project.thumbnail ? (
-                    <img
-                        src={project.thumbnail}
-                        alt={project.title}
-                        className="card-thumbnail-inner"
-                        style={{
-                            objectFit: "cover",
-                            width: "100%",
-                            height: "100%",
-                        }}
-                    />
-                ) : (
-                    <>
-                        <div
-                            className="card-thumbnail-inner"
-                            style={{ background: project.gradient }}
-                        />
-                        <span className="card-thumbnail-label">
-                            {project.title}
-                        </span>
-                    </>
-                )}
-            </div>
-            <div className="card-body">
-                <div className="card-tags">
-                    <span className={`tag tag-${project.type}`}>
-                        {project.typeLabel}
-                    </span>
-                    {project.teamSize ? (
-                        <span className="tag tag-accent">
-                            팀 {project.teamSize}인
-                        </span>
-                    ) : project.type !== "team" ? (
-                        <span className="tag tag-toy">개인</span>
-                    ) : null}
-                </div>
-                <h3 className="card-title">{project.title}</h3>
-                <p className="card-desc">{project.subtitle}</p>
-                <div className="card-techs">
-                    {project.techStack.slice(0, 4).map((t) => (
-                        <span key={t} className="tech-tag">
-                            {t}
-                        </span>
-                    ))}
-                    {project.techStack.length > 4 && (
-                        <span className="tech-tag">
-                            +{project.techStack.length - 4}
-                        </span>
-                    )}
-                </div>
-            </div>
-            <div className="card-footer">
-                <span
-                    style={{
-                        fontSize: "0.82rem",
-                        color: "var(--text-tertiary)",
-                    }}
-                >
-                    {project.role}
-                </span>
-                <span className="card-arrow">→</span>
-            </div>
-        </Link>
-    );
-}
+import { Link } from 'react-router-dom';
+import { projects, smallProjects } from '../data/projects';
+import { extras } from '../data/extras';
+import { ProjectGrid } from '../components/ProjectGrid';
+import { SmallProjectCard } from '../components/SmallProjectCard';
+import { Icon } from '../components/Icon';
 
 export default function Projects() {
-    const [active, setActive] = useState<FilterType>("all");
-    useScrollReveal();
+  const extra = extras[0];
 
-    const filtered =
-        active === "all" ? projects : projects.filter((p) => p.type === active);
+  return (
+    <>
+      <title>Projects — 안현석</title>
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    return (
-        <div className="page">
-            <div className="container">
-                <section className="section">
-                    <div className="section-header reveal">
-                        <span className="section-label">Portfolio</span>
-                        <h1 className="section-title">프로젝트</h1>
-                        <p className="section-desc">
-                            팀 프로젝트부터 개인 토이 프로젝트까지, 다양한
-                            경험을 쌓아왔습니다.
-                        </p>
-                    </div>
-
-                    <div className="filter-bar reveal">
-                        {filters.map((f) => (
-                            <button
-                                key={f.key}
-                                className={`filter-btn${active === f.key ? " active" : ""}`}
-                                onClick={() => setActive(f.key)}
-                            >
-                                {f.label}
-                                {f.key !== "all" && (
-                                    <span
-                                        style={{ marginLeft: 6, opacity: 0.7 }}
-                                    >
-                                        (
-                                        {
-                                            projects.filter(
-                                                (p) => p.type === f.key,
-                                            ).length
-                                        }
-                                        )
-                                    </span>
-                                )}
-                            </button>
-                        ))}
-                    </div>
-
-                    {filtered.length === 0 ? (
-                        <div
-                            style={{
-                                textAlign: "center",
-                                padding: "80px 0",
-                                color: "var(--text-tertiary)",
-                            }}
-                        >
-                            해당 유형의 프로젝트가 없습니다.
-                        </div>
-                    ) : (
-                        <div className="grid-3">
-                            {filtered.map((project) => (
-                                <ProjectCard
-                                    key={project.id}
-                                    project={project}
-                                />
-                            ))}
-                        </div>
-                    )}
-                </section>
-            </div>
+      <header className="page-hero">
+        <div className="container">
+          <h1 className="page-hero__title">프로젝트</h1>
+          <p className="page-hero__lead">
+            주요 프로젝트 다섯 개와 작은 프로젝트 하나입니다. 각 프로젝트는 문제 → 판단 → 해결 → 결과 순서로
+            정리했습니다.
+          </p>
         </div>
-    );
+      </header>
+
+      <section className="section section--tight container" aria-label="주요 프로젝트">
+        <ProjectGrid projects={projects} headingLevel="h2" />
+      </section>
+
+      <section className="section container" id="small-projects" aria-labelledby="small-projects-title">
+        <header className="section__head">
+          <div>
+            <h2 className="section__title" id="small-projects-title">
+              작은 프로젝트
+            </h2>
+          </div>
+        </header>
+        {smallProjects.map((p) => (
+          <SmallProjectCard key={p.slug} project={p} />
+        ))}
+      </section>
+
+      <section className="section container">
+        <Link to="/extras" className="aside-link" data-tone={extra.tone}>
+          <span>
+            <span className="aside-link__label">프로젝트 외 자잘한 것들</span>
+            <span className="aside-link__title">{extra.title}</span>
+          </span>
+          <Icon name="arrow-right" size={20} />
+        </Link>
+      </section>
+    </>
+  );
 }
+

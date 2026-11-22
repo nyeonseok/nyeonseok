@@ -1,401 +1,311 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { projects } from "../data/projects";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import { Link, Navigate, useParams } from 'react-router-dom';
+import { getProject, legacyProjectRedirects, projects } from '../data/projects';
+import type { MediaFolder, Project } from '../data/types';
+import { getAssets, getCover } from '../lib/media';
+import { useActiveSection } from '../hooks/useActiveSection';
+import { CaseStudy } from '../components/CaseStudy';
+import { FlowGroup } from '../components/Flow';
+import { Gallery, MediaItem } from '../components/Media';
+import { ExternalLinks } from '../components/ExternalLinks';
+import { Icon } from '../components/Icon';
+import NotFound from './NotFound';
 
 export default function ProjectDetail() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const project = projects.find((p) => p.id === id);
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(
-    null
-  );
-  useScrollReveal();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [id]);
-
-  useEffect(() => {
-    if (!lightbox) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLightbox(null);
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [lightbox]);
+  const { slug } = useParams();
+  const project = getProject(slug);
 
   if (!project) {
-    return (
-      <div className="not-found">
-        <div className="not-found-number">404</div>
-        <h2>프로젝트를 찾을 수 없습니다</h2>
-        <button
-          onClick={() => navigate("/projects")}
-          className="btn btn-primary"
-          style={{ marginTop: 8 }}
-        >
-          프로젝트 목록으로
-        </button>
-      </div>
-    );
+    const legacy = slug ? legacyProjectRedirects[slug] : undefined;
+    return legacy ? <Navigate to={legacy} replace /> : <NotFound />;
   }
+  // key: 다른 프로젝트로 이동하면 목차 상태를 새로 시작한다.
+  return <ProjectArticle key={project.slug} project={project} />;
+}
+
+function ProjectArticle({ project }: { project: Project }) {
+  const captions = project.captions ?? {};
+  const cover = getCover(project.slug);
+
+  const galleriesAt = (placement: MediaFolder['placement']) =>
+    project.media
+      .filter((m) => m.placement === placement)
+      .map((m) => ({ ...m, assets: getAssets(project.slug, m.dir) }))
+      .filter((m) => m.assets.length > 0);
+
+  const screens = galleriesAt('screens');
+  const caseMedia = galleriesAt('cases');
+  const resultMedia = galleriesAt('results');
+  const flowMedia = galleriesAt('flow');
+  const retro = (project.retrospective ?? []).filter((r) => r.body?.trim());
+
+  const hasResults = Boolean(project.outcomes?.length) || resultMedia.length > 0;
+  const hasFlow = Boolean(project.flows?.length) || flowMedia.length > 0;
+
+  const toc = [
+    { id: 'overview', label: '개요', show: true },
+    { id: 'screens', label: screens[0]?.label ?? '서비스 화면', show: screens.length > 0 },
+    { id: 'contribution', label: '내가 맡은 부분', show: true },
+    { id: 'cases', label: '문제 해결', show: project.cases.length > 0 },
+    { id: 'results', label: '결과', show: hasResults },
+    { id: 'architecture', label: 'Architecture · Flow', show: hasFlow },
+    { id: 'retrospective', label: '회고', show: retro.length > 0 },
+    { id: 'links', label: '링크', show: Boolean(project.links?.length) },
+  ].filter((t) => t.show);
+  const active = useActiveSection(toc.map((t) => t.id));
+
+  const index = projects.findIndex((p) => p.slug === project.slug);
+  const prev = projects[index - 1];
+  const next = projects[index + 1];
+
+  const renderGalleries = (items: ReturnType<typeof galleriesAt>, showLabel = true) =>
+    items.map((m) => (
+      <div key={m.dir} className="detail-media">
+        {showLabel && <h3 className="subhead">{m.label}</h3>}
+        <Gallery assets={m.assets} label={m.label} projectName={project.name} captions={captions} />
+      </div>
+    ));
 
   return (
-    <div className="detail-page">
-      {/* Hero */}
-      <div className="detail-hero">
-        <div
-          className="detail-hero-bg"
-          style={{ background: project.gradient }}
-        />
-        <div className="container detail-hero-content">
-          <button className="detail-back" onClick={() => navigate("/projects")}>
-            ← 프로젝트 목록
-          </button>
-          <div className="reveal">
-            <div
-              style={{
-                display: "flex",
-                gap: 8,
-                marginBottom: 16,
-                flexWrap: "wrap",
-              }}
-            >
-              <span className={`tag tag-${project.type}`}>
-                {project.typeLabel}
-              </span>
-              {project.teamSize ? (
-                <span className="tag tag-accent">팀 {project.teamSize}인</span>
-              ) : project.type !== "team" ? (
-                <span className="tag tag-toy">개인 개발</span>
-              ) : null}
-            </div>
-            <h1 className="detail-title">{project.title}</h1>
-            <p className="detail-subtitle">{project.subtitle}</p>
-            <div className="detail-meta">
-              <div className="detail-meta-item">
-                <span>역할</span>
-                <strong>{project.role}</strong>
-              </div>
-              {project.period && (
-                <div className="detail-meta-item">
-                  <span>기간</span>
-                  <strong>{project.period}</strong>
-                </div>
-              )}
-              {project.teamSize && (
-                <div className="detail-meta-item">
-                  <span>팀 규모</span>
-                  <strong>{project.teamSize}명</strong>
-                </div>
-              )}
-            </div>
-            <div className="detail-actions">
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary btn-sm"
-                >
-                  🐙 GitHub
-                </a>
-              )}
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary btn-sm"
-                >
-                  🚀 배포 링크
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+    <article className="detail" data-tone={project.tone} aria-labelledby="project-title">
+      <title>{`${project.name} — 안현석`}</title>
 
-      {/* Body */}
-      <div className="detail-body">
+      <header className="dhero">
         <div className="container">
-          {/* Thumbnail */}
-          {/* {project.thumbnail && (
-            <div className="detail-section reveal" style={{ paddingBottom: 0 }}>
-              <img
-                src={project.thumbnail}
-                alt={`${project.title} 대표 이미지`}
-                style={{ width: '100%', borderRadius: 'var(--radius-lg)', display: 'block', border: '1px solid var(--border)' }}
-              />
-            </div>
-          )} */}
+          <Link to="/projects" className="back-link">
+            <Icon name="arrow-left" size={16} /> Projects
+          </Link>
+          <p className="pill dhero__pill">{project.context}</p>
+          <h1 className="dhero__title" id="project-title">
+            {project.name}
+          </h1>
+          <p className="dhero__tagline">{project.tagline}</p>
 
-          {/* Overview */}
-          <div className="detail-section reveal">
-            <h2 className="detail-section-title">프로젝트 개요</h2>
-            <p
-              style={{
-                color: "var(--text-secondary)",
-                lineHeight: 1.85,
-                fontSize: "0.975rem",
-              }}
-            >
-              {project.description}
-            </p>
-          </div>
-
-          {/* Background & Goals */}
-          {project.background && (
-            <div className="detail-section reveal">
-              <h2 className="detail-section-title">배경 &amp; 목표</h2>
-              <p
-                style={{
-                  color: "var(--text-secondary)",
-                  lineHeight: 1.85,
-                  fontSize: "0.975rem",
-                }}
-              >
-                {project.background}
-              </p>
+          <dl className="dmeta">
+            <div>
+              <dt>기간</dt>
+              <dd>{project.period}</dd>
             </div>
-          )}
-
-          {/* Tech Stack */}
-          <div className="detail-section reveal">
-            <h2 className="detail-section-title">기술 스택</h2>
-            <div className="tech-stack-display">
-              {project.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="tech-tag"
-                  style={{
-                    fontSize: "0.85rem",
-                    padding: "6px 14px",
-                  }}
-                >
-                  {tech}
-                </span>
-              ))}
+            <div>
+              <dt>역할</dt>
+              <dd>{project.role}</dd>
             </div>
-            {project.techReason && (
-              <p
-                style={{
-                  color: "var(--text-secondary)",
-                  lineHeight: 1.85,
-                  fontSize: "0.925rem",
-                  marginTop: 20,
-                  borderLeft: "3px solid var(--accent)",
-                  paddingLeft: 16,
-                }}
-              >
-                <strong
-                  style={{
-                    color: "var(--text)",
-                    display: "block",
-                    marginBottom: 6,
-                    fontSize: "0.85rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  선택 이유
-                </strong>
-                {project.techReason}
-              </p>
+            <div>
+              <dt>기관</dt>
+              <dd>{project.org}</dd>
+            </div>
+            {project.team && (
+              <div>
+                <dt>구성</dt>
+                <dd>{project.team}</dd>
+              </div>
             )}
-          </div>
+          </dl>
 
-          {/* Features */}
-          <div className="detail-section reveal">
-            <h2 className="detail-section-title">주요 기능</h2>
-            <div className="feature-list">
-              {project.features.map((f) => (
-                <div key={f.title} className="feature-item">
-                  <div className="feature-item-title">{f.title}</div>
-                  <div className="feature-item-desc">{f.description}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <ul className="chips chips--surface dhero__stack" aria-label="핵심 기술">
+            {project.stack.map((s) => (
+              <li key={s} className="chip">
+                {s}
+              </li>
+            ))}
+          </ul>
 
-          {/* Contributions */}
-          <div className="detail-section reveal">
-            <h2 className="detail-section-title">개인 기여도</h2>
-            <div className="contribution-list">
-              {project.contributions.map((c) => (
-                <div key={c.title} className="contribution-item">
-                  <div className="contribution-title">{c.title}</div>
-                  <div className="contribution-points">
-                    {c.items.map((item, i) => (
-                      <div key={i} className="contribution-point">
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Troubleshooting */}
-          <div className="detail-section reveal">
-            <h2 className="detail-section-title">트러블슈팅</h2>
-            <div className="trouble-list">
-              {project.troubleshooting.map((t) => (
-                <div key={t.title} className="trouble-item">
-                  <div className="trouble-header">{t.title}</div>
-                  <div className="trouble-body">
-                    <div className="trouble-row trouble-problem">
-                      <span className="trouble-label">문제</span>
-                      <p className="trouble-text">{t.problem}</p>
-                    </div>
-                    <div className="trouble-row trouble-solution">
-                      <span className="trouble-label">해결</span>
-                      <div>
-                        <p className="trouble-text">{t.solution}</p>
-                        {t.code && <pre className="code-block">{t.code}</pre>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Screenshots */}
-          {project.screenshots && project.screenshots.length > 0 && (
-            <div className="detail-section reveal">
-              <h2 className="detail-section-title">스크린샷</h2>
-              <div className="screenshots-grid">
-                {project.screenshots.map((shot) => (
-                  <div key={shot.title} className="screenshot-card">
-                    <div className="screenshot-media">
-                      <img src={shot.image} alt={shot.title} />
-                      <button
-                        type="button"
-                        className="screenshot-expand-btn"
-                        aria-label="이미지 전체화면으로 보기"
-                        onClick={() =>
-                          setLightbox({ src: shot.image, alt: shot.title })
-                        }
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M8 3H5a2 2 0 0 0-2 2v3" />
-                          <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
-                          <path d="M3 16v3a2 2 0 0 0 2 2h3" />
-                          <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
-                        </svg>
-                      </button>
-                    </div>
-                    <h4>{shot.title}</h4>
-                    <p>{shot.description}</p>
+          {project.keyResults && (
+            <>
+              <dl className="kpis">
+                {project.keyResults.map((r) => (
+                  <div key={r.label} className="kpi">
+                    <dt>{r.label}</dt>
+                    <dd>{r.value}</dd>
                   </div>
                 ))}
-              </div>
-            </div>
+              </dl>
+              {project.keyResultsNote && (
+                <p className="note note--icon">
+                  <Icon name="info" size={16} />
+                  {project.keyResultsNote}
+                </p>
+              )}
+            </>
           )}
 
-          {/* Demo Video */}
-          {project.demoVideo && (
-            <div className="detail-section reveal">
-              <h2 className="detail-section-title">시연 영상</h2>
-
-              <div className="project-video">
-                <video
-                  src={project.demoVideo}
-                  controls
-                  preload="metadata"
-                  playsInline
-                  style={{
-                    width: "100%",
-                    borderRadius: "16px",
-                  }}
-                />
-              </div>
+          {cover && (
+            <div className="dhero__cover">
+              <MediaItem asset={cover} alt={captions[cover.key] ?? `${project.name} 대표 화면`} priority />
             </div>
           )}
+        </div>
+      </header>
 
-          {/* CTA */}
-          <div
-            className="detail-section reveal"
-            style={{ borderBottom: "none" }}
-          >
-            <div
-              style={{
-                display: "flex",
-                gap: 12,
-                flexWrap: "wrap",
-              }}
-            >
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary"
+      <div className="container dlayout">
+        <nav className="dtoc" aria-label="이 페이지의 목차">
+          <p className="dtoc__title">목차</p>
+          <ol>
+            {toc.map((t) => (
+              <li key={t.id}>
+                <Link
+                  to={`#${t.id}`}
+                  className={active === t.id ? 'is-active' : undefined}
+                  aria-current={active === t.id ? 'location' : undefined}
                 >
-                  🐙 GitHub에서 코드 보기
-                </a>
-              )}
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                >
-                  🚀 배포 링크 방문
-                </a>
-              )}
-              <button
-                onClick={() => navigate("/projects")}
-                className="btn btn-ghost"
-              >
-                ← 목록으로
-              </button>
+                  {t.label}
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div className="dcontent">
+          <section id="overview" className="dsection" aria-labelledby="overview-title">
+            <h2 className="dsection__title" id="overview-title">
+              개요
+            </h2>
+            <div className="prose">
+              {project.overview.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
             </div>
-          </div>
+            {project.team && (
+              <p className="note note--icon">
+                <Icon name="info" size={16} />
+                서비스 소개는 팀 전체 기준입니다. 개인 기여는 아래 ‘내가 맡은 부분’부터 정리했습니다.
+              </p>
+            )}
+          </section>
+
+          {screens.length > 0 && (
+            <section id="screens" className="dsection" aria-labelledby="screens-title">
+              <h2 className="dsection__title" id="screens-title">
+                {screens[0].label}
+              </h2>
+              {renderGalleries(screens, false)}
+            </section>
+          )}
+
+          <section id="contribution" className="dsection" aria-labelledby="contribution-title">
+            <h2 className="dsection__title" id="contribution-title">
+              내가 맡은 부분
+            </h2>
+            {project.focus && <p className="focus-lead">{project.focus}</p>}
+            <div className="contrib-grid">
+              {project.contributions.map((group) => (
+                <div key={group.title} className="contrib">
+                  <h3 className="contrib__title">{group.title}</h3>
+                  <ul className="list">
+                    {group.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {project.cases.length > 0 && (
+            <section id="cases" className="dsection" aria-labelledby="cases-title">
+              <h2 className="dsection__title" id="cases-title">
+                문제 해결
+              </h2>
+              <div className="cases">
+                {project.cases.map((c, i) => {
+                  const assets = c.media ? getAssets(project.slug, c.media) : [];
+                  return (
+                    <CaseStudy key={c.id} data={c} index={i}>
+                      <Gallery assets={assets} label={c.title} projectName={project.name} captions={captions} />
+                    </CaseStudy>
+                  );
+                })}
+              </div>
+              {renderGalleries(caseMedia)}
+              {project.takeaway && (
+                <blockquote className="takeaway">
+                  <p>{project.takeaway}</p>
+                </blockquote>
+              )}
+            </section>
+          )}
+
+          {hasResults && (
+            <section id="results" className="dsection" aria-labelledby="results-title">
+              <h2 className="dsection__title" id="results-title">
+                결과
+              </h2>
+              {project.outcomes && (
+                <ul className="list">
+                  {project.outcomes.map((o) => (
+                    <li key={o}>{o}</li>
+                  ))}
+                </ul>
+              )}
+              {renderGalleries(resultMedia, false)}
+            </section>
+          )}
+
+          {hasFlow && (
+            <section id="architecture" className="dsection" aria-labelledby="architecture-title">
+              <h2 className="dsection__title" id="architecture-title">
+                Architecture · Flow
+              </h2>
+              {project.flows && <FlowGroup flows={project.flows} />}
+              {renderGalleries(flowMedia)}
+            </section>
+          )}
+
+          {retro.length > 0 && (
+            <section id="retrospective" className="dsection" aria-labelledby="retro-title">
+              <h2 className="dsection__title" id="retro-title">
+                회고
+              </h2>
+              <dl className="retro">
+                {retro.map((r) => (
+                  <div key={r.label} className="retro__item">
+                    <dt>{r.label}</dt>
+                    <dd>{r.body}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
+
+          {project.links && project.links.length > 0 && (
+            <section id="links" className="dsection" aria-labelledby="links-title">
+              <h2 className="dsection__title" id="links-title">
+                링크
+              </h2>
+              <ExternalLinks links={project.links} />
+            </section>
+          )}
         </div>
       </div>
 
-      {lightbox && (
-        <div
-          className="screenshot-lightbox"
-          onClick={() => setLightbox(null)}
-        >
-          <button
-            type="button"
-            className="screenshot-lightbox-close"
-            aria-label="닫기"
-            onClick={() => setLightbox(null)}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="M6 6l12 12" />
-            </svg>
-          </button>
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-    </div>
+      <nav className="container pager" aria-label="다른 프로젝트">
+        {prev ? (
+          <Link to={`/projects/${prev.slug}`} className="pager__link" data-tone={prev.tone}>
+            <span className="pager__dir">
+              <Icon name="arrow-left" size={14} /> 이전 프로젝트
+            </span>
+            <span className="pager__name">{prev.name}</span>
+            <span className="pager__tagline">{prev.tagline}</span>
+          </Link>
+        ) : (
+          <span className="pager__spacer" />
+        )}
+        {next ? (
+          <Link to={`/projects/${next.slug}`} className="pager__link pager__link--next" data-tone={next.tone}>
+            <span className="pager__dir">
+              다음 프로젝트 <Icon name="arrow-right" size={14} />
+            </span>
+            <span className="pager__name">{next.name}</span>
+            <span className="pager__tagline">{next.tagline}</span>
+          </Link>
+        ) : (
+          <Link to="/projects" className="pager__link pager__link--next">
+            <span className="pager__dir">
+              목록 <Icon name="arrow-right" size={14} />
+            </span>
+            <span className="pager__name">전체 프로젝트</span>
+          </Link>
+        )}
+      </nav>
+    </article>
   );
 }
