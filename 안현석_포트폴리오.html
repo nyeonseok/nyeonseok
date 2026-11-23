@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>안현석 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+    @bottom-right { content: counter(page) " / " counter(pages); font: 700 9pt "Noto Sans KR", "Malgun Gothic", sans-serif; color: #222; }
+  }
+  :root { --ink: #1f1f1f; --muted: #555; --line: #222; --thin: #cfcfcf; --label: 92px; --accent: #1f3864; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; }
+  body { font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; color: var(--ink); font-size: 9.6pt; line-height: 1.6; }
+  .page { max-width: 180mm; margin: 0 auto; padding: 12mm 0; }
+  @media print { .page { padding: 0; max-width: none; } }
+  a { color: var(--ink); text-decoration: none; }
+  ul { margin: 0; padding-left: 15px; }
+  li { margin: 1px 0; }
+  li ul { margin-top: 1px; list-style: circle; }
+  b, strong { font-weight: 700; }
+  .ph { background: #fff3c4; padding: 0 3px; border-radius: 2px; }
+
+  /* header */
+  .header { display: flex; gap: 22px; align-items: flex-start; padding-bottom: 20px; }
+  .photo { width: 92px; height: 112px; border-radius: 8px; background: #e9e9e9; flex: none; display: flex; align-items: center; justify-content: center; color: #9a9a9a; font-size: 8pt; }
+  .name { font-size: 20pt; font-weight: 700; letter-spacing: -0.5px; }
+  .name small { font-size: 11pt; font-weight: 500; color: var(--muted); margin-left: 8px; }
+  .tagline { margin-top: 6px; font-weight: 500; }
+  .contact { margin-top: 6px; color: var(--muted); font-size: 9pt; line-height: 1.7; }
+
+  /* section */
+  .section { display: grid; grid-template-columns: var(--label) 1fr; gap: 0 14px; border-top: 1.5px solid var(--line); padding: 14px 0 6px; }
+  .section > .label { font-weight: 700; font-size: 11pt; }
+  .intro-item { margin-bottom: 12px; break-inside: avoid; }
+  .intro-item h3 { font-size: 10.5pt; margin: 0 0 3px; }
+  .intro-item p { margin: 0; color: #333; }
+
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+  .skills .group { break-inside: avoid; }
+  .skills h4 { margin: 0 0 1px; font-size: 9.8pt; }
+
+  /* project */
+  .project { border-top: 1.5px solid var(--line); padding-top: 14px; margin-top: 4px; }
+  .project + .project { margin-top: 18px; }
+  .ptitle { display: grid; grid-template-columns: var(--label) 1fr; gap: 0 14px; margin-bottom: 8px; break-after: avoid; }
+  .ptitle .label { font-weight: 700; font-size: 11pt; }
+  .ptitle .pname { font-size: 12pt; font-weight: 700; }
+  .ptitle .pmeta { color: var(--muted); font-size: 8.8pt; margin-left: 8px; font-weight: 400; }
+  .ptitle .psum { margin-top: 2px; }
+  .row { display: grid; grid-template-columns: var(--label) 1fr; gap: 0 14px; border-top: 1px solid var(--thin); padding: 9px 0; }
+  .row > .label { font-weight: 700; font-size: 9.6pt; }
+  .row.keep { break-inside: avoid; }
+  .case { margin-bottom: 8px; break-inside: avoid; }
+  .case:last-child { margin-bottom: 0; }
+  .case > .ctitle { font-weight: 700; }
+  .k { font-weight: 700; }
+  table.metric { border-collapse: collapse; margin: 4px 0 2px; font-size: 8.8pt; }
+  table.metric th, table.metric td { border: 1px solid var(--thin); padding: 2px 8px; text-align: left; }
+  table.metric th { background: #f3f3f3; font-weight: 700; }
+  table.metric td.num { text-align: right; }
+
+  /* timeline entries (학력·교육·경험) */
+  .entry { margin-bottom: 12px; break-inside: avoid; }
+  .entry:last-child { margin-bottom: 4px; }
+  .entry-head { display: flex; justify-content: space-between; gap: 12px; }
+  .entry-head .t { font-weight: 700; }
+  .entry-head .t span { font-weight: 400; color: var(--muted); margin-left: 6px; font-size: 9pt; }
+  .entry-head .d { color: var(--muted); font-size: 8.8pt; white-space: nowrap; }
+  .entry .sub { color: var(--muted); font-size: 9pt; margin-bottom: 2px; }
+  .mini { margin-bottom: 7px; break-inside: avoid; }
+  .mini .t { font-weight: 700; }
+  .mini .t span { font-weight: 400; color: var(--muted); font-size: 8.8pt; margin-left: 6px; }
+  code { font-family: inherit; font-size: 0.95em; background: #f2f2f2; padding: 0 3px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<main class="page">
+
+<!-- 헤더 -->
+<header class="header">
+  <div class="photo">사진</div>
+  <div>
+    <div class="name">안현석<small>Backend Developer</small></div>
+    <div class="tagline">문제를 로그·데이터·수치로 확인하고, 구조를 개선한 뒤 정상 상태까지 검증하는 엔지니어</div>
+    <div class="contact">
+      hyeonseokan5@gmail.com<br>
+      <span class="ph">github.com/[GitHub 아이디]</span>
+    </div>
+  </div>
+</header>
+
+<!-- 소개 -->
+<section class="section">
+  <div class="label">소개</div>
+  <div>
+    <div class="intro-item">
+      <h3>운영 장애를 로그와 데이터로 좁히고, 정상 상태까지 검증합니다.</h3>
+      <p>망분리 공공 시스템을 6개월간 운영하며 암호화 모듈 라이선스 만료로 평문 저장되던 약 50건을 로그로 찾아냈습니다. 서버를 한 대씩 순차 교체하고, 데이터를 재암호화한 뒤 건별로 정합성을 확인했습니다.</p>
+    </div>
+    <div class="intro-item">
+      <h3>동시 요청·재시도·타임아웃에서도 데이터와 비용이 어긋나지 않게 설계합니다.</h3>
+      <p>Geomate에서 유료 AI 호출을 맡아, 실패한 시점에 요청이 이미 처리됐을 가능성까지 구분해 재시도 여부를 정했습니다. DB 제약·행 잠금·멱등키로 동시 요청의 정합성을 지키고, 경합·실패 경로를 실제 PostgreSQL 테스트로 검증했습니다.</p>
+    </div>
+    <div class="intro-item">
+      <h3>성능 병목은 실제 실행 환경에서 측정하고 구조로 개선합니다.</h3>
+      <p>Projectree의 3D 트리에서 라벨 DOM 4,000개가 평균 9.3 FPS를 만든다는 것을 빌드 환경에서 측정했고, 렌더링 구조를 바꿔 같은 조건에서 45.4 FPS로 다시 검증했습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 기술 -->
+<section class="section">
+  <div class="label">기술</div>
+  <div class="skills">
+    <div class="group"><h4>Backend</h4><ul><li>Java · Spring Boot · Spring Security · JPA · JWT</li><li>Python · FastAPI 연동</li></ul></div>
+    <div class="group"><h4>Frontend</h4><ul><li>React · TypeScript · JavaScript · HTML · CSS</li><li>Zustand</li></ul></div>
+    <div class="group"><h4>Database</h4><ul><li>PostgreSQL · MySQL · Tibero</li><li>Flyway · DataGrip</li></ul></div>
+    <div class="group"><h4>AI / Agent</h4><ul><li>OpenAI API · LangGraph · Custom MCP</li><li>Hugging Face · Transformers · PyTorch · PEFT · LoRA · BitsAndBytes · Qwen2.5-VL</li></ul></div>
+    <div class="group"><h4>Infra / Operations</h4><ul><li>AWS · S3 · Docker · Linux · Nginx · k3s</li><li>WebtoB · JEUS · NAT</li></ul></div>
+    <div class="group"><h4>Observability · Testing</h4><ul><li>Prometheus · Grafana · Loki · Tempo</li><li>JUnit · Testcontainers</li></ul></div>
+    <div class="group"><h4>Collaboration</h4><ul><li>Git · GitHub · GitLab · Jira · Notion</li></ul></div>
+  </div>
+</section>
+
+<!-- 경력 -->
+<article class="project">
+  <div class="ptitle">
+    <div class="label">경력</div>
+    <div>
+      <div class="pname">CODE JS<span class="pmeta">프리랜서 개발자 · 2025.06 ~ 2025.12</span></div>
+      <div class="psum">대구·경북 어르신 무임 교통카드 공공 시스템 WEB/WAS 운영 · LG SHOPTIME 서비스 페이지 유지보수</div>
+    </div>
+  </div>
+  <div class="row keep">
+    <div class="label">개요</div>
+    <ul>
+      <li><b>대구·경북 어르신 무임 교통카드 공공 시스템</b> (2025.06.19 ~ 2025.12.19)<ul>
+        <li>망분리 공공 운영환경에서 WebtoB(WEB) + JEUS(WAS) + Tibero 기반 시스템을 6개월간 운영</li>
+        <li>외부 진입 트래픽을 DNAT으로 내부 서버에 매핑하는 환경</li></ul></li>
+      <li><b>LG SHOPTIME</b>: 기능 명세서 기반 신규 서비스 페이지 개발, 운영 중 오류 대응과 기존 페이지 유지보수 (jQuery)</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">담당 업무</div>
+    <ul>
+      <li>서버 용량·로그 모니터링과 로그 백업, 배치 오류·서비스 이슈 대응</li>
+      <li>이상 접근자 모니터링과 문서화</li>
+      <li>현업 데이터 요청의 목적과 조회 조건을 확인한 뒤 SQL 작성·CSV 전달, SQL 쿼리 개선</li>
+      <li>WEB 페이지 개발과 UX 개선, 시연 환경을 위해 외부 통신 없이 동작하도록 네트워크 통신부 수정</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">트러블슈팅</div>
+    <div class="case">
+      <div class="ctitle">암호화 모듈 라이선스 만료 장애</div>
+      <ul>
+        <li><span class="k">문제:</span> 선임 부재 중 모니터링에서 데이터 적재 방식의 이상을 발견했습니다. 애플리케이션을 바로 고치지 않고 서버 로그를 먼저 추적해, 암호화 모듈 라이선스 만료로 일부 데이터가 평문 저장되고 있음을 확인했습니다.</li>
+        <li><span class="k">판단:</span> 두 서버를 동시에 바꾸면 교체 중 문제가 생겼을 때 정상 서버가 남지 않는다고 보고, 한 서버에 먼저 새 라이선스를 적용해 정상 암호화를 확인한 뒤 두 번째 서버에 순차 적용했습니다.</li>
+        <li><span class="k">복구:</span> 보안 공백 기간에 평문 저장된 약 50건을 DataGrip으로 전수 추출해 재암호화하고, 기존 데이터와 건별로 비교했습니다.</li>
+        <li><span class="k">결과:</span> 이후 적재 데이터 정상 암호화 확인, 평문 약 <b>50건 재암호화 완료</b>, <b>건별 정합성 일치</b> 확인</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- Geomate -->
+<article class="project">
+  <div class="ptitle">
+    <div class="label">프로젝트</div>
+    <div>
+      <div class="pname">Geomate<span class="pmeta">사진 기반 AI 기하 학습 서비스 · 2026.10.06 ~ 2026.11.18</span></div>
+      <div class="psum">학생이 문제 사진을 올리면 VLM이 조건을 해석하고, 기하 엔진이 검증·판정하고, LLM이 단계형 힌트를 주는 학습 서비스</div>
+    </div>
+  </div>
+  <div class="row keep">
+    <div class="label">개요</div>
+    <ul>
+      <li>SSAFY 자율 프로젝트 · 6인 팀 · <b>Backend</b> (백엔드 초기 기반, 학습·문제함·사진 해석·AI 힌트 API)</li>
+      <li><b>원스토어 정식 배포 · 누적 148회 다운로드</b>, 실제 사용자가 쓰는 서비스로 운영</li>
+      <li>백엔드 커밋 122건(머지 제외), 직접 작성한 테스트 약 990건(<code>@Test</code> 기준)</li>
+      <li>사용 기술: Java 21, Spring Boot, Spring Security, JPA, PostgreSQL, Flyway, JUnit, Testcontainers, Docker, S3, FastAPI 연동</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기능 구현</div>
+    <ul>
+      <li><b>백엔드 초기 기반:</b> Spring Boot 프로젝트 구성, Flyway 마이그레이션, JWT 기반 Spring Security, ProblemDetail 전역 예외 처리, JPA Auditing</li>
+      <li><b>학습 흐름:</b> 학습 단계 전이 <code>PREDICTION → DIAGNOSED → REVEALED</code>, 예상·답 제출과 엔진 판정, 학습 완료 API</li>
+      <li><b>사진 해석:</b> 해석 시작·상태 조회 API와 비동기 실행기, Python 엔진 연동</li>
+      <li><b>AI 힌트:</b> 힌트 요청·저장 API, 입력 해시 기반 결과 재사용, 계정별 슬라이딩 윈도우 요청 제한</li>
+      <li><b>문제함·기록:</b> 문제·폴더 CRUD, 풀이 기록·복습·오답 모음 조회 API</li>
+      <li><b>공통:</b> Idempotency-Key 공통 모듈, Python 엔진 클라이언트의 상태 코드별 오류 매핑과 <code>X-Request-Id</code> 추적, 백엔드 개발 규칙·오류 응답·엔진 호출 규칙 문서화</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기술적<br>의사결정</div>
+    <ul>
+      <li><b>공개 API와 AI 내부 API 분리</b><ul>
+        <li>앱이 부르는 API는 모두 Spring Boot에 두고, Python(FastAPI)은 Spring만 부르는 내부 API로 분리했습니다.</li>
+        <li>유료 AI 호출의 권한·횟수·재시도 여부를 Spring 한 곳에서 통제하기 위해서입니다.</li></ul></li>
+      <li><b>긴 외부 호출은 DB 트랜잭션 밖에서</b><ul>
+        <li>수십 초 걸리는 VLM 해석과 S3 업로드가 요청 스레드와 DB 커넥션을 붙잡지 않도록, 작업 가져가기·결과 저장에서만 짧게 트랜잭션을 열었습니다.</li></ul></li>
+      <li><b>재시도는 "이미 처리됐을 가능성"으로 구분</b><ul>
+        <li>503·연결 실패처럼 처리되지 않았다고 판단할 수 있는 실패만 즉시 재시도했습니다.</li>
+        <li>읽기 타임아웃처럼 이미 과금됐을 수 있는 실패는 바로 다시 부르지 않고 <code>retry_at</code> 이후에 재시도했습니다.</li></ul></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="label">트러블슈팅<br>및 성능 개선</div>
+    <div>
+      <div class="case">
+        <div class="ctitle">1. 유료 AI 호출의 중복 실행과 이중 과금 경로 차단</div>
+        <ul>
+          <li><span class="k">문제:</span> AI 힌트는 느리고 호출마다 비용이 듭니다. 같은 입력의 동시 요청, 타임아웃, 서버 재시작, DB 저장 실패가 겹치면 같은 요청을 여러 번 유료 호출하는 경로가 생길 수 있었습니다.</li>
+          <li><span class="k">해결:</span><ul>
+            <li>정규화한 입력의 SHA-256 해시에 유니크 제약을 걸어, 같은 입력의 생성 주체를 하나로 제한</li>
+            <li><code>GENERATING / READY / FAILED</code> 상태와 <code>generation</code> 번호로 펜싱해, 장애 후 다른 요청이 이어받아도 늦게 끝난 이전 작업자가 결과를 덮어쓰지 못하게 함</li>
+            <li>결과 저장에 실패해도 기록을 지우지 않아 같은 유료 요청이 곧바로 반복되지 않게 함</li>
+            <li>Python 담당자와 응답 코드의 의미를 맞추고, AI SDK 자체 재시도를 꺼 Spring·Python·SDK 재시도가 겹쳐 불어나지 않게 함</li></ul></li>
+          <li><span class="k">결과:</span><ul>
+            <li>같은 입력 <b>동시 5건 요청 → AI 호출 1회</b> (실제 PostgreSQL 통합 테스트로 검증)</li>
+            <li>힌트 1건당 모델 호출 상한 <b>최대 12회 → 4회</b> (SDK 기본 재시도를 켰을 때와 비교한 설계 상한)</li>
+            <li>장애 상황에서도 앱은 500 대신 "생성 중 / 힌트 없음" 상태를 받음</li></ul></li>
+        </ul>
+      </div>
+      <div class="case">
+        <div class="ctitle">2. 사진 해석을 비동기 작업으로 분리</div>
+        <ul>
+          <li><span class="k">문제:</span> 사진 해석은 VLM 호출에 수십 초가 걸려 요청 안에서 처리하면 스레드와 DB 커넥션을 오래 점유합니다. 같은 문제에 시작 요청이 겹치면 해석 작업이 중복될 수도 있었습니다.</li>
+          <li><span class="k">해결:</span><ul>
+            <li>해석을 작업(Job)으로 분리하고 <code>대기 → 실행 → 성공/실패</code> 상태 전이를 설계</li>
+            <li>문제당 활성 작업 1개를 부분 유니크 인덱스로 제한</li>
+            <li>Python 503은 1회만 재시도하고, 오래 멈춘 작업은 스케줄러가 정리하도록 구성</li></ul></li>
+          <li><span class="k">결과:</span> 같은 문제에 시작 요청이 동시에 와도 <b>작업 1개, 모두 같은 jobId</b>를 받는 것을 통합 테스트로 검증, 서버 재시작 뒤에도 복구 가능한 작업 흐름 확보</li>
+        </ul>
+      </div>
+      <div class="case">
+        <div class="ctitle">3. 동시 요청·재전송 감사와 정합성 보강</div>
+        <ul>
+          <li>API 구현 뒤 정상 요청뿐 아니라 동시에 오거나 재전송되는 상황을 따로 감사했습니다.</li>
+          <li>같은 폴더 같은 이름 동시 등록: 유니크 인덱스 + <code>flush</code>로 즉시 확인 / 폴더 삭제 vs 문제 등록·이동: 폴더 행 잠금과 잠금 순서 통일</li>
+          <li>풀이 화면 이어 저장: <code>revision</code> 기반 낙관적 동시성, 불일치 시 409 / 학습 완료 중복 요청: 시도 행 잠금 후 최초 결과 재사용</li>
+          <li>주요 생성 API 재전송: <code>Idempotency-Key</code> + 정규화된 요청 해시. <code>INSERT … ON CONFLICT</code>로 선점하고 선점 기록을 업무 트랜잭션과 함께 롤백해, 실패한 요청은 같은 키로 재시도 가능</li>
+          <li>이미지 업로드는 스트림으로 처리하고, S3 업로드 후 DB 저장이 실패하면 업로드한 파일을 정리</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Projectree -->
+<article class="project">
+  <div class="ptitle">
+    <div class="label">프로젝트</div>
+    <div>
+      <div class="pname">Projectree<span class="pmeta">WebRTC 기반 프로젝트 협업 서비스 · 2026.07.13 ~ 2026.08.10</span></div>
+      <div class="psum">화상회의 음성을 STT와 생성형 AI로 처리해 회의록과 3D 프로젝트 트리로 시각화하는 협업 서비스</div>
+    </div>
+  </div>
+  <div class="row keep">
+    <div class="label">개요</div>
+    <ul>
+      <li>SSAFY 공통 프로젝트 · <b>PM · Frontend · 실시간 통신 · 성능 최적화</b></li>
+      <li>사용 기술: React, Three.js, OpenVidu, WebRTC, SSE, SQS, S3, Zustand, AWS</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기능 구현</div>
+    <ul>
+      <li>OpenVidu 연동으로 회의방 생성·종료, OpenVidu를 별도 EC2에 분리 배치</li>
+      <li>로그인 후 공통 Layout에서 SSE 자동 연결·재연결, Heartbeat와 <code>lastEventId</code>로 연결 관리</li>
+      <li>OpenVidu 녹음 파일의 비동기 처리에 SQS 활용, Presigned URL로 프론트에서 S3 직접 업로드</li>
+      <li>Zustand로 사용자·SSE·카메라/마이크 트랙·토스트·로그인 모달 상태 관리</li>
+      <li>PM으로 매일 오전 스크럼 진행, 프론트에 필요한 데이터 형식과 백엔드 처리 방식 조율</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기술적<br>의사결정</div>
+    <ul>
+      <li><b>반복되는 서버 트리 재조립 제거</b><ul>
+        <li>조회할 때마다 서버가 같은 트리를 다시 조립하는 것을 확인했습니다.</li>
+        <li>생성·수정보다 조회가 훨씬 잦다는 특성에 맞춰, 생성·수정·삭제 때만 DFS로 조립해 Three.js가 바로 쓰는 JSON으로 저장하고 조회 시 그대로 반환하도록 제안·조율했습니다.</li></ul></li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">트러블슈팅<br>및 성능 개선</div>
+    <div class="case">
+      <div class="ctitle">3D 트리 렌더링 병목 개선</div>
+      <ul>
+        <li><span class="k">문제:</span> 모든 노드에 라벨을 표시하면서 약 4,000개의 DOM이 생겨 평균 FPS가 9.3까지 떨어졌습니다.</li>
+        <li><span class="k">분석:</span> 실제 빌드 환경에서 같은 3D 트리 데이터로 개선 전후를 측정했습니다.</li>
+        <li><span class="k">해결:</span> 화면에 표시할 라벨 수 제한, 디자인 변경 시 React state로 전체를 리렌더링하지 않고 <code>ref</code>로 DOM을 잡아 <code>useFrame</code>에서 직접 갱신</li>
+        <li><span class="k">결과:</span>
+          <table class="metric">
+            <tr><th>지표</th><th>개선 전</th><th>개선 후</th></tr>
+            <tr><td>Label DOM</td><td class="num">4,000</td><td class="num">592</td></tr>
+            <tr><td>평균 FPS</td><td class="num">9.3</td><td class="num"><b>45.4</b></td></tr>
+            <tr><td>30FPS 미만 프레임</td><td class="num">76.9%</td><td class="num">4.2%</td></tr>
+            <tr><td>라벨 리렌더</td><td class="num">5,373회</td><td class="num">0회</td></tr>
+            <tr><td>JS Heap</td><td class="num">594.9MB</td><td class="num">205MB</td></tr>
+          </table>
+        </li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- 사달라 -->
+<article class="project">
+  <div class="ptitle">
+    <div class="label">프로젝트</div>
+    <div>
+      <div class="pname">사달라<span class="pmeta">자연어 기반 AI Agent 주식 서비스 · 2026.08.17 ~ 2026.09.28</span></div>
+      <div class="psum">자연어 요청으로 종목 뉴스 분석·시장 동향 분석·포트폴리오 제공·주식 구매를 수행하는 4개 AI Agent 서비스</div>
+    </div>
+  </div>
+  <div class="row keep">
+    <div class="label">개요</div>
+    <ul>
+      <li>SSAFY 특화 프로젝트 · <b>Frontend · Infra · PM · MCP 기획</b></li>
+      <li>흐름: 자연어 요청 → Spring → Python / OpenAI API → LangGraph → Custom MCP → 외부 금융 API</li>
+      <li>사용 기술: Spring Boot, Python, OpenAI API, LangGraph, Custom MCP, SSE, k3s, Prometheus, Grafana, Loki, Tempo, AWS</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기능 구현</div>
+    <ul>
+      <li>자연어 기반 4개 Agent 서비스 구현</li>
+      <li><b>k3s 기반 Observability:</b> 별도 EC2에 Prometheus(Metric)·Grafana(Dashboard)·Loki(Log)·Tempo(Trace)를 Pod로 구성해, 서로 다른 VPC의 서비스 상태를 한 곳에서 확인</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기술적<br>의사결정</div>
+    <ul>
+      <li><b>주식 주문에 Human-in-the-loop 적용</b><ul>
+        <li>초기에는 주문도 Custom MCP가 외부 API를 직접 부르는 구조였습니다.</li>
+        <li>주문은 사용자 자산에 실제 영향을 주므로, AI Agent는 주문 정보까지만 만들고 사용자가 확인·승인한 뒤 Spring이 한국투자증권 API를 직접 호출하도록 실행 경계를 바꿨습니다.</li>
+        <li>별도 주문 서버를 두는 대신 프로젝트 범위에 맞춰 Spring에서 실행해, AI 판단 단계와 실제 거래 실행 단계를 분리했습니다.</li></ul></li>
+      <li><b>SSE 연결 생명주기 단순화</b><ul>
+        <li>요청마다 SSE를 열고 닫으면 여러 채팅방에서 요청할 때 한 사용자에게 연결이 여러 개 생기는 시나리오를 확인했습니다.</li>
+        <li>로그인 후 한 번 연결해 이용 중 하나의 연결을 유지하는 방식을 제안해 구조를 정리했습니다.</li></ul></li>
+    </ul>
+  </div>
+</article>
+
+<!-- VQA -->
+<article class="project">
+  <div class="ptitle">
+    <div class="label">프로젝트</div>
+    <div>
+      <div class="pname">AI 이미지 VQA Fine-tuning<span class="pmeta">SSAFY AI 챌린지 · 2026.04.02 ~ 2026.04.06</span></div>
+      <div class="psum">재활용 이미지와 질문·4개 보기를 보고 정답을 고르는 VQA 모델 개발, Validation 정확도 약 68% → 약 91%</div>
+    </div>
+  </div>
+  <div class="row keep">
+    <div class="label">개요</div>
+    <ul>
+      <li><b>모델 선정 · Fine-tuning · 데이터 전처리 · 추론/검증</b></li>
+      <li>학습 데이터 5,073개, Train / Validation 9:1, 5 Epoch</li>
+      <li>사용 기술: Qwen2.5-VL, Hugging Face, Transformers, PyTorch, PEFT, LoRA, BitsAndBytes</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기능 구현</div>
+    <ul>
+      <li><b>제한된 GPU에서 7B 학습:</b> <code>Qwen2.5-VL-7B-Instruct</code>에 4-bit NF4 양자화, LoRA(r=16, alpha=32)를 Attention q/k/v/o와 MLP gate/up/down에 적용</li>
+      <li>Batch 2 + Gradient Accumulation(Effective Batch 8), Gradient Checkpointing, bfloat16 Mixed Precision</li>
+      <li><b>데이터 처리:</b> EXIF 방향 보정, Horizontal Flip, Color Jitter, Random Crop, Gaussian Blur, 입력 해상도 256×256 ~ 1280×1280</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기술적<br>의사결정</div>
+    <ul>
+      <li><b>서비스가 바로 쓸 수 있는 출력 형식을 모델 요구사항으로 정의</b><ul>
+        <li>질문과 보기를 <code>[질문]</code>, <code>[보기]</code>로 구조화하고, 색상·재질·형태·내용물에 집중하도록 System Prompt 설계</li>
+        <li>출력을 소문자 <code>a / b / c / d</code> 한 글자로 제한하고 <code>do_sample=False</code>와 정규식 후처리 적용</li></ul></li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">결과</div>
+    <ul>
+      <li>Validation 508개 기준 정확도 <b>약 68% → 약 91% (약 23%p 개선)</b>, Best Validation Loss 6.5424</li>
+      <li>전체 7B 파라미터를 학습하지 않고 Fine-tuning 환경 구성</li>
+    </ul>
+  </div>
+</article>
+
+<!-- Trip Baton -->
+<article class="project">
+  <div class="ptitle">
+    <div class="label">프로젝트</div>
+    <div>
+      <div class="pname">Trip Baton<span class="pmeta">여행 PWA 서비스 · 2026.06.08 ~ 2026.06.26</span></div>
+      <div class="psum">생성형 AI와 배치 기능을 활용한 여행 서비스를 PWA 웹앱으로 구현 · <b>SSAFY 1학기 최종 관통 프로젝트 최우수상</b></div>
+    </div>
+  </div>
+  <div class="row keep">
+    <div class="label">개요</div>
+    <ul>
+      <li>SSAFY 1학기 최종 관통 프로젝트 · <b>Frontend 아키텍처 · UI/UX · 일부 Backend · 일정 관리</b></li>
+      <li>사용 기술: React, TypeScript, FSD, PWA, Zustand, OAuth, JWT, S3, OpenAI API</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기능 구현</div>
+    <ul>
+      <li><b>모바일 UX:</b> PWA 설치, 하단 네비게이션, Drag Bottom Sheet, Toast, Promise 기반 Confirm Modal, Route Guard, 비모바일 환경의 QR 접근</li>
+      <li><b>인증·업로드:</b> Kakao / Google OAuth, JWT 인증·인가, Axios Interceptor로 Access Token 주입, Presigned URL로 S3 직접 업로드</li>
+      <li><b>AI·배치·검색:</b> OpenAI API 연동과 One-shot Prompting, 주기 실행 Batch, 검색 debounce와 재사용 컴포넌트 분리</li>
+      <li>Jira · Notion으로 일정·이슈 관리</li>
+    </ul>
+  </div>
+  <div class="row keep">
+    <div class="label">기술적<br>의사결정</div>
+    <ul>
+      <li><b>FSD(Feature-Sliced Design) 도입:</b> 도메인별 <code>ui / api / hook</code>을 분리해 책임 단위로 코드 구조 정리</li>
+      <li><b>하나의 코드베이스에서 웹/모바일 분기:</b> 환경에 따라 UI를 나누고 Zustand + <code>persist</code>로 전역 상태 관리</li>
+    </ul>
+  </div>
+</article>
+
+<!-- 기타 프로젝트 -->
+<section class="section">
+  <div class="label">기타<br>프로젝트</div>
+  <div>
+    <div class="mini">
+      <div class="t">MenuPicker<span>개인 · Serverless PWA · 2025.09.07 ~ 2025.10.01</span></div>
+      <ul><li>검색창 <code>onChange</code>마다 반복되던 API 호출에 debounce 적용, Vercel Serverless로 Gemini API 연동</li>
+      <li>같은 검색어 API 호출 <b>24회 → 3회 (87.5% 감소)</b>, <b>INP 65ms → 24ms</b></li></ul>
+    </div>
+    <div class="mini">
+      <div class="t">VERO<span>정보보안 SW 웹/앱 개발 공모전 · Frontend 단독 · 2025.01.22 ~ 2025.03.07</span></div>
+      <ul><li>Remix·React·TypeScript로 프론트 전체 UI/UX와 인증·통신·상태관리 구현, Access/Refresh Token 저장 위치 분리와 갱신 자동화</li>
+      <li>LLM 대화기록을 일괄 조회하던 구조의 메모리 점유 문제를 발견해 구간별 Paging 방식으로 변경</li></ul>
+    </div>
+    <div class="mini">
+      <div class="t">ILKAN<span>멋쟁이사자처럼 AI 지역경제 해커톤 · Frontend · Infra · PM · 2025.07.21 ~ 2025.08.25</span></div>
+      <ul><li>아키텍처와 Jira 기반 GitHub Flow 설정, 프론트 UI/UX, AWS 백엔드 배포, OpenAI·Gemini API 연동</li>
+      <li>총 1,500명 · 약 250개 팀 중 <b>상위 6%</b></li></ul>
+    </div>
+    <div class="mini">
+      <div class="t">생성형 AI 기반 채용공고 자동화<span>개인 · Workflow 설계 · 2026.09 ~ 현재</span></div>
+      <ul><li>공고 탐색 → 지원조건 판별 → JD 적합도 평가 → DB 비교 → 신규 저장/갱신 → 누락 검증 흐름을 ChatGPT 예약 실행 + Notion으로 구현</li>
+      <li>약 1주 운영, 하루 평균 <b>3~4개</b>의 지원 가능한 신규 공고 누적</li></ul>
+    </div>
+    <div class="mini">
+      <div class="t">STAGE ON<span>멋쟁이사자처럼 · 공연 일정 PWA · Frontend</span></div>
+      <ul><li><code>vh → dvh</code> 변경으로 모바일 주소창에 따른 UI 흔들림 대응, Custom Hook으로 UI와 API 로직 분리, Vercel 배포</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 학력 -->
+<section class="section">
+  <div class="label">학력</div>
+  <div>
+    <div class="entry">
+      <div class="entry-head"><div class="t">영남대학교<span>수학과 · 컴퓨터공학과 | 3.94 / 4.50</span></div><div class="d"><span class="ph">[입학 ~ 졸업 연월]</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 교육 -->
+<section class="section">
+  <div class="label">교육</div>
+  <div>
+    <div class="entry">
+      <div class="entry-head"><div class="t">삼성청년SW·AI아카데미 (SSAFY)<span>1학기 SW·AI 이론 및 실습 과정</span></div><div class="d">2026.01.07 ~ 2026.06.26</div></div>
+      <ul>
+        <li>알고리즘·자료구조, Java 객체지향, Spring Boot·MyBatis·REST API, Vue.js, SQL·DB 모델링 학습</li>
+        <li>생성형 AI·머신러닝/딥러닝·LangChain/Agent·Fine-tuning·MCP 학습</li>
+        <li>매일 알고리즘 문제를 풀며 <b>삼성 SW 역량테스트 A형 취득</b></li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head"><div class="t">대구경북혁신대학</div><div class="d">2023.03.06 ~ 2024.12.31</div></div>
+      <ul>
+        <li>데이터 가공과 모델 학습 기본 과정, Transformer 기반 AI 모델 개발과 학습 데이터 처리</li>
+        <li>제주도 팀 프로젝트에서 특산품을 활용한 지역 문제 해결 아이디어를 구체화해 <b>관련 특허 출원</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 경험 -->
+<section class="section">
+  <div class="label">경험</div>
+  <div>
+    <div class="entry">
+      <div class="entry-head"><div class="t">멋쟁이사자처럼</div><div class="d">2025.03.04 ~ 2025.12.31</div></div>
+      <ul>
+        <li>딥페이크·딥보이스 문제를 주제로 AI 보안 솔루션 기획, 교수 자문과 필드리서치로 필요성 검증 → <b>교내 아이디어톤 1위</b></li>
+        <li>중앙 해커톤에서 ILKAN의 Frontend · Infra · PM 수행, 약 250개 팀 중 상위 6%</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head"><div class="t">윌수학학원<span>보조강사</span></div><div class="d">2022.12.01 ~ 2025.06.30</div></div>
+      <ul>
+        <li>초·중·고 학생 대상 채점·풀이, 교재 제작, 문서·데스크 업무를 <b>2년 7개월</b>간 수행</li>
+        <li>답을 바로 알려 주기보다 학생이 막힌 지점을 파악해 이해 가능한 방식으로 설명</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head"><div class="t">동부고등학교<span>수학 교생실습</span></div><div class="d">2025.05.07 ~ 2025.05.30</div></div>
+      <ul>
+        <li>고1 공통수학 <b>18회 수업</b>, 학생 상담, 기말고사 문제 제작, 수업지도안·실습보고서 작성</li>
+        <li>매 수업 후 판서와 설명을 복기하고 담당교사 피드백을 다음 수업에 반영</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head"><div class="t">제29기 하계 대학생 재능봉사캠프<span>한국장학재단 · 서동지역아동센터</span></div><div class="d">2024.08.05 ~ 2024.08.08</div></div>
+      <ul><li>총 <b>33시간</b> 교육 봉사, 체험형 교육 프로그램 운영과 아동 상담, 6인 팀 서기</li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head"><div class="t">미지수<span>기획부장</span></div><div class="d">2019.03.15 ~ 2026.02.20</div></div>
+      <ul><li>1년 단위 행사·일정 기획과 운영, 이전 사례 검토와 부원 의견 수렴으로 실행 계획을 정리해 행사 완료까지 관리</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 수상·자격 -->
+<section class="section">
+  <div class="label">수상</div>
+  <div>
+    <div class="entry">
+      <div class="entry-head"><div class="t">SSAFY 1학기 최종 관통 프로젝트 최우수상<span>삼성청년SW·AI아카데미 · Trip Baton</span></div><div class="d">2026.06</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="label">자격증</div>
+  <div>
+    <ul>
+      <li>정보처리기사 (한국산업인력공단) · SQLD · ADsP · DAsP (한국데이터베이스진흥원)</li>
+      <li>컴퓨터활용능력 1급 (대한상공회의소) · TOEIC Speaking Intermediate High (YBM)</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

@@ -5,7 +5,7 @@ import { education } from '../data/education';
 import { certifications } from '../data/certifications';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { Icon } from '../components/Icon';
-import profileImg from '../assets/profile.jpg';
+import profileImg from '../assets/profile.webp';
 
 const sections = [
   { id: 'strengths', label: '일하는 방식' },
@@ -28,7 +28,7 @@ export default function About() {
 
       <header className="ahero">
         <div className="container ahero__inner">
-          <img className="ahero__photo" src={profileImg} alt="안현석 프로필 사진" width={144} height={144} />
+          <img className="ahero__photo" src={profileImg} alt="안현석 프로필 사진" width={720} height={962} />
           <div>
             <h1 className="ahero__name">
               {profile.name}

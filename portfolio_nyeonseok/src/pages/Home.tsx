@@ -1,51 +1,34 @@
 import { Link } from 'react-router-dom';
 import { profile } from '../data/profile';
-import { projects, smallProjects } from '../data/projects';
 import { experiences } from '../data/experience';
-import { extras } from '../data/extras';
-import { ProjectGrid } from '../components/ProjectGrid';
+import { ProjectShowcase } from '../components/ProjectShowcase';
 import { Icon } from '../components/Icon';
+import { HeroDock } from '../components/HeroDock';
+import portrait from '../assets/profile-cutout.webp';
 
 export default function Home() {
-  const experience = experiences[0];
-  return (
-    <>
-      <title>안현석 — 개발자 포트폴리오</title>
-      <section className="intro container" aria-labelledby="hero-title">
-        <div className="intro__layout">
-          <div>
-            <p className="intro__name">안현석 · 개발자</p>
-            <h1 id="hero-title">익숙함에 안주하지 않고<br /><em>도전하는 개발자</em></h1>
-            <p className="intro__summary">서비스를 개발하고 운영하면서 동시성, 성능, AI 연동 문제를 해결해 왔습니다.</p>
-            <div className="hero__actions">
-              <Link to="/projects" className="button button--primary button--lg">프로젝트 보기 <Icon name="arrow-right" size={18} /></Link>
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="button button--lg">GitHub <Icon name="arrow-up-right" size={16} /><span className="sr-only"> (새 창)</span></a>
-              <Link to="/about" className="button button--ghost button--lg">About</Link>
-            </div>
-          </div>
-        </div>
+  return <>
+    <title>안현석 — 개발자 포트폴리오</title>
+    <section className="portrait-hero" aria-labelledby="home-title">
+      <img className="portrait-hero__image" src={portrait} alt="안현석 프로필" width="898" height="1200" fetchPriority="high" />
+      <div className="container portrait-hero__top"><span>안현석 · 개발자</span><span>Backend / AI / Service operation</span></div>
+      <div className="container portrait-hero__body">
+        <a className="portrait-hero__down" href="#selected-work" aria-label="대표 프로젝트로 이동"><Icon name="arrow-right" size={22} /></a>
+      </div>
+      {/* 얼굴 아래(가슴 높이)에 고정. 모바일에서는 첫 구절이 줄바꿈된다. */}
+      <h1 id="home-title" className="portrait-hero__title"><span>익숙함을 넘어,</span> 도전하는 개발자</h1>
+      <div className="container portrait-hero__bottom"><span>{profile.nameEn}</span><HeroDock /><span>개발 · 운영 · 문제 해결</span></div>
+    </section>
+    <div className="paper-surface">
+      <section className="container studio-intro" aria-label="소개">
+        <p>서비스를 만들고,<br />운영하면서 생기는 문제를 해결합니다.</p>
+        <div><p>{profile.summary}</p><Link to="/about">조금 더 알아보기 <Icon name="arrow-up-right" size={16} /></Link></div>
       </section>
-      <section className="section container" aria-labelledby="home-projects">
-        <header className="section__head">
-          <div><h2 className="section__title" id="home-projects">대표 프로젝트</h2></div>
-          <Link to="/projects" className="link-arrow">전체 프로젝트 <Icon name="arrow-right" size={16} /></Link>
-        </header>
-        <ProjectGrid projects={projects} />
+      <section className="container studio-work" id="selected-work" aria-labelledby="work-title">
+        <header className="studio-section-head"><h2 id="work-title">Selected projects<span>05</span></h2><Link to="/projects">전체 프로젝트 <Icon name="arrow-up-right" size={16} /></Link></header>
+        <ProjectShowcase />
       </section>
-      <section className="operation container section" aria-labelledby="home-experience">
-        <div className="operation__inner">
-          <div><h2 id="home-experience">실무 경험</h2><Link to="/experience" className="button button--primary">실무 경험 보기 <Icon name="arrow-right" size={16} /></Link></div>
-          <div className="operation__story"><p className="operation__meta">{experience.org} · {experience.employment}<br />{experience.period}</p><h3>{experience.title}</h3><p>{experience.summary}</p><p className="operation__incident">{experience.incident.title}</p><p>로그 확인 → 원인 특정 → 서버 순차 변경 → 재암호화 → 데이터 정합성 검증</p></div>
-        </div>
-      </section>
-      <section className="section container" aria-labelledby="home-more">
-        <header className="section__head"><div><h2 className="section__title" id="home-more">그 밖에 만든 것들</h2></div></header>
-        <div className="side-notes">
-          <Link to="/projects#small-projects" className="side-note"><span className="kicker">개인 프로젝트</span><h3>{smallProjects[0].name} <Icon name="arrow-up-right" size={22} /></h3><p>{smallProjects[0].tagline}</p></Link>
-          <Link to="/extras" className="side-note"><span className="kicker">프로젝트 외 자잘한 것들</span><h3>{extras[0].title} <Icon name="arrow-up-right" size={22} /></h3><p>ChatGPT와 Notion으로 채용공고 탐색·분류·저장을 자동화했습니다.</p></Link>
-        </div>
-      </section>
-    </>
-  );
+      <section className="container studio-experience" aria-labelledby="work-experience"><div><p>실무 경험</p><h2 id="work-experience">운영 환경에서<br />직접 마주한 문제들.</h2></div><div><p className="studio-experience__meta">{experiences[0].org} · {experiences[0].period}</p><h3>{experiences[0].title}</h3><p>{experiences[0].summary}</p><Link to="/experience">실무 경험 보기 <Icon name="arrow-up-right" size={18} /></Link></div></section>
+    </div>
+  </>;
 }
-

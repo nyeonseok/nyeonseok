@@ -14,7 +14,7 @@ function focusElement(el: HTMLElement | null) {
 
 /**
  * 키보드·스크린리더 사용자를 위한 포커스 관리
- * - #앵커가 있으면 해당 섹션으로 포커스 (스크롤은 ScrollRestoration이 처리)
+ * - #앵커가 있으면 콘텐츠가 준비된 후 해당 섹션으로 스크롤하고 포커스
  * - 그 밖의 페이지 이동은 새 페이지의 main으로 포커스
  */
 function useFocusOnNavigate() {
@@ -23,19 +23,41 @@ function useFocusOnNavigate() {
   const prevPath = useRef(pathname);
 
   useEffect(() => {
-    if (isFirst.current) {
-      isFirst.current = false;
-      return;
-    }
+    const first = isFirst.current;
     const samePage = prevPath.current === pathname;
+    isFirst.current = false;
     prevPath.current = pathname;
 
-    const anchor = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
-    if (anchor) focusElement(anchor);
-    else if (!samePage) focusElement(document.getElementById('main'));
+    if (!hash) {
+      if (!first && !samePage) focusElement(document.getElementById('main'));
+      return;
+    }
+
+    let id: string;
+    try { id = decodeURIComponent(hash.slice(1)); }
+    catch { return; }
+
+    // Lazy route content may mount after the persistent layout's effect.
+    let frame = 0;
+    const moveToAnchor = () => {
+      const anchor = document.getElementById(id);
+      if (!anchor) return false;
+      frame = requestAnimationFrame(() => {
+        focusElement(anchor);
+        anchor.scrollIntoView({ block: 'start', behavior: 'instant' });
+      });
+      return true;
+    };
+    const observer = new MutationObserver(() => {
+      if (moveToAnchor()) observer.disconnect();
+    });
+    if (!moveToAnchor()) observer.observe(document.getElementById('main') ?? document.body, { childList: true, subtree: true });
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
   }, [pathname, hash]);
 }
-
 /** 기록(history)을 건드리지 않는 본문 건너뛰기 */
 function skipToMain(e: MouseEvent<HTMLAnchorElement>) {
   e.preventDefault();
@@ -55,7 +77,7 @@ export default function Layout() {
       </a>
       <Navbar />
       <main id="main" tabIndex={-1}>
-        <div key={pathname} className="page-enter">
+        <div key={pathname} className={`page-enter${pathname === '/' ? '' : ' paper-surface studio-page'}`}>
           <Outlet />
         </div>
       </main>
@@ -64,3 +86,6 @@ export default function Layout() {
     </>
   );
 }
+
+
+

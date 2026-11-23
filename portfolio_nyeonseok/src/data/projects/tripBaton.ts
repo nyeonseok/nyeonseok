@@ -117,7 +117,7 @@ const tripBaton: Project = {
     { dir: 'architecture', label: 'Architecture', placement: 'flow' },
   ],
   captions: {
-    'cover/cover.webp': 'Trip Baton 릴레이 경로 화면 — 지도 위 릴레이 경로와 AI 지역 요약',
+    'cover/cover.webp': 'Trip Baton 대표 이미지 — AI Travel Relay Platform',
     'screens/01-main.webp': '메인 화면 — 진행 중인 릴레이와 참여 현황, QR 코드로 모바일 접근',
     'screens/02-relay.webp': '릴레이 경로 — 참여 지역을 지도 위 선으로 연결하고 AI 지역 설명 표시',
     'screens/03-relay-detail.webp': '릴레이 상세 — 지나온 지역과 AI 추천 여행지',

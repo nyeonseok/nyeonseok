@@ -217,7 +217,9 @@ const geomate: Project = {
     { dir: 'results', label: '결과 자료', placement: 'results' },
     { dir: 'architecture', label: 'Architecture', placement: 'flow' },
   ],
-  captions: {},
+  captions: {
+    'cover/cover.webp': 'Geomate 대표 이미지 — 도형을 어려워하는 학생들을 위한 기하학습 보조도구 서비스',
+  },
 };
 
 export default geomate;

@@ -134,7 +134,9 @@ const projectree: Project = {
     { dir: 'results', label: '결과 자료', placement: 'results' },
     { dir: 'architecture', label: 'Architecture', placement: 'flow' },
   ],
-  captions: {},
+  captions: {
+    'cover/cover.webp': 'Projectree 대표 이미지 — Ideas connect, grow together',
+  },
 };
 
 export default projectree;

@@ -6,7 +6,7 @@ import NotFound from './pages/NotFound';
 /** 청크 로딩 실패 등 예외 상황 */
 function RouteError() {
   return (
-    <main className="page-hero page-hero--center">
+    <main className="paper-surface studio-page page-hero page-hero--center">
       <div className="container">
         <title>문제가 생겼습니다 — 안현석</title>
         <h1 className="page-hero__title">페이지를 불러오지 못했습니다</h1>
@@ -47,3 +47,4 @@ const router = createBrowserRouter([
 export default function App() {
   return <RouterProvider router={router} />;
 }
+

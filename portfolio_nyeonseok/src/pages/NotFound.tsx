@@ -11,10 +11,11 @@ export default function NotFound() {
         <p className="page-hero__lead">주소가 바뀌었거나 삭제된 페이지입니다.</p>
         <p className="page-hero__actions">
           <Link to="/" className="button button--primary">
-            Home으로 <Icon name="arrow-right" size={16} />
+            홈으로 <Icon name="arrow-right" size={16} />
           </Link>
         </p>
       </div>
     </header>
   );
 }
+

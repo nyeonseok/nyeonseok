@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 const navItems = [
-  { to: '/', label: 'Home', end: true },
-  { to: '/projects', label: 'Projects' },
-  { to: '/experience', label: 'Experience' },
-  { to: '/about', label: 'About' },
+  { to: '/', label: '홈', end: true },
+  { to: '/projects', label: '프로젝트' },
+  { to: '/experience', label: '실무 경험' },
+  { to: '/about', label: '소개' },
   { to: '/extras', label: '프로젝트 외 자잘한 것들' },
 ];
 
@@ -66,3 +66,4 @@ export default function Navbar() {
     </header>
   );
 }
+

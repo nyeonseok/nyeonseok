@@ -72,7 +72,7 @@ function ProjectArticle({ project }: { project: Project }) {
       <header className="dhero">
         <div className="container">
           <Link to="/projects" className="back-link">
-            <Icon name="arrow-left" size={16} /> Projects
+            <Icon name="arrow-left" size={16} /> 프로젝트 목록
           </Link>
           <p className="pill dhero__pill">{project.context}</p>
           <h1 className="dhero__title" id="project-title">
@@ -309,3 +309,4 @@ function ProjectArticle({ project }: { project: Project }) {
     </article>
   );
 }
+
