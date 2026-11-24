@@ -2556,25 +2556,6 @@ main {
   margin-top: 10px;
 }
 
-.skill-groups {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 12px;
-}
-
-.skill-group {
-  padding: 18px 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-}
-
-.skill-group__title {
-  margin-bottom: 10px;
-  font-size: 0.9375rem;
-  font-weight: 800;
-}
-
 .certs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
@@ -2787,7 +2768,7 @@ main {
 .dtoc a.is-active { background: transparent; border-color: var(--brand); }
 .dtoc__title { font-size: .875rem; }
 .ahero__photo { border-radius: 50%; border: 0; }
-.strength, .skill-group, .cert { background: transparent; border-width: 1px 0 0; border-radius: 0; }
+.strength, .cert { background: transparent; border-width: 1px 0 0; border-radius: 0; }
 .site-footer { margin-top: 80px; background: var(--bg); }
 .site-footer__inner { padding-top: 28px; }
 .site-footer__en { color: var(--text-3); }

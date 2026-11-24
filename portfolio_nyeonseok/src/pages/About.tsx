@@ -5,6 +5,7 @@ import { education } from '../data/education';
 import { certifications } from '../data/certifications';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { Icon } from '../components/Icon';
+import { skillIcon } from '../data/skillIcons';
 import profileImg from '../assets/profile.webp';
 
 const sections = [
@@ -144,26 +145,42 @@ export default function About() {
           </ol>
         </section>
 
-        <section className="about-section" id="skills" aria-labelledby="skills-title">
-          <h2 className="dsection__title" id="skills-title">
-            기술
-          </h2>
-          <div className="skill-groups">
-            {profile.skills.map((s) => (
-              <div key={s.area} className="skill-group">
-                <h3 className="skill-group__title">{s.area}</h3>
-                <ul className="chips">
-                  {s.items.split(' · ').map((item) => (
-                    <li key={item} className="chip">
+      </div>
+
+      {/* 기술은 컨테이너를 벗어나 화면 전체 너비를 쓴다. */}
+      <section className="about-section skills-band" id="skills" aria-labelledby="skills-title">
+        <h2 className="dsection__title" id="skills-title">
+          기술
+        </h2>
+        <div className="skill-board">
+          {profile.skills.map((s) => {
+            const logos = s.items.filter((item) => skillIcon(item));
+            const texts = s.items.filter((item) => !skillIcon(item));
+            return (
+              <article key={s.area} className="skill-card">
+                <h3 className="skill-card__title">{s.area}</h3>
+                <p className="skill-card__desc">{s.desc}</p>
+                <ul className="skill-card__stack" aria-label={`${s.area} 기술`}>
+                  {logos.map((item) => (
+                    <li key={item} className="skill-logo">
+                      <img src={skillIcon(item)} alt="" width={26} height={26} loading="lazy" />
+                      {/* 화면에서는 hover 툴팁, 스크린리더에서는 기술 이름 */}
+                      <span className="skill-logo__label">{item}</span>
+                    </li>
+                  ))}
+                  {texts.map((item) => (
+                    <li key={item} className="skill-pill">
                       {item}
                     </li>
                   ))}
                 </ul>
-              </div>
-            ))}
-          </div>
-        </section>
+              </article>
+            );
+          })}
+        </div>
+      </section>
 
+      <div className="container about-body">
         <section className="about-section" id="certifications" aria-labelledby="cert-title">
           <h2 className="dsection__title" id="cert-title">
             자격

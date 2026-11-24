@@ -31,16 +31,16 @@
 
 ## Core Skills
 
-| 영역 | 기술 |
-|---|---|
-| Frontend | React · TypeScript · JavaScript · HTML · CSS · Zustand |
-| Backend | Spring Boot · Java · Spring Security · JPA · JWT · Python · FastAPI 연동 |
-| Database | PostgreSQL · MySQL · Tibero · Flyway · DataGrip |
-| Testing | JUnit · Testcontainers |
-| AI / Agent | OpenAI API · LangGraph · Custom MCP · Hugging Face · Transformers · Qwen2.5-VL · PyTorch · PEFT · LoRA · BitsAndBytes |
-| Infra / Operations | AWS · S3 · Docker · Linux · Nginx · WebtoB · JEUS · NAT · k3s |
-| Observability | Prometheus · Grafana · Loki · Tempo |
-| Collaboration | Git · GitHub · GitLab · Jira · Notion |
+| 영역 | 기술 | 설명 (About 기술 카드) |
+|---|---|---|
+| Frontend | React · TypeScript · JavaScript · HTML · CSS · Zustand | React·TypeScript로 화면을 만들고, Zustand로 사용자·SSE·카메라/마이크 상태를 관리했습니다. |
+| Backend | Spring Boot · Java · Spring Security · JPA · JWT · Python · FastAPI 연동 | Spring Boot로 인증·이미지 업로드·AI 연동 API를 만들고, 동시 요청과 재시도에도 데이터가 어긋나지 않게 설계합니다. |
+| Database | PostgreSQL · MySQL · Tibero · Flyway · DataGrip | PostgreSQL 스키마를 Flyway로 관리하고, 공공 운영 환경에서는 Tibero 데이터를 DataGrip으로 직접 조회·추출했습니다. |
+| Testing | JUnit · Testcontainers | Testcontainers로 실제 PostgreSQL을 띄워 Repository·DB 제약·동시성까지 테스트합니다. |
+| AI / Agent | OpenAI API · LangGraph · Custom MCP · Hugging Face · Transformers · Qwen2.5-VL · PyTorch · PEFT · LoRA · BitsAndBytes | Qwen2.5-VL-7B를 4-bit 양자화와 LoRA로 파인튜닝했고, LangGraph·Custom MCP 기반 AI Agent 서비스에서 MCP를 기획했습니다. |
+| Infra / Operations | AWS · S3 · Docker · Linux · Nginx · WebtoB · JEUS · NAT · k3s | 망분리 공공 환경에서 WebtoB·JEUS 기반 시스템을 6개월간 운영했고, AWS·Docker·k3s 환경을 구성합니다. |
+| Observability | Prometheus · Grafana · Loki · Tempo | Prometheus·Loki·Tempo로 Metric·Log·Trace를 모아 Grafana에서 함께 확인하는 환경을 구성했습니다. |
+| Collaboration | Git · GitHub · GitLab · Jira · Notion | Git·GitHub Flow로 협업하고, Jira·Notion으로 일정과 이슈를 관리합니다. |
 
 ---
 
