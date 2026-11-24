@@ -212,6 +212,7 @@ const geomate: Project = {
   ],
 
   media: [
+    { dir: 'video', label: '영상 소개', placement: 'video' },
     { dir: 'screens', label: '서비스 화면', placement: 'screens' },
     { dir: 'problem-solving', label: '문제 해결 자료', placement: 'cases' },
     { dir: 'results', label: '결과 자료', placement: 'results' },
@@ -219,6 +220,7 @@ const geomate: Project = {
   ],
   captions: {
     'cover/cover.webp': 'Geomate 대표 이미지 — 도형을 어려워하는 학생들을 위한 기하학습 보조도구 서비스',
+    'video/geomate-video.mp4': 'Geomate 서비스 소개 영상 (1분 20초)',
   },
 };
 

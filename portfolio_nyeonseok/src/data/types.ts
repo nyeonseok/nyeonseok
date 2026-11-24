@@ -70,7 +70,8 @@ export interface ExternalLink {
 export interface MediaFolder {
   dir: string;
   label: string;
-  placement: 'screens' | 'cases' | 'results' | 'flow';
+  /** video: 개요 바로 다음 '영상 소개' 섹션 (섹션 제목은 label) */
+  placement: 'video' | 'screens' | 'cases' | 'results' | 'flow';
 }
 
 export interface Project {

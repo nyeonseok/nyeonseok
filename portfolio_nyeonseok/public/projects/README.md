@@ -30,6 +30,7 @@ captions: {
 
 | placement | 상세 페이지 위치 |
 |---|---|
+| `video` | 영상 소개 섹션 (개요 바로 다음) |
 | `screens` | 서비스 화면 섹션 |
 | `cases` | 문제 해결 섹션 끝 |
 | `results` | 결과 섹션 |

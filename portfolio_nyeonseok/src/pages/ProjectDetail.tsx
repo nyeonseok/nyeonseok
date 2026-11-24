@@ -32,6 +32,7 @@ function ProjectArticle({ project }: { project: Project }) {
       .map((m) => ({ ...m, assets: getAssets(project.slug, m.dir) }))
       .filter((m) => m.assets.length > 0);
 
+  const videos = galleriesAt('video');
   const screens = galleriesAt('screens');
   const caseMedia = galleriesAt('cases');
   const resultMedia = galleriesAt('results');
@@ -43,6 +44,7 @@ function ProjectArticle({ project }: { project: Project }) {
 
   const toc = [
     { id: 'overview', label: '개요', show: true },
+    { id: 'video', label: videos[0]?.label ?? '영상 소개', show: videos.length > 0 },
     { id: 'screens', label: screens[0]?.label ?? '서비스 화면', show: screens.length > 0 },
     { id: 'contribution', label: '내가 맡은 부분', show: true },
     { id: 'cases', label: '문제 해결', show: project.cases.length > 0 },
@@ -171,6 +173,15 @@ function ProjectArticle({ project }: { project: Project }) {
               </p>
             )}
           </section>
+
+          {videos.length > 0 && (
+            <section id="video" className="dsection" aria-labelledby="video-title">
+              <h2 className="dsection__title" id="video-title">
+                {videos[0].label}
+              </h2>
+              {renderGalleries(videos, false)}
+            </section>
+          )}
 
           {screens.length > 0 && (
             <section id="screens" className="dsection" aria-labelledby="screens-title">
