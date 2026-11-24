@@ -4,13 +4,13 @@ import { experiences } from '../data/experience';
 import { ProjectShowcase } from '../components/ProjectShowcase';
 import { Icon } from '../components/Icon';
 import { HeroDock } from '../components/HeroDock';
-import portrait from '../assets/profile-cutout.webp';
+import portrait from '../assets/profile-side.webp';
 
 export default function Home() {
   return <>
     <title>안현석 — 개발자 포트폴리오</title>
     <section className="portrait-hero" aria-labelledby="home-title">
-      <img className="portrait-hero__image" src={portrait} alt="안현석 프로필" width="898" height="1200" fetchPriority="high" />
+      <img className="portrait-hero__image" src={portrait} alt="안현석 프로필" width="1122" height="1282" fetchPriority="high" />
       <div className="container portrait-hero__top"><span>안현석 · 개발자</span><span>Backend / AI / Service operation</span></div>
       <div className="container portrait-hero__body">
         <a className="portrait-hero__down" href="#selected-work" aria-label="대표 프로젝트로 이동"><Icon name="arrow-right" size={22} /></a>
