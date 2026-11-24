@@ -1822,83 +1822,128 @@ main {
 }
 
 /* =============================================================================
-   Flow — 번호 카드
+   Flow — 가로 곡선 흐름
+   단계 점이 띠의 위/아래에 번갈아 놓이고 S자 곡선이 순서대로 잇는다. 라벨은 점 바깥쪽(위 점은 위,
+   아래 점은 아래)에 붙어 같은 쪽 라벨끼리 두 칸 간격이므로 한 칸보다 넓게 쓸 수 있다.
+   단계당 너비가 모자라면 Flow.tsx가 data-layout="vertical"로 바꿔 세로 목록이 된다.
    ============================================================================= */
 .flow-group {
   display: grid;
   gap: 14px;
 }
 
-@media (min-width: 760px) {
-  .flow-group--compare {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 .flow {
-  padding: 16px;
+  padding: 18px 20px 20px;
   border-radius: var(--radius-lg);
   background: var(--tone-tint);
 }
 
 .flow__title {
-  margin: 2px 4px 12px;
+  margin: 2px 4px 14px;
   font-size: 0.8125rem;
   font-weight: 800;
   color: var(--tone-ink);
 }
 
 .flow__note {
-  margin: 12px 4px 2px;
+  margin: 14px 4px 2px;
   font-size: 0.875rem;
   color: var(--text-2);
 }
 
-.fsteps {
+.fflow__steps {
   display: grid;
-  gap: 8px;
+  /* 양 끝 0.4칸은 첫·마지막 라벨이 넘칠 자리 (Flow.tsx의 EDGE) */
+  grid-template-columns: 0.4fr repeat(var(--n), minmax(0, 1fr)) 0.4fr;
+  grid-template-rows: auto var(--band) auto;
 }
 
-.fsteps--grid {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 176px), 1fr));
+.fflow__step {
+  grid-column: var(--col);
+  grid-row: 1 / span 3;
+  display: grid;
+  grid-template-rows: subgrid;
 }
 
-.fstep {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 12px 14px;
-  border: 1.5px solid transparent;
-  border-radius: 12px;
+/* 이 점의 중심에서 다음 점의 중심까지: 한 칸 너비를 반 칸 오른쪽으로 민다. */
+.fflow__link {
+  grid-row: 2;
+  grid-column: 1;
+  width: 100%;
+  height: var(--band);
+  overflow: visible;
+  transform: translateX(50%);
+  fill: none;
+  stroke: var(--tone);
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+
+.fflow__node {
+  grid-row: 2;
+  grid-column: 1;
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  border: 2px solid var(--tone);
+  border-radius: 50%;
   background: var(--surface);
-}
-
-.fsteps--list .fstep {
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-}
-
-.fstep__num {
+  color: var(--tone-ink);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--tone-ink);
 }
 
-.fstep__text {
-  font-size: 0.9375rem;
+.fflow__step--up .fflow__node {
+  align-self: start;
+}
+
+.fflow__step--down .fflow__node {
+  align-self: end;
+}
+
+.fflow__step.is-marked .fflow__node {
+  border-color: var(--tone-ink);
+  background: var(--tone-ink);
+  color: var(--on-ink);
+}
+
+/* 칸 너비 + 좌우 40%씩 = 1.8칸. 같은 쪽 이웃 라벨은 2칸 떨어져 있어 겹치지 않는다. */
+.fflow__label {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-inline: -40%;
+  text-align: center;
+}
+
+.fflow__step--up .fflow__label {
+  grid-row: 1;
+  align-self: end;
+  padding-bottom: 10px;
+}
+
+.fflow__step--down .fflow__label {
+  grid-row: 3;
+  align-self: start;
+  padding-top: 10px;
+}
+
+.fflow__text {
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
-.fstep--marked {
-  border-color: var(--tone);
-}
-
-.fstep__tag {
+.fflow__tag {
   display: inline-flex;
-  align-self: flex-start;
   align-items: center;
   gap: 3px;
   padding: 2px 8px;
@@ -1910,9 +1955,101 @@ main {
   white-space: nowrap;
 }
 
-.fsteps--list .fstep__tag {
-  align-self: center;
-  margin-left: auto;
+/* 세로: 점과 라벨을 한 줄에 두고 점 사이를 세로선으로 잇는다. */
+.fflow[data-layout='vertical'] .fflow__steps {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: none;
+}
+
+.fflow[data-layout='vertical'] .fflow__step {
+  position: relative;
+  grid-column: 1;
+  grid-row: auto;
+  grid-template-columns: var(--node) minmax(0, 1fr);
+  grid-template-rows: none;
+  column-gap: 12px;
+  padding-bottom: 14px;
+}
+
+.fflow[data-layout='vertical'] .fflow__step:last-child {
+  padding-bottom: 0;
+}
+
+.fflow[data-layout='vertical'] .fflow__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: var(--node);
+  bottom: 0;
+  left: calc(var(--node) / 2 - 1px);
+  width: 2px;
+  background: var(--tone);
+}
+
+.fflow[data-layout='vertical'] .fflow__link {
+  display: none;
+}
+
+.fflow[data-layout='vertical'] .fflow__node {
+  grid-row: 1;
+  align-self: start;
+}
+
+.fflow[data-layout='vertical'] .fflow__label {
+  grid-row: 1;
+  grid-column: 2;
+  align-self: start;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: var(--node);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* 화면에 들어오면 단계마다 160ms씩 늦게: 점 → 라벨 → 다음 점까지 곡선.
+   점은 투명도 없이 커지기만 해서, 반투명한 점 너머로 곡선이 비치지 않는다. */
+.fflow__node {
+  transition: transform 0.3s ease;
+  transition-delay: calc(var(--i) * 160ms);
+}
+
+.fflow__label {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  transition-delay: calc(var(--i) * 160ms + 60ms);
+}
+
+.fflow[data-anim] .fflow__link {
+  clip-path: inset(-4px 0 -4px 0);
+  transition: clip-path 0.2s linear;
+  transition-delay: calc(var(--i) * 160ms + 100ms);
+}
+
+.fflow[data-anim='waiting'] .fflow__node {
+  transform: scale(0);
+}
+
+.fflow[data-anim='waiting'] .fflow__label {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.fflow[data-anim='waiting'] .fflow__link {
+  clip-path: inset(-4px 100% -4px 0);
+}
+
+/* 인쇄할 때는 스크롤 전이라도 모두 보이게 */
+@media print {
+  .fflow[data-anim] .fflow__node,
+  .fflow[data-anim] .fflow__label {
+    opacity: 1;
+    transform: none;
+  }
+
+  .fflow[data-anim] .fflow__link {
+    clip-path: none;
+  }
 }
 
 /* =============================================================================

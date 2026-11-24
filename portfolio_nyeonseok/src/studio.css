@@ -184,8 +184,6 @@
 .studio-page .focus-lead, .studio-page .takeaway { background: #eeefed; border-radius: 6px; color: var(--text); }
 .studio-page .flow { background: #eeefed; border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
 .studio-page .flow__title { color: var(--text); font-weight: 600; }
-.studio-page .fstep { border-radius: 5px; }
-.studio-page .fstep__text { font-weight: 500; }
 .studio-page .compare, .studio-page .table-wrap { border-radius: 6px; box-shadow: none; }
 .studio-page .table th, .studio-page .table td { padding-block: 14px; }
 .studio-page .dtoc { border-top: 1px solid var(--line-strong); padding-top: 18px; }
